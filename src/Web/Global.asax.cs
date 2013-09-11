@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using NMoneys.Web.App_Start;
 
 namespace NMoneys.Web
 {
