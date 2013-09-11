@@ -123,8 +123,15 @@
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap\css\bootstrap.css" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\flat-ui.css" />
+    <Content Include="Content\fonts\Flat-UI-Icons.dev.svg" />
+    <Content Include="Content\fonts\Flat-UI-Icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\fonts\Flat-UI-Icons.eot" />
+    <Content Include="Content\fonts\Flat-UI-Icons.ttf" />
+    <Content Include="Content\fonts\Flat-UI-Icons.woff" />
+    <Content Include="Content\fonts\icomoon-session.json" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />

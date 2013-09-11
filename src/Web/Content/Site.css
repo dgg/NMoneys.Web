@@ -1,11 +1,4 @@
-﻿body {
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
-}
-
-header, footer, nav, section {
+﻿header, footer, nav, section {
     display: block;
 }
 
@@ -35,27 +28,8 @@ textarea {
     margin: 0.5em 0 0 0;
 }
 
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error {
-    color: #f00;
-}
-
-.field-validation-valid {
-    display: none;
-}
-
-.input-validation-error {
-    border: 1px solid #f00;
-    background-color: #fee;
-}
-
-.validation-summary-errors {
-    font-weight: bold;
-    color: #f00;
-}
-
-.validation-summary-valid {
-    display: none;
+@font-face {
+  font-family: 'Flat-UI-Icons';
+  src: url('fonts/Flat-UI-Icons.eot');
+  src: url('fonts/Flat-UI-Icons.eot?#iefix') format('embedded-opentype'), url('fonts/Flat-UI-Icons.woff') format('woff'), url('fonts/Flat-UI-Icons.ttf') format('truetype'), url('fonts/Flat-UI-Icons.svg#Flat-UI-Icons') format('svg');
 }

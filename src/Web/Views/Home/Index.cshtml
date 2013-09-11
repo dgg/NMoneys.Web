@@ -5,15 +5,6 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Header</h2>
-<a href="#" data-toggle="tooltip" title="tit">Something</a>
-
-@section scripts
-{
-	<script type="text/javascript">
-		$(function () {
-			$('a').tooltip({placement : 'bottom'})/*.addClass('btn-large')*/;
-		});
-	</script>
-
-}
+<section class="container">
+	<h2>@ViewBag.Header</h2>
+</section>
