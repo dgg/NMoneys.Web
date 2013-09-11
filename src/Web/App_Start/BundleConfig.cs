@@ -20,6 +20,16 @@ namespace NMoneys.Web.App_Start
 			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+
+			var bootstrap = new ScriptBundle("~/bundles/bootstrap", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js").Include("~/Scripts/bootstrap.min.js");
+			bootstrap.CdnFallbackExpression = "$.fn.modal";
+			bundles.Add(bootstrap);
+
+			bundles.Add(new StyleBundle("~/Content/bootstrap", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css").Include(
+				"~/Content/bootstrap/css/bootstrap.css"));
+
+			bundles.Add(new StyleBundle("~/Content/bootstrap_responsive").Include(
+				"~/Content/bootstrap/css/bootstrap-responsive.css"));
 		}
 	}
 }
