@@ -1,35 +1,44 @@
 ﻿header, footer, nav, section {
-    display: block;
+	display: block;
 }
 
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
 fieldset {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
+	border: 1px solid #ddd;
+	padding: 0 1.4em 1.4em 1.4em;
+	margin: 0 0 1.5em 0;
 }
 
 legend {
-    font-size: 1.2em;
-    font-weight: bold;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 textarea {
-    min-height: 75px;
+	min-height: 75px;
 }
 
 .editor-label {
-    margin: 1em 0 0 0;
+	margin: 1em 0 0 0;
 }
 
 .editor-field {
-    margin: 0.5em 0 0 0;
+	margin: 0.5em 0 0 0;
 }
 
+/* Flat UI overrides
+-----------------------------------------------------------*/
+
+/* fonts live in a different folder */
 @font-face {
-  font-family: 'Flat-UI-Icons';
-  src: url('fonts/Flat-UI-Icons.eot');
-  src: url('fonts/Flat-UI-Icons.eot?#iefix') format('embedded-opentype'), url('fonts/Flat-UI-Icons.woff') format('woff'), url('fonts/Flat-UI-Icons.ttf') format('truetype'), url('fonts/Flat-UI-Icons.svg#Flat-UI-Icons') format('svg');
+	font-family: 'Flat-UI-Icons';
+	src: url('fonts/Flat-UI-Icons.eot');
+	src: url('fonts/Flat-UI-Icons.eot?#iefix') format('embedded-opentype'), url('fonts/Flat-UI-Icons.woff') format('woff'), url('fonts/Flat-UI-Icons.ttf') format('truetype'), url('fonts/Flat-UI-Icons.svg#Flat-UI-Icons') format('svg');
+}
+
+/* first nav item should not be rounded as we have a brand element*/
+.navbar .nav > li:first-child > a {
+	border-radius: 0;
 }

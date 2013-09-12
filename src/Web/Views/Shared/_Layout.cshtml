@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using NMoneys.Web.Controllers
+@using NMoneys.Web.Views
+
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -20,12 +23,9 @@
 				<div class="nav-collapse collapse" id="nav-collapse-01">
 
 					<ul class="nav">
-						<li>
-							<a href="#fakelink"><span class="fui-radio-checked small"></span></a>
-						</li>
-						<li>
-							<a href="#fakelink">About</a>
-						</li>
+						@(Html.IconNavEntry<HomeController>(c => c.Index(), "fui-radio-checked"))
+						@(Html.NavEntry<HomeController>(c => c.Currencies(), "Currencies"))
+						@(Html.NavEntry<HomeController>(c => c.About(), "About"))
 					</ul>
 				</div>
 				<!--/.nav -->
