@@ -7,4 +7,11 @@
 
 <section class="container">
 	<h2>@ViewBag.Header</h2>
+	<ul>
+		@foreach (NMoneys.Currency currency in ViewBag.Currencies)
+		{
+			<li>@string.Join(" | ", currency.EnglishName, currency.NativeName, currency.Symbol)</li>
+		}
+
+	</ul>
 </section>
