@@ -10,32 +10,43 @@
 	@Styles.Render("~/Content/css")
 	@Scripts.Render("~/bundles/modernizr")
 </head>
-	<body>
-		<nav class="navbar navbar-inverse">
-			<div class="navbar-inner">
-				<span class="brand">nMoneys</span>		
-				<div class="container">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
-				
-					<div class="nav-collapse collapse" id="nav-collapse-01">
-					
-						<ul class="nav">
-							<li>
-								<a href="#fakelink"><span class="fui-radio-checked small"></span></a>
-							</li>
-							<li>
-								<a href="#fakelink">About</a>
-							</li>
-						</ul>
-					</div>
-					<!--/.nav -->
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="navbar-inner">
+			<span class="brand">nMoneys</span>
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse-01"></button>
+
+				<div class="nav-collapse collapse" id="nav-collapse-01">
+
+					<ul class="nav">
+						<li>
+							<a href="#fakelink"><span class="fui-radio-checked small"></span></a>
+						</li>
+						<li>
+							<a href="#fakelink">About</a>
+						</li>
+					</ul>
+				</div>
+				<!--/.nav -->
+			</div>
+		</div>
+	</nav>
+	@RenderBody()
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="span7">
+					<h3 class="footer-title"></h3>
+					<p><a title="nMoneys" href="http://code.google.com/p/nmoneys/">NMoneys</a> is &copy; 2010-@DateTime.Now.Year Daniel Gonz&aacute;lez and contributors under the <a href="http://www.opensource.org/licenses/bsd-license.php">New BSD license.</a></p>
 				</div>
 			</div>
-		</nav>
-		@RenderBody()
+		</div>
+	</footer>
 
-		@Scripts.Render("~/bundles/jquery")
-		@Scripts.Render("~/bundles/bootstrap")
-		@RenderSection("scripts", required: false)
-	</body>
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
+</body>
 </html>

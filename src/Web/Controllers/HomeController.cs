@@ -10,7 +10,7 @@ namespace NMoneys.Web.Controllers
 			Currency.InitializeAllCurrencies();
 
 			ViewBag.Header = "nMoneys";
-			ViewBag.Currencies = Currency.FindAll();
+			ViewBag.Currencies = Currency.FindAll().Take(5);
 			return View();
 		}
 	}
