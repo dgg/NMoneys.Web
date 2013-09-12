@@ -6,5 +6,47 @@
 }
 
 <section class="container">
-	<h2>@ViewBag.Header</h2>
+	<header>
+		<h1>nMoneys</h1>
+		<div class="login-form">
+			<h2>A <em>Money Value Object</em> implementation for .NET supporting ISO 4417.</h2>
+		</div>
+	</header>
+	<article>
+		<h2><a id="What"></a>What<a href="#What"></a></h2>
+		<p><em>NMoneys</em> (plural) is a simple .Net library to represent monetary quantities. </p>
+		<p>What does <em>NMoneys</em> provide?</p>
+		<ul>
+			<li>types for <strong>representing</strong> <em>currencies</em> that conform to the ISO 4217 standard and quantities of <em>money</em> in a given currency. </li>
+			<li><strong>simple but extensible operations</strong> with monetary quantities of the <strong>same currency</strong>, including allocations of several sorts. </li>
+			<li>ways of <strong>formatting</strong> the representation of monetary quantities </li>
+			<li>a simple way of <strong>contributing</strong> to improve the completeness and correctness of the library </li>
+		</ul>
+		<h3><a id="What_not"></a>What not<a href="#What_not"></a></h3>
+		<p><em>NMoneys</em> <strong>does not provide</strong> any support for <strong>exchanging</strong> monetary quantities in different currencies. That means that you could not &quot;convert&quot;, for example, 10 Euro into the equivalent quantity in dollars using an internal exchange rate in the library. Instead, you could, for example, perform the conversion with numeric types and then display the resultant quantity in a meaningful way by using types provided by <em>NMoneys</em>. </p>
+		<p>If you need to convert monetary quantities into other currencies you can use the framework provided by <em>NMoneys.Exchange</em> alongside your trusted currency rates feed. </p>
+		<p><em>NMoneys</em> does not provide, as of now, <strong>complex monetary or financial operations</strong> </p>
+		<h3><a id="What_might"></a>What might<a href="#What_might"></a></h3>
+		<p>The aim of <em>NMoneys</em> is being simple and to-the-point: represent monetary quantities. </p>
+		<p>But, one of the reasons of making it Open-Source is that people with knowledge in the areas related with the subject of the library, that is money, can contribute with correct and useful ways to operate with the concepts in the library without cluttering its original purpose. </p>
+	</article>
+	<hr/>
+	<article>
+		<h2><a id="Why"></a>Why<a href="#Why"></a></h2>
+		<h3><a id="The_.NET_Framework"></a>The .NET Framework<a href="#The_.NET_Framework"></a></h3>
+		<p>.Net does not provide a good way of representing and operating with monetary quantities. Nonetheless, it does support numeric types that can be used to represent monetary quantities and it also provides support for formatting those numeric values in different cultures. But it is surprisingly easy to mix the concept of &quot;<em>10 represented euros when was saved</em>&quot; with &quot;<em>now, 10 represents something else because of the current culture of the thread</em>&quot;. </p>
+		<p>The .Net Framework mixes numbers, currencies, cultures and formats in a way that it becomes confusing, difficult and/or impossible to represent something as simple as &quot;one Euro&quot; or &quot;ten-and-the-half Zambian kwacha&quot;. </p>
+		<p>On top of that mixture of concepts, it does not support a complete implementation for the ISO standard and for the subset implemented, the information may be outdated or even wrong. Fixes might be issued for wrong/outdated data, but they may take too long to be rolled-out and to add further confusion currency formatting information can be modified by the user. </p>
+		<h3><a id="Other_libraries"></a>Other libraries<a href="#Other_libraries"></a></h3>
+		<p>There might be others libraries or simple code snippets that might cover a necessity. But they did not cover mine for one or another reason: different goals, lack of activity/outdated, not suitable API,... </p>
+		<h3><a id="Open_source"></a>Open source<a href="#Open_source"></a></h3>
+		<p>I have been using different incarnations of this library in commercial projects for some time now. It started with a limited set of well-known currencies. Then it grew to include some others until I decided to support all ISO currencies. At that point I realised that there was no way I could support correctly all scenarios for multiple reasons:</p>
+		<ul>
+			<li>lack of cultural knowledge (e.g. how does one represent decimals in Swaziland?) </li>
+			<li>lack of technical knowledge (e.g how does one distribute an amount of money amongst a number of parties?) </li>
+		</ul>
+		<p>With the realisation came the proposal to my employer to Open-Source the library and modify it so that is easy enough for people to help out, even if they are not .Net programmers. </p>
+		<p>And here we are.</p>
+	</article>
+	<hr/>
 </section>

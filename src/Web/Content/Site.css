@@ -42,3 +42,11 @@ textarea {
 .navbar .nav > li:first-child > a {
 	border-radius: 0;
 }
+
+/* give space at the bottom of call-out */
+.login-form {
+	margin-bottom: 30px;
+	margin-top: 30px;
+	min-height: 50px;
+	text-align: center;
+}
