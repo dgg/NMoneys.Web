@@ -1,9 +1,18 @@
 ﻿@model NMoneys.Web.Models.Snapshot
 
-<div class="span3 tile">
-	<h4>@Model.AlphabeticCode</h4>
-	<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	<p><a class="btn" href="#">View details &raquo;</a></p>
+<div class="span3 tile snapshot" id="@Model.AlphabeticCode">
+	<div class="tabulated">
+		<div class="cell alphabetic-code">
+			<h4>@Model.AlphabeticCode</h4>
+		</div>
+		<div class="cell">
+			<div class="numeric-code">@Model.NumericCode</div>
+			<div class="symbol">@Model.Symbol</div>
+		</div>
+		
+	</div>
+	<div class="tabulated english-name">@Model.EnglishName</div>
+	<div class="tabulated native-name">@Model.NativeName</div>
 </div>
 <!--/span-->
 

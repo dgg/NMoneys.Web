@@ -52,3 +52,13 @@ textarea {
 }
 
 .row-of-tiles{ margin-bottom: 20px;}
+
+.tabulated { display: table; }
+.cell { display: table-cell; vertical-align: middle;}
+.snapshot { text-align: left;}
+.snapshot .alphabetic-code { margin-right: 5px;}
+.snapshot .symbol { padding-left: 10px;}
+.snapshot .numeric-code { padding-left: 10px;}
+.snapshot .english-name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;margin: 0;padding: 0; }
+.snapshot .native-name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0;padding: 0;}
+

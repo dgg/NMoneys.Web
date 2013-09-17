@@ -16,7 +16,8 @@ namespace NMoneys.Web.Controllers
 		public ActionResult Currencies()
 		{
 			IEnumerable<GroupedByInitialInBatches> byInitial = GroupedByInitialInBatches.Collection(
-				Currency.FindAll().Take(15).Select(c => new Snapshot(c)),
+				Currency.FindAll()
+				.Select(c => new Snapshot(c)),
 				s => s.AlphabeticCode,
 				batchSize: 4);
 
