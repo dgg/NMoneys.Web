@@ -6,6 +6,17 @@
 }
 
 <section class="container">
-	<h2>@ViewBag.Header</h2>
+	<form class="form-search">
+		<span class="fui-search">&nbsp;</span>
+		<input id="search-box" type="search" class="input-medium search-query" placeholder="Search...">
+	</form>
+</section>
+
+<section class="container">
 	@Html.DisplayFor(g => Model)
 </section>
+
+@section scripts
+{
+	@Scripts.Render("~/bundles/app_currencies")
+}

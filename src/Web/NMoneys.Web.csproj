@@ -147,9 +147,12 @@
     <Content Include="Content\fonts\Flat-UI-Icons.woff" />
     <Content Include="Content\fonts\icomoon-session.json" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\app.Currencies.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\jquery.highlight.js" />
+    <Content Include="Scripts\jquery.quicksearch.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />

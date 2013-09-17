@@ -62,3 +62,6 @@ textarea {
 .snapshot .english-name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;margin: 0;padding: 0; }
 .snapshot .native-name { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0;padding: 0;}
 
+.form-search { font-size: 24px;}
+
+.highlight { background-color: #FFFF88; }

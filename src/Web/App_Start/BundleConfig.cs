@@ -19,6 +19,16 @@ namespace NMoneys.Web.App_Start
 			bootstrap(bundles);
 
 			flatUI(bundles);
+
+			currencies(bundles);
+		}
+
+		private static void currencies(BundleCollection bundles)
+		{
+			bundles.Add(new ScriptBundle("~/bundles/app_currencies").Include(
+				"~/Scripts/jquery.quicksearch.js",
+				"~/Scripts/jquery.highlight.js",
+				"~/Scripts/app.Currencies.js"));
 		}
 
 		private static void flatUI(BundleCollection bundles)
