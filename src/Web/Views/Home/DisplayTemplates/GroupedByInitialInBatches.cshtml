@@ -1,0 +1,10 @@
+﻿@model NMoneys.Web.Models.GroupedByInitialInBatches
+<article>
+<h3>@Model.Initial</h3>
+@foreach (var batch in Model.BatchedSnapshots)
+{
+	<div class="row-fluid row-of-tiles">
+		@Html.DisplayFor(m => batch)
+	</div>
+}
+</article>

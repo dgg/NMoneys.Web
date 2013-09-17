@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model IEnumerable<NMoneys.Web.Models.GroupedByInitialInBatches>
 
 @{
 	ViewBag.Title = "nMoneys";
@@ -7,11 +7,5 @@
 
 <section class="container">
 	<h2>@ViewBag.Header</h2>
-	<ul>
-		@foreach (NMoneys.Currency currency in ViewBag.Currencies)
-		{
-			<li>@string.Join(" | ", currency.EnglishName, currency.NativeName, currency.Symbol)</li>
-		}
-
-	</ul>
+	@Html.DisplayFor(g => Model)
 </section>

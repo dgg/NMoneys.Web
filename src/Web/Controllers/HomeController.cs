@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-
-using Microsoft.Web.Mvc;
+using NMoneys.Web.Models;
 
 namespace NMoneys.Web.Controllers
 {
@@ -9,20 +9,18 @@ namespace NMoneys.Web.Controllers
 	{
 		public ActionResult Index()
 		{
-			Currency.InitializeAllCurrencies();
-
-			ViewBag.Header = "nMoneys : /";
-			ViewBag.Currencies = Currency.FindAll().Take(5);
 			return View();
 		}
 
+		//[OutputCache(CacheProfile = "snapshots")]
 		public ActionResult Currencies()
 		{
-			Currency.InitializeAllCurrencies();
+			IEnumerable<GroupedByInitialInBatches> byInitial = GroupedByInitialInBatches.Collection(
+				Currency.FindAll().Take(15).Select(c => new Snapshot(c)),
+				s => s.AlphabeticCode,
+				batchSize: 4);
 
-			ViewBag.Header = "nMoneys : Currencies";
-			ViewBag.Currencies = Currency.FindAll().Take(5);
-			return View();	
+			return View(byInitial);	
 		}
 
 		public ActionResult About()
