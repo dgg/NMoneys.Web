@@ -12,7 +12,7 @@ namespace NMoneys.Web.Controllers
 			return View();
 		}
 
-		//[OutputCache(CacheProfile = "snapshots")]
+		[OutputCache(CacheProfile = "snapshots")]
 		public ActionResult Currencies()
 		{
 			IEnumerable<GroupedByInitialInBatches> byInitial = GroupedByInitialInBatches.Collection(
