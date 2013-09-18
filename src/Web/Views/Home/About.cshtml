@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model NMoneys.Web.Models.SnippetCollection
 
 @{
 	ViewBag.Title = "nMoneys";
@@ -6,5 +6,33 @@
 }
 
 <section class="container">
-	<h2>@ViewBag.Header</h2>
+	@foreach (var snippet in Model.Snippets)
+ {
+	 <article class="row-fluid">
+		 <h2>@snippet.Title</h2>
+		 <pre class="code" data-src="@snippet.Url" />
+	 </article>	
+ }
+	
 </section>
+@section scripts
+{
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			function htmlEncode(str) {
+				return $('<div/>').text(str).html();
+			}
+
+			$('.code').each(function () {
+				var $code = $(this);
+				var url = $code.data('src');
+				$.get(url, function(data, status, xhr) {
+					$code.html(prettyPrintOne(htmlEncode(data)));
+				});
+			});
+			//prettyPrint();
+		});
+	</script>
+}

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using NMoneys.Web.Models;
@@ -26,8 +27,8 @@ namespace NMoneys.Web.Controllers
 
 		public ActionResult About()
 		{
-			ViewBag.Header = "nMoneys : About";
-			return View();
+			var model = new SnippetCollection(new DirectoryInfo(System.Web.Hosting.HostingEnvironment.MapPath("/Content/src")));
+			return View(model);
 		}
 	}
 }

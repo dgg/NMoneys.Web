@@ -122,6 +122,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\src\08.Extensions.cs" />
+    <Content Include="Content\src\07.Formatting_Money.cs" />
+    <Content Include="Content\src\06.Allocating_Money.cs" />
+    <Content Include="Content\src\05.Money_Arithmetic.cs" />
+    <Content Include="Content\src\02.Dealing_with_CurrencyIsoCode.cs" />
+    <Content Include="Content\src\01.Instantiating_Currency.cs" />
+    <Content Include="Content\src\04.Comparing_Money.cs" />
+    <Content Include="Content\src\03.Instantiating_Money.cs" />
     <Compile Include="Models\GroupedByInitialInBatches.cs" />
     <Compile Include="Models\Enumerable.Extensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -129,6 +137,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Snapshot.cs" />
+    <Compile Include="Models\Snippet.cs" />
+    <Compile Include="Models\SnippetCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\HtmlHelper.Extensions.cs" />
     <Compile Include="Views\TwoLevelViewCache.cs" />
@@ -146,6 +156,7 @@
     <Content Include="Content\fonts\Flat-UI-Icons.ttf" />
     <Content Include="Content\fonts\Flat-UI-Icons.woff" />
     <Content Include="Content\fonts\icomoon-session.json" />
+    <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\app.Currencies.js" />
     <Content Include="Scripts\bootstrap.min.js" />
