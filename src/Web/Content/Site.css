@@ -51,7 +51,7 @@ textarea {
 	text-align: center;
 }
 
-.row-of-tiles{ margin-bottom: 20px;}
+.tile{ margin-bottom: 20px;}
 
 .tabulated { display: table; }
 .cell { display: table-cell; vertical-align: middle;}
