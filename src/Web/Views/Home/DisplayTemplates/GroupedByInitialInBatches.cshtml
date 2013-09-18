@@ -1,7 +1,7 @@
 ﻿@model NMoneys.Web.Models.GroupedByInitialInBatches
 <section class="row-fluid">
 
-	<h2>@Model.Initial</h2>
+	<h2 class="initial">@Model.Initial</h2>
 	@foreach (var batch in Model.BatchedSnapshots)
 	{
 		@Html.DisplayFor(m => batch)

@@ -7,32 +7,21 @@
 
 <section class="container">
 	@foreach (var snippet in Model.Snippets)
- {
-	 <article class="row-fluid">
-		 <h2>@snippet.Title</h2>
-		 <pre class="code" data-src="@snippet.Url" />
-	 </article>	
- }
-	
+	{
+		<article class="row-fluid">
+			<h2>@snippet.Title</h2>
+			<pre class="code" data-src="@snippet.Url" />
+		</article>	
+	}	
 </section>
+
+@section head
+{
+	@Styles.Render("~/Content/prettify")
+}
+
 @section scripts
 {
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" />
-	<script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
-	<script type="text/javascript">
-		$(function () {
-			function htmlEncode(str) {
-				return $('<div/>').text(str).html();
-			}
-
-			$('.code').each(function () {
-				var $code = $(this);
-				var url = $code.data('src');
-				$.get(url, function(data, status, xhr) {
-					$code.html(prettyPrintOne(htmlEncode(data)));
-				});
-			});
-			//prettyPrint();
-		});
-	</script>
+	@Scripts.Render("~/bundles/prettify")
+	@Scripts.Render("~/bundles/app_about")
 }

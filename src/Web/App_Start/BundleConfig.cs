@@ -8,7 +8,7 @@ namespace NMoneys.Web.App_Start
 		public static void RegisterBundles(BundleCollection bundles)
 		{
 			bundles.UseCdn = true;
-			//BundleTable.EnableOptimizations = true;
+			BundleTable.EnableOptimizations = true;
 
 			jQuery(bundles);
 
@@ -21,6 +21,22 @@ namespace NMoneys.Web.App_Start
 			flatUI(bundles);
 
 			currencies(bundles);
+
+			about(bundles);
+		}
+
+		private static void about(BundleCollection bundles)
+		{
+			var prettify = new ScriptBundle("~/bundles/prettify", "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js")
+				.Include("~/Scripts/prettify.js");
+			prettify.CdnFallbackExpression = "prettyPrint";
+			bundles.Add(prettify);
+
+			bundles.Add(new ScriptBundle("~/bundles/app_about").Include(
+				"~/Scripts/app.About.js"));
+
+			bundles.Add(new StyleBundle("~/Content/prettify", "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css")
+				.Include("~/Content/prettify.css"));
 		}
 
 		private static void currencies(BundleCollection bundles)

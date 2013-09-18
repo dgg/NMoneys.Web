@@ -2,7 +2,7 @@
 	var $searchBox = $('#search-box');
 	var snapshotSelector = '.snapshot';
 	var $snapshots = $(snapshotSelector);
-	var $titles = $('article h3');
+	var $titles = $('.initial');
 	$searchBox.quicksearch(snapshotSelector,
 		{
 			'delay': 300,
