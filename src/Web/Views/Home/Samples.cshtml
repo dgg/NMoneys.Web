@@ -1,0 +1,35 @@
+﻿@model NMoneys.Web.Models.CodeSnippetCollection
+
+@{
+	ViewBag.Title = "nMoneys";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#quickstart" data-toggle="tab">Developer Quickstart</a></li>
+		<li><a href="#codeproject" data-toggle="tab">Code Project</a></li>
+	</ul>
+	<div class="tab-content">
+		<section class="tab-pane active" id="quickstart">
+			@Html.DisplayFor(m => m.QuickStart)
+		</section>
+		<section class="tab-pane" id="codeproject">
+			@Html.DisplayFor(m => m.CodeProject)
+		</section>
+
+	</div>
+
+</div>
+
+
+
+@section head
+{
+	@Styles.Render("~/Content/prettify")
+}
+
+@section scripts
+{
+	@Scripts.Render("~/bundles/prettify")
+	@Scripts.Render("~/bundles/app_about")
+}
