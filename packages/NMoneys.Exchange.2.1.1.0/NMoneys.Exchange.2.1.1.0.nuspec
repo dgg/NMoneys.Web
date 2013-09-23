@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>NMoneys.Exchange</id>
+    <version>2.1.1.0</version>
+    <title>NMoneys Exchange</title>
+    <authors>Daniel González García</authors>
+    <owners>Daniel González García</owners>
+    <licenseUrl>http://www.opensource.org/licenses/bsd-license.php</licenseUrl>
+    <projectUrl>http://code.google.com/p/nmoneys/</projectUrl>
+    <iconUrl>https://nugetgallery.blob.core.windows.net/icons/NMoneys.Exchange.1.0.0.0.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Extensions to the implementation of the Money Value Object to support exchange operations between moneys in different currencies.</description>
+    <summary>NMoneys Exchange (plural) is an extension to the NMoneys library that allows exchange operations between monetary quantities in different currencies.
+			It does so by providing a framework in which such operations can take place using some default implementations and multiple extensions points.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>.net currency money</tags>
+    <dependencies>
+      <dependency id="nmoneys" version="3.0.0.0" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,368 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NMoneys.Exchange</name>
+    </assembly>
+    <members>
+        <member name="T:NMoneys.Exchange.ExchangeRate">
+            <summary>
+            Represents the rate at which one currency will be exchanged for another.
+            </summary>
+            <remarks>The also named "currency pair" is the quotation of the relative value of a currency unit against the unit of another currency.</remarks>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.#ctor(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode,System.Decimal)">
+            <summary>
+            Initializes an instance of <see cref="T:NMoneys.Exchange.ExchangeRate"/> with the provided information.
+            </summary>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <param name="rate">A non-negative <see cref="T:System.Decimal"/> instance representing the relative vaue of <paramref name="from"/> against <paramref name="to"/>.</param>
+            <example>{from}= EUR, {to}= USD, {rate}=1.2500, represented as "EUR/USD 1.2500" means that one euro is exchanged for 1.2500 US dollars.</example>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException"><paramref name="from"/> or <paramref name="to"/> are undefined currencies.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="rate"/> is negative.</exception>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.Invert">
+            <summary>
+            Creates a new <see cref="T:NMoneys.Exchange.ExchangeRate"/> in which the order of the currencies has been "swapped" that is, the <see cref="P:NMoneys.Exchange.ExchangeRate.From"/> currency
+            will become the <see cref="P:NMoneys.Exchange.ExchangeRate.To"/> currency and viceversa and the rate, by default, has been inverted (reciprocated).
+            </summary>
+            <remarks>The instance on which the method is called remains unchanged.</remarks>
+            <returns>A new <see cref="T:NMoneys.Exchange.ExchangeRate"/> with swapped currencies and inverted rate.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.Apply(NMoneys.Money)">
+            <summary>
+            Applies the conversion rate to the provided monetary quantity.
+            </summary>
+            <remarks>The quanity to be exchanged need to be compatible with the instance of the rate, that is have the same currency as specified in the <see cref="P:NMoneys.Exchange.ExchangeRate.From"/> property.
+            <para>By default, the application of the rate to the amount is a simple product as specified in <see cref="M:System.Decimal.op_Multiply(System.Decimal,System.Decimal)"/>. No further manipulations is performed.</para></remarks>
+            <param name="from">The monetary quantity to be exchanged.</param>
+            <returns>A new monetary quantity which has the currency as specified in the <see cref="P:NMoneys.Exchange.ExchangeRate.To"/> and its amount the result of the application of the exchange rate to its previous amount.</returns>
+            <exception cref="T:NMoneys.DifferentCurrencyException">The rate cannot be applied to <paramref name="from"/>.</exception>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.assertCompatibility(NMoneys.CurrencyIsoCode)">
+            <summary>
+            Asserts whether a currency is compatible with this exchange rate, that is, is the same as <see cref="P:NMoneys.Exchange.ExchangeRate.From"/>.
+            </summary>
+            <param name="from">The currency to check its compatibility againsts the base currency.</param>
+            <exception cref="T:NMoneys.DifferentCurrencyException"><paramref name="from"/> is not compatible.</exception>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.ToString">
+            <summary>
+            Converts a exchange rate to its equivalent string representation.
+            </summary>
+            <returns>The string representation of the value of this instance, consisting of the three letter code of the base currency, a forward slash <c>/</c>,
+            the three letter code of the quote currency and the rate formatted as per the rules of the invariant culture.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.Parse(System.String)">
+            <summary>
+            Converts the string representation of a exhange rate to its <see cref="T:NMoneys.Exchange.ExchangeRate"/> representation.
+            </summary>
+            <param name="rateRepresentation">A string containing a rate to convert.</param>
+            <returns>A <see cref="T:NMoneys.Exchange.ExchangeRate"/> instance equivalent to the rate represented by <paramref name="rateRepresentation"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="rateRepresentation"/> is null.</exception>
+            <exception cref="T:System.FormatException"><paramref name="rateRepresentation"/> is not in the correct format.</exception>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.Identity(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode)">
+            <summary>
+            Creates an instance of an identity exchange rate with the parameters provided.
+            </summary>
+            <remarks>An identity exchange rate is one which rate is 1, as such applying it to some monetary quantity merely changes the currency while leaving its amount unchanged.</remarks>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <returns>An identity exchange rate for the currencies provided.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.Identity(NMoneys.CurrencyIsoCode)">
+            <summary>
+            Creates an instance of an identity exchange rate with the parameters provided.
+            </summary>
+            <remarks>An identity exchange rate is one which rate is 1, as such applying it to some monetary quantity merely changes the currency while leaving its amount unchanged.</remarks>
+            <param name="single">This currency will become  both the base currency, and the quote currency.</param>
+            <returns>An identity exchange rate for the currency provided.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.Equals(NMoneys.Exchange.ExchangeRate)">
+            <summary>
+            Indicates whether the current exchange rate is equal to another exchange rate.
+            </summary>
+            <returns>
+            true if the current object is equal to the <paramref name="other"/> parameter; otherwise, false.
+            </returns>
+            <param name="other">An object to compare with this rate.</param>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:NMoneys.Exchange.ExchangeRate"/>.
+            </summary>
+            <returns>
+            true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:NMoneys.Exchange.ExchangeRate"/>; otherwise, false.
+            </returns>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:NMoneys.Exchange.ExchangeRate"/>.</param>
+            <exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is null.</exception>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            </summary>
+            <returns>
+            A hash code for the current <see cref="T:NMoneys.Exchange.ExchangeRate"/>.
+            </returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.op_Equality(NMoneys.Exchange.ExchangeRate,NMoneys.Exchange.ExchangeRate)">
+            <summary>
+            Returns a value indicating whether two instances of <see cref="T:NMoneys.Exchange.ExchangeRate"/> are equal.
+            </summary>
+            <param name="left">The first value to compare.</param>
+            <param name="right">The second value to compare.</param>
+            <returns>true if <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRate.op_Inequality(NMoneys.Exchange.ExchangeRate,NMoneys.Exchange.ExchangeRate)">
+            <summary>
+            Returns a value indicating whether two instances of <see cref="T:NMoneys.Exchange.ExchangeRate"/> are not equal.
+            </summary>
+            <param name="left">The first value to compare.</param>
+            <param name="right">The second value to compare.</param>
+            <returns>true if <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, false.</returns>
+        </member>
+        <member name="P:NMoneys.Exchange.ExchangeRate.From">
+            <summary>
+            Base currency, the currency from which the conversion is performed.
+            </summary>
+        </member>
+        <member name="P:NMoneys.Exchange.ExchangeRate.To">
+            <summary>
+            Quote currency, the currency which the conversion is performed to.
+            </summary>
+        </member>
+        <member name="P:NMoneys.Exchange.ExchangeRate.Rate">
+            <summary>
+            A <see cref="T:System.Decimal"/> instance representing the relative vaue of <see cref="P:NMoneys.Exchange.ExchangeRate.From"/> against <see cref="P:NMoneys.Exchange.ExchangeRate.To"/>.
+            </summary>
+        </member>
+        <member name="T:NMoneys.Exchange.TabulatedExchangeRateProvider">
+            <summary>
+            Provides a way to obtain exhange rates to be used in conversion operations
+            </summary>
+        </member>
+        <member name="T:NMoneys.Exchange.IExchangeRateProvider">
+            <summary>
+            Provides means to obtain applicable rates for exchange opeerations.
+            </summary>
+        </member>
+        <member name="M:NMoneys.Exchange.IExchangeRateProvider.Get(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode)">
+            <summary>
+            Provides an applicable rate for exchange operations.
+            </summary>
+            <remarks>Implementations may throw in case an applicable rate cannot be provided.</remarks>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <returns>A rate at which one currency will be exchanged for another.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.IExchangeRateProvider.TryGet(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode,NMoneys.Exchange.ExchangeRate@)">
+            <summary>
+            Provides an applicable rate for exchange operations.
+            </summary>
+            <remarks>Implementations should not throw in case an applicable rate cannot be provided.</remarks>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <param name="rate">A rate at which one currency will be exchanged for another or null if one cannot be provided.</param>
+            <returns>true if an applicable rate can be provided; otherwise, false.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.#ctor">
+            <summary>
+            Creates an instance of <see cref="T:NMoneys.Exchange.TabulatedExchangeRateProvider"/> with the standard way to build a <see cref="T:NMoneys.Exchange.ExchangeRate"/>.
+            </summary>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.#ctor(System.Func{NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode,System.Decimal,NMoneys.Exchange.ExchangeRate})">
+            <summary>
+            Creates an instance of <see cref="T:NMoneys.Exchange.TabulatedExchangeRateProvider"/> with the custom way to build a <see cref="T:NMoneys.Exchange.ExchangeRate"/>.
+            </summary>
+            <param name="rateBuilder">Custom way of building a <see cref="T:NMoneys.Exchange.ExchangeRate"/> implementation.</param>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.Add(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode,System.Decimal)">
+            <summary>
+            Adds a rate for its later retrieval.
+            </summary>
+            <abstract>It will try to populate its inverse rate if this has not been added before.</abstract>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <param name="rate">A non-negative <see cref="T:System.Decimal"/> instance representing the relative vaue of <paramref name="from"/> against <paramref name="to"/>.</param>
+            <returns>The <see cref="T:NMoneys.Exchange.ExchangeRate"/> just added as per the rules specified in the constructor.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.MultiAdd(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode,System.Decimal)">
+            <summary>
+            Adds a rate, its inverse and identity rates for both base and quote currency for its later retrieval.
+            </summary>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <param name="rate">A non-negative <see cref="T:System.Decimal"/> instance representing the relative vaue of <paramref name="from"/> against <paramref name="to"/>.</param>
+            <returns>The <see cref="T:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair"/> just added as per the rules specified in the constructor.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.Get(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode)">
+            <summary>
+            Provides an applicable rate for exchange operations.
+            </summary>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <returns>A rate at which one currency will be exchanged for another.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">A rate converting <paramref name="from"/> into <paramref name="to"/> could not be provided.</exception>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.TryGet(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode,NMoneys.Exchange.ExchangeRate@)">
+            <summary>
+            Provides an applicable rate for exchange operations.
+            </summary>
+            <param name="from">Base currency, the currency from which the conversion is performed.</param>
+            <param name="to">Quote currency, the currency which the conversion is performed to.</param>
+            <param name="rate">A rate at which one currency will be exchanged for another or null if one cannot be provided.</param>
+            <returns>true if an applicable rate can be provided; otherwise, false.</returns>
+        </member>
+        <member name="T:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair">
+            <summary>
+            Represents a rate to exchange a currency X into another Y and a rate to convert Y into X
+            </summary>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair.#ctor(NMoneys.Exchange.ExchangeRate,NMoneys.Exchange.ExchangeRate)">
+            <summary>
+            Creates a <see cref="T:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair"/> instance.
+            </summary>
+            <param name="direct">Direct conversion from currency X into currency Y.</param>
+            <param name="inverse">Inverse conversion from currency Y into currency X.</param>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair.AssertConsistentcy(NMoneys.Exchange.ExchangeRate,NMoneys.Exchange.ExchangeRate)">
+            <summary>
+            Check the constistency of a pair of rates.
+            </summary>
+            <remarks>Two rates as consistent as a pair if the base currency on one is the quote currency of the other and viceversa.</remarks>
+            <param name="direct">One of the rates to be checked.</param>
+            <param name="inverse">Another of the rates to be checked.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="direct"/> or <paramref name="inverse"/> are null.</exception>
+            <exception cref="T:NMoneys.DifferentCurrencyException">The rates are not consistent.</exception>
+        </member>
+        <member name="M:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair.ToString">
+            <summary>
+            Converts a rate pair to its equivalent string representation.
+            </summary>
+            <returns>The string representation of the value of this instance, consisting of the string representation of the <see cref="P:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair.Direct"/> rate and the 
+            string representation of the <see cref="P:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair.Inverse"/> rate.</returns>
+        </member>
+        <member name="P:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair.Direct">
+            <summary>
+            Conversion from currency X into currency Y.
+            </summary>
+        </member>
+        <member name="P:NMoneys.Exchange.TabulatedExchangeRateProvider.ExchangeRatePair.Inverse">
+            <summary>
+            Conversion from currency Y into currency X.
+            </summary>
+        </member>
+        <member name="T:NMoneys.Exchange.ExchangeSafeConversion">
+            <summary>
+            Implements the conversions of monetary quantities into other monetary quantities with different currencies.
+            </summary>
+            <remarks>Does not throw if the rate cannot be found.</remarks>
+        </member>
+        <member name="T:NMoneys.Exchange.IExchangeSafeConversion">
+            <summary>
+            Allows conversions of monetary quantities into other monetary quantities with different currencies.
+            </summary>
+        </member>
+        <member name="M:NMoneys.Exchange.IExchangeSafeConversion.To(NMoneys.CurrencyIsoCode)">
+            <summary>
+            Converts a monetary quantity into another monetary with the currency specified by <paramref name="to"/>.
+            </summary>
+            <remarks>Implementations of the interface should throw when conversion cannot be performed.</remarks>
+            <param name="to">Target currency of the conversion.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> instance with the <see cref="P:NMoneys.Money.CurrencyCode"/> specified by <paramref name="to"/> 
+            and the <see cref="P:NMoneys.Money.Amount"/> corresponding to the conversion; or null if the conversion could not be performed.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.IExchangeSafeConversion.To(NMoneys.Currency)">
+            <summary>
+            Converts a monetary quantity into another monetary with the currency specified by <paramref name="to"/>.
+            </summary>
+            <remarks>Implementations of the interface should throw when conversion cannot be performed.</remarks>
+            <param name="to">Target currency of the conversion.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> instance with the <see cref="P:NMoneys.Money.CurrencyCode"/> specified by <paramref name="to"/> 
+            and the <see cref="P:NMoneys.Money.Amount"/> corresponding to the conversion; or null of the conversion could not be performed.</returns>
+        </member>
+        <member name="P:NMoneys.Exchange.IExchangeSafeConversion.From">
+            <summary>
+            Allows access to the instance the extensions method was invoked on.
+            </summary>
+        </member>
+        <member name="T:NMoneys.Exchange.IExchangeConversion">
+            <summary>
+            Allows conversions of monetary quantities into other monetary quantities with different currencies.
+            </summary>
+        </member>
+        <member name="M:NMoneys.Exchange.IExchangeConversion.To(NMoneys.CurrencyIsoCode)">
+            <summary>
+            Converts a monetary quantity into another monetary with the currency specified by <paramref name="to"/>.
+            </summary>
+            <remarks>Implementations of the interface might throw when conversion cannot be performed.</remarks>
+            <param name="to">Target currency of the conversion.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> instance with the <see cref="P:NMoneys.Money.CurrencyCode"/> specified by <paramref name="to"/> 
+            and the <see cref="P:NMoneys.Money.Amount"/> corresponding to the conversion.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.IExchangeConversion.To(NMoneys.Currency)">
+            <summary>
+            Converts a monetary quantity into another monetary with the currency specified by <paramref name="to"/>.
+            </summary>
+            <remarks>Implementations of the interface might throw when conversion cannot be performed.</remarks>
+            <param name="to">Target currency of the conversion.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> instance with the <see cref="P:NMoneys.Money.CurrencyCode"/> specified by <paramref name="to"/> 
+            and the <see cref="P:NMoneys.Money.Amount"/> corresponding to the conversion.</returns>
+        </member>
+        <member name="P:NMoneys.Exchange.IExchangeConversion.From">
+            <summary>
+            Allows access to the instance the extensions method was invoked on.
+            </summary>
+        </member>
+        <member name="T:NMoneys.Exchange.ExchangeConversion">
+            <summary>
+            Implements the conversions of monetary quantities into other monetary quantities with different currencies.
+            </summary>
+            <remarks>Throws if the rate cannot be found.</remarks>
+        </member>
+        <member name="T:NMoneys.Exchange.ExchangeRateProvider">
+            <summary>
+            Container for conversion extension methods and <see cref="T:NMoneys.Exchange.IExchangeRateProvider"/> factories.
+            </summary>
+        </member>
+        <member name="F:NMoneys.Exchange.ExchangeRateProvider.Factory">
+            <summary>
+            Gets or sets the provider to be used when performing exchange conversions.
+            </summary>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRateProvider.Convert(NMoneys.Money)">
+            <summary>
+            Gives acccess to exchange operations of <see cref="T:NMoneys.Money"/> instances.
+            </summary>
+            <remarks>Operations accessed through this method can throw if an applicable rate cannot be provided.</remarks>
+            <param name="from">Monetary quantity to be exchanged.</param>
+            <returns>A <see cref="T:NMoneys.Exchange.IExchangeConversion"/> that allows performing exchange operations.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ExchangeRateProvider.TryConvert(NMoneys.Money)">
+            <summary>
+            Gives acccess to exchange operations of <see cref="T:NMoneys.Money"/> instances.
+            </summary>
+            <remarks>Operations accessed through this method should not throw if an applicable rate cannot be provided.</remarks>
+            <param name="from">Monetary quantity to be exchanged.</param>
+            <returns>A <see cref="T:NMoneys.Exchange.IExchangeSafeConversion"/> that allows performing exchange operations.</returns>
+        </member>
+        <member name="P:NMoneys.Exchange.ExchangeRateProvider.Default">
+            <summary>
+            Default rate provider.
+            </summary>
+            <remarks>Return a provider that always return identity rates: rates with the rate of one.</remarks>
+        </member>
+        <member name="T:NMoneys.Exchange.ProviderOfIdentities">
+            <summary>
+            Null object pattern implementor of <see cref="T:NMoneys.Exchange.IExchangeRateProvider"/>
+            </summary>
+        </member>
+        <member name="M:NMoneys.Exchange.ProviderOfIdentities.Get(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode)">
+            <returns>Returns an identity rate: a rate of one.</returns>
+        </member>
+        <member name="M:NMoneys.Exchange.ProviderOfIdentities.TryGet(NMoneys.CurrencyIsoCode,NMoneys.CurrencyIsoCode,NMoneys.Exchange.ExchangeRate@)">
+            <returns>Returns an identity rate: a rate of one.</returns>
+        </member>
+    </members>
+</doc>

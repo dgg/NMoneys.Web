@@ -98,3 +98,5 @@ iframe{ border-width: 0;}
 .highlight {
 	background-color: #f1c40f;
 }
+
+.nav-tabs em { font-size: smaller;}
