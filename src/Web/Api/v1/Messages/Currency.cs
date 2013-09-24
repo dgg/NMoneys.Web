@@ -8,7 +8,7 @@ namespace NMoneys.Web.Api.v1.Messages
 	[Api("Get detailed information about a currency.")]
 	public class Currency : IReturn<CurrencyResponse>
 	{
-		[ApiMember(IsRequired = true, ParameterType = "path", Description = "ISO code of the currency to return.")]
+		[ApiMember(IsRequired = true, ParameterType = "path", Description = "Three-letter ISO code of the currency to return.")]
 		public CurrencyIsoCode IsoCode { get; set; }	 
 	}
 

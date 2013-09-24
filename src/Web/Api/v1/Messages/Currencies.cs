@@ -9,7 +9,6 @@ namespace NMoneys.Web.Api.v1.Messages
 
 	public class CurrenciesResponse
 	{
-		[ApiMember(Description = "desc")]
 		public CurrencySnapshot[] Snapshots { get; set; }
 	}
 }

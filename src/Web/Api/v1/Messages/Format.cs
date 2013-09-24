@@ -9,7 +9,7 @@ namespace NMoneys.Web.Api.v1.Messages
 	public class Format : IReturn<FormatResponse>
 	{
 		[ApiMember(IsRequired = true, ParameterType = "path, body", Verb = "GET, POST",
-			Description = "ISO code of the currency to use for formatting.")]
+			Description = "Three-letter ISO code of the currency to use for formatting.")]
 		public CurrencyIsoCode IsoCode { get; set; }
 		[ApiMember(IsRequired = true, ParameterType = "path, body", Verb = "GET, POST",
 			Description = "Amount of the monetary quantity to be formatted.")]
