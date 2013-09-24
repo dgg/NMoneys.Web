@@ -21,19 +21,27 @@ GET currencies
 Get detailed information about a currency.
 GET currencies/{isoCode}
 > Content-Type: application/json
-{ "isoCode":"EUR" }
++ Parameters
+    + isoCode (required, string) Three-letter ISO code of the currency to return.
 < 200
 < Content-Type: application/json
-{"detail":{"isoCode":"EUR","numericCode":978,"englishName":"Euro","nativeName":"Euro","symbol":"€","isObsolete":false}}
+{"detail":{"isoCode":"EUR","numericCode":978,"englishName":"Euro","nativeName":"Euro","symbol":"â‚¬","isObsolete":false}}
 
 Allows formatting a monetary amount according to its currency.
 GET /currencies/{isoCode}/format/{amount}
++ Parameters
+    + isoCode (required, string) Three-letter ISO code of the currency to use for formatting.
+    + amount (required, number) Amount of the monetary quantity to be formatted.
 { "isoCode": "EUR", "amount": "123" }
 < 200
-{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 €","amountRepresentation":"123,00"}}
+{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 ï¿½","amountRepresentation":"123,00"}}
 
 Allows formatting a monetary amount according to its currency.
 POST /currencies/{isoCode}/format
++ Parameters
+    + isoCode (required, string) Three-letter ISO code of the currency to use for formatting.
++ Model (application/json)
+    + amount (required, string) Amount of the monetary quantity to be formatted.
 { "isoCode": "EUR", "amount": "123" }
 < 200
-{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 €","amountRepresentation":"123,00"}}
+{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 ï¿½","amountRepresentation":"123,00"}}
