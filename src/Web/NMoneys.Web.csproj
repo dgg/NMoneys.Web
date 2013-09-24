@@ -203,6 +203,7 @@
     <Content Include="Content\fonts\Flat-UI-Icons.ttf" />
     <Content Include="Content\fonts\Flat-UI-Icons.woff" />
     <Content Include="Content\fonts\icomoon-session.json" />
+    <Content Include="apiary.apib" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\app.Currencies.js" />
