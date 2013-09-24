@@ -11,6 +11,7 @@ The following is a section of resources related to ISO 4217 currencies
 --
 List current supported currencies.
 GET /currencies
+> Accept: application/json
 < 200
 < Content-Type: application/json
 { "snapshots": [
@@ -19,29 +20,23 @@ GET /currencies
 
 
 Get detailed information about a currency.
-GET /currencies{/isoCode}
-> Content-Type: application/json
-+ Parameters
-    + isoCode (required, string) ... Three-letter ISO code of the currency to return.
+GET /currencies/{isoCode}
+> Accept: application/json
 < 200
 < Content-Type: application/json
 {"detail":{"isoCode":"EUR","numericCode":978,"englishName":"Euro","nativeName":"Euro","symbol":"€","isObsolete":false}}
 
 Allows formatting a monetary amount according to its currency.
-GET /currencies{/isoCode}/forma/{/amount}
-+ Parameters
-    + isoCode (required, string) ... Three-letter ISO code of the currency to use for formatting.
-    + amount (required, number) ... Amount of the monetary quantity to be formatted.
-{ "isoCode": "EUR", "amount": "123" }
+GET /currencies/{isoCode}/format/{amount}
+> Accept: application/json
 < 200
-{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 �","amountRepresentation":"123,00"}}
+< Content-Type: application/json
+{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 €", "amountRepresentation":"123,00"}}
 
 Allows formatting a monetary amount according to its currency.
-POST /currencies{/isoCode}/format
-+ Parameters
-    + isoCode (required, string) ... Three-letter ISO code of the currency to use for formatting.
-+ Model (application/json)
-    + amount (required, string) ... Amount of the monetary quantity to be formatted.
-{ "isoCode": "EUR", "amount": "123" }
+POST /currencies/{isoCode}/format
+> Accept: application/json
+{ "amount": "123" }
 < 200
-{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 �","amountRepresentation":"123,00"}}
+< Content-Type: application/json
+{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 €","amountRepresentation":"123,00"}}
