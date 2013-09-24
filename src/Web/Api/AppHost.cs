@@ -14,7 +14,7 @@ namespace NMoneys.Web.Api
 		{
 			SetConfig(new EndpointHostConfig
 			{
-				EnableFeatures = Feature.All.Remove(Feature.Jsv | Feature.Soap),
+				EnableFeatures = Feature.All.Remove(Feature.Jsv | Feature.Soap | Feature.Xml),
 				DefaultContentType = ContentType.Json,
 				ServiceStackHandlerFactoryPath = "api",
 			});

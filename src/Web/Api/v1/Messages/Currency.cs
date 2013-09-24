@@ -3,9 +3,12 @@ using ServiceStack.ServiceHost;
 
 namespace NMoneys.Web.Api.v1.Messages
 {
-	[Route("/v1/currencies/{isoCode}", "GET")]
+	[Route("/v1/currencies/{isoCode}", "GET", 
+		Summary = "Get detailed information about a currency.")]
+	[Api("Get detailed information about a currency.")]
 	public class Currency : IReturn<CurrencyResponse>
 	{
+		[ApiMember(IsRequired = true, ParameterType = "path", Description = "ISO code of the currency to return.")]
 		public CurrencyIsoCode IsoCode { get; set; }	 
 	}
 
