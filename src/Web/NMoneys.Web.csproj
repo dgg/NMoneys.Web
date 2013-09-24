@@ -77,15 +77,6 @@
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\..\packages\ServiceStack.Common.3.9.63\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\..\packages\ServiceStack.OrmLite.SqlServer.3.9.63\lib\net35\ServiceStack.OrmLite.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.OrmLite.SqlServer">
-      <HintPath>..\..\packages\ServiceStack.OrmLite.SqlServer.3.9.63\lib\net35\ServiceStack.OrmLite.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\packages\ServiceStack.Redis.3.9.63\lib\net35\ServiceStack.Redis.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.ServiceInterface">
       <HintPath>..\..\packages\ServiceStack.3.9.63\lib\net35\ServiceStack.ServiceInterface.dll</HintPath>
     </Reference>
@@ -94,8 +85,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -138,7 +127,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -149,8 +137,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AppHost.cs" />
+    <Compile Include="Api\v1\Datatypes\CurrencyDetail.cs" />
+    <Compile Include="Api\v1\Datatypes\CurrencySnapshot.cs" />
+    <Compile Include="Api\v1\Datatypes\FormattedMoney.cs" />
+    <Compile Include="Api\v1\Messages\Currencies.cs" />
+    <Compile Include="Api\v1\Messages\Currency.cs" />
+    <Compile Include="Api\v1\Messages\Format.cs" />
+    <Compile Include="Api\v1\Resources\Currencies.cs" />
+    <Compile Include="App_Start\ApiConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MvcConfig.cs" />
+    <Compile Include="App_Start\NMoneysConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Content\prettify.css" />
     <Content Include="Content\src\Quickstart\08.Extensions.cs" />
@@ -236,7 +235,6 @@
     <Content Include="Views\Home\DisplayTemplates\CodeSnippet.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Api\v1\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
