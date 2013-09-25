@@ -55,6 +55,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.1\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -141,6 +147,11 @@
     <Compile Include="Api\v1\Datatypes\CurrencyDetail.cs" />
     <Compile Include="Api\v1\Datatypes\CurrencySnapshot.cs" />
     <Compile Include="Api\v1\Datatypes\FormattedMoney.cs" />
+    <Compile Include="Api\v1\Infrastructure\ApiAuthenticationFilter.cs" />
+    <Compile Include="Api\v1\Infrastructure\ApiKey.cs" />
+    <Compile Include="Api\v1\Infrastructure\IAuthenticationFilter.cs" />
+    <Compile Include="Api\v1\Infrastructure\IKeyVerifier.cs" />
+    <Compile Include="Api\v1\Infrastructure\KeyVerifier.cs" />
     <Compile Include="Api\v1\Messages\Currencies.cs" />
     <Compile Include="Api\v1\Messages\Currency.cs" />
     <Compile Include="Api\v1\Messages\Format.cs" />
