@@ -149,9 +149,10 @@
     <Compile Include="Api\v1\Datatypes\FormattedMoney.cs" />
     <Compile Include="Api\v1\Infrastructure\ApiAuthenticationFilter.cs" />
     <Compile Include="Api\v1\Infrastructure\ApiKey.cs" />
-    <Compile Include="Api\v1\Infrastructure\IAuthenticationFilter.cs" />
+    <Compile Include="Api\v1\Infrastructure\HostBootstrapper.cs" />
     <Compile Include="Api\v1\Infrastructure\IKeyVerifier.cs" />
     <Compile Include="Api\v1\Infrastructure\KeyVerifier.cs" />
+    <Compile Include="Api\v1\Infrastructure\MongoUrlbuilder.cs" />
     <Compile Include="Api\v1\Messages\Currencies.cs" />
     <Compile Include="Api\v1\Messages\Currency.cs" />
     <Compile Include="Api\v1\Messages\Format.cs" />

@@ -3,20 +3,14 @@ using ServiceStack.ServiceHost;
 
 namespace NMoneys.Web.Api.v1.Infrastructure
 {
-
-	public class ApiAuthenticationFilter : IAuthenticationFilter
+	public class ApiAuthenticationFilter
 	{
-		private readonly IKeyVerifier _verifier;
-
-		public ApiAuthenticationFilter(IKeyVerifier verifier)
+		public static void Handle(IHttpRequest request, IHttpResponse response, object dto)
 		{
-			_verifier = verifier;
-		}
+			var verifier = request.TryResolve<IKeyVerifier>();
 
-		public void Handle(IHttpRequest request, IHttpResponse response, object dto)
-		{
 			ApiKey apiKey = ApiKey.ExtractFrom(request);
-			if (apiKey.IsMissing || !_verifier.Verify(apiKey))
+			if (apiKey.IsMissing || !verifier.Verify(apiKey))
 			{
 				string unauthorized = string.Format("Unauthorized request. Please, include a valid '{0}'", ApiKey.ParameterName);
 				throw HttpError.Unauthorized(unauthorized);

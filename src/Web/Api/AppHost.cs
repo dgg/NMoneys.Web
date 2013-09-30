@@ -9,27 +9,18 @@ namespace NMoneys.Web.Api
 {
 	public class AppHost : AppHostBase
 	{
-		public AppHost() : base("NMoneys", typeof(AppHost).Assembly) { }
+		public AppHost() : base(HostBootstrapper.ServiceName, HostBootstrapper.ServiceContainer) { }
 
 		public override void Configure(Container container)
 		{
-			configure(container);
+			EndpointHostConfig config = new HostBootstrapper().BootstrapAll(
+				container,
+				RequestFilters,
+				ResponseFilters);
 
-			SetConfig(new EndpointHostConfig
-			{
-				EnableFeatures = Feature.All.Remove(Feature.Jsv | Feature.Soap | Feature.Xml),
-				DefaultContentType = ContentType.Json,
-				ServiceStackHandlerFactoryPath = "api",
-			});
-			ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
-
-			RequestFilters.Add(container.Resolve<IAuthenticationFilter>().Handle);
+			SetConfig(config);
 		}
 
-		private void configure(Container container)
-		{
-			container.RegisterAutoWiredAs<KeyVerifier, IKeyVerifier>();
-			container.RegisterAutoWiredAs<ApiAuthenticationFilter, IAuthenticationFilter>();
-		}
+		
 	}
 }
