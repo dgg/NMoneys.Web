@@ -1,9 +1,8 @@
 ﻿using System;
-using NUnit.Framework;
 
 namespace Tests.Api.Support
 {
-	public abstract class EndToEndTester
+	public abstract class TesterBase
 	{
 		private TestHost _host;
 		protected TestHost Host { get { return _host; } }
@@ -11,8 +10,7 @@ namespace Tests.Api.Support
 		private readonly Uri _baseUrl = new Uri("http://localhost:8081/");
 		public Uri BaseUrl { get { return _baseUrl; } }
 
-		[TestFixtureSetUp]
-		public void StartHost()
+		protected void StartHost()
 		{
 			_host = new TestHost();
 			_host.Init();
@@ -20,8 +18,7 @@ namespace Tests.Api.Support
 			_host.Start(_baseUrl.ToString());
 		}
 
-		[TestFixtureTearDown]
-		public void ShutdownHost()
+		protected void ShutdownHost()
 		{
 			_host.Stop();
 			_host.Dispose();
@@ -29,7 +26,7 @@ namespace Tests.Api.Support
 		}
 
 
-		public EndToEndTester Replacing<T>(T dependency)
+		public TesterBase Replacing<T>(T dependency)
 		{
 			_host.Register(dependency);
 			return this;

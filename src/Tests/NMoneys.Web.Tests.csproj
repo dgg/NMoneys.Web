@@ -36,6 +36,14 @@
     <Reference Include="JsonFx">
       <HintPath>..\..\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
     </Reference>
+    <Reference Include="MongoDB.Bson, Version=1.8.2.34, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.8.2.34, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="NMoneys">
       <HintPath>..\..\packages\NMoneys.3.2.0.0\lib\Net20-client\NMoneys.dll</HintPath>
     </Reference>
@@ -65,12 +73,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Support\EndToEndTester.cs" />
+    <Compile Include="Api\Support\SingleHostPerFixture.cs" />
+    <Compile Include="Api\Support\SingleHostPerTest.cs" />
+    <Compile Include="Api\Support\TesterBase.cs" />
     <Compile Include="Api\Support\TestHost.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\RequestThrottlerTester.cs" />
+    <Compile Include="Api\v1\Resources\CurrenciesTester.RequestThrottling.cs" />
     <Compile Include="Api\v1\Resources\CurrenciesTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\v1\Resources\CurrenciesTester.Authentication.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -6,16 +6,24 @@ namespace Tests.Api.Support
 {
 	public class TestHost : AppHostHttpListenerBase
 	{
-		public TestHost() : base(HostBootstrapper.ServiceName, HostBootstrapper.ServiceContainer) { }
+		private readonly HostBootstrapper _bootrapper;
+
+		public TestHost() : base(HostBootstrapper.ServiceName, HostBootstrapper.ServiceContainer)
+		{
+			_bootrapper= new HostBootstrapper();
+		}
 
 		public override void Configure(Container container)
 		{
-			EndpointHostConfig config = new HostBootstrapper()
-				.BootstrapAll(
-					container,
-					RequestFilters,
-					ResponseFilters);
+			EndpointHostConfig config = _bootrapper
+				.BootstrapAll(this);
 			SetConfig(config);
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			base.Dispose(disposing);
+			_bootrapper.Dispose();
 		}
 	}
 }

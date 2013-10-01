@@ -1,21 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using NMoneys.Web.Api.v1.Infrastructure.Filters;
 using ServiceStack.Common;
 using ServiceStack.Common.Web;
+using ServiceStack.Configuration;
 using ServiceStack.ServiceHost;
 using ServiceStack.WebHost.Endpoints;
 
 namespace NMoneys.Web.Api.v1.Infrastructure
 {
-	public class HostBootstrapper
+	public class HostBootstrapper : IDisposable
 	{
 		public static readonly string ServiceName = "nMoneys";
 		public static readonly Assembly ServiceContainer = typeof(HostBootstrapper).Assembly;
 
+		private readonly IList<IDisposable> _disposables;
+		private readonly RequestThrottler _throttler;
+
+		public HostBootstrapper()
+		{
+			//create only one cache
+			_throttler = new RequestThrottler();
+			_disposables = new List<IDisposable>(5) { _throttler };
+		}
+
 		public HostBootstrapper Bootstrap(Funq.Container container)
 		{
 			container.RegisterAutoWiredAs<KeyVerifier, IKeyVerifier>();
+			container.RegisterAutoWiredAs<AppSettings, IResourceManager>();
 
 			return this;
 		}
@@ -24,7 +37,8 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			List<Action<IHttpRequest, IHttpResponse, object>> requestFilters,
 			List<Action<IHttpRequest, IHttpResponse, object>> responseFilters)
 		{
-			requestFilters.Add(ApiAuthenticationFilter.Handle);
+			requestFilters.Add(ApiAuthentication.Handle);
+			requestFilters.Add(_throttler.Handle);
 
 			return this;
 		}
@@ -43,13 +57,19 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			return config;
 		}
 
-		public EndpointHostConfig BootstrapAll(Funq.Container container,
-			List<Action<IHttpRequest, IHttpResponse, object>> requestFilters,
-			List<Action<IHttpRequest, IHttpResponse, object>> responseFilters)
+		public EndpointHostConfig BootstrapAll<T>(T host) where T : IAppHost, IDisposable
 		{
-				return Bootstrap(container)
-					.Bootstrap(requestFilters, responseFilters)
-					.WithConfig();	
+			return Bootstrap(host.GetContainer())
+				.Bootstrap(host.RequestFilters, host.ResponseFilters)
+				.WithConfig();
+		}
+
+		public void Dispose()
+		{
+			foreach (var disposable in _disposables)
+			{
+				disposable.Dispose();
+			}
 		}
 	}
 }
