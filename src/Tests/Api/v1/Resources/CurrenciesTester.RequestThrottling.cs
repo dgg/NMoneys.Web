@@ -81,7 +81,7 @@ namespace Tests.Api.v1.Resources
 			}
 
 			[Test]
-			public void MoreRequestsThanLimit_TooManyRequestWithHeader()
+			public void MoreRequestsThanLimit_TooManyRequests()
 			{
 				var twoEveryTenSeconds = new ThrottlingConfiguration
 				{
@@ -100,8 +100,37 @@ namespace Tests.Api.v1.Resources
 				Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 				response = client.Get(msg.ToUrl("GET"));
 				Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
 				response = client.Get(msg.ToUrl("GET"));
 				Assert.That(response.StatusCode, Is.EqualTo((HttpStatusCode)429));
+			}
+
+			[Test]
+			public void MoreRequestsThanLimit_RetryHeaderAndMessage()
+			{
+				var twoEveryTenSeconds = new ThrottlingConfiguration
+				{
+					NumberOfRequests = 2,
+					Period = TimeSpan.FromSeconds(10)
+				};
+
+				authenticateRequest();
+				configureThrottling(twoEveryTenSeconds);
+
+				var client = new HttpClient(BaseUrl.ToString());
+				client.Request.Accept = HttpContentTypes.ApplicationJson;
+				client.Request.AddExtraHeader(ApiKey.ParameterName, ObjectId.Empty);
+				var msg = new CurrencyMsg { IsoCode = CurrencyIsoCode.EUR };
+
+				HttpResponse response = client.Get(msg.ToUrl("GET"));
+				Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+				response = client.Get(msg.ToUrl("GET"));
+				Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+				response = client.Get(msg.ToUrl("GET"));
+				Assert.That(response.RawHeaders["Retry-After"], Is.StringContaining("10"));
+				Assert.That(response.DynamicBody.responseStatus.errorCode,
+					Is.StringContaining("10").And.StringContaining("2"));
 			}
 		}
 	}

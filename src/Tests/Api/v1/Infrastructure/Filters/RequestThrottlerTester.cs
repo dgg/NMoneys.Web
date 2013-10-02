@@ -19,23 +19,44 @@ namespace Tests.Api.v1.Infrastructure.Filters
 		{
 			var request = Substitute.For<IHttpRequest>();
 			var response = Substitute.For<IHttpResponse>();
-			var configuration = Substitute.For<IResourceManager>();
 
-			request.TryResolve<IResourceManager>().Returns(configuration);
 			authenticate(request);
-			configuration.Get(RequestThrottler.ConfigurationKey, Arg.Any<ThrottlingConfiguration>()).Returns(
-				new ThrottlingConfiguration
-				{
-					NumberOfRequests = 3,
-					Period = TimeSpan.FromSeconds(30)
-				});
+			setupRepository(request);
+			setupConfiguration(request, 3, TimeSpan.FromSeconds(30));
 
-			using (var subject = new RequestThrottler())
-			{
-				// no assertion due to using of delegates and IDisposable
-				subject.Handle(request, response, null);
-				subject.Handle(request, response, null);
-			}
+			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+
+		}
+		
+		[Test]
+		public void AsManyRequestsAsLimit_NoException()
+		{
+			var request = Substitute.For<IHttpRequest>();
+			var response = Substitute.For<IHttpResponse>();
+
+			authenticate(request);
+			setupRepository(request);
+			setupConfiguration(request, 2, TimeSpan.FromSeconds(30));
+
+			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+		}
+
+		[Test]
+		public void MoreRequestsThanLimit_Exception()
+		{
+			var request = Substitute.For<IHttpRequest>();
+			var response = Substitute.For<IHttpResponse>();
+
+			authenticate(request);
+			setupRepository(request);
+			setupConfiguration(request, 2, TimeSpan.FromSeconds(30));
+
+			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+			Assert.That(() => RequestThrottler.Handle(request, response, null),
+				Throws.InstanceOf<HttpError>());
 		}
 
 		private void authenticate(IHttpRequest request)
@@ -47,59 +68,22 @@ namespace Tests.Api.v1.Infrastructure.Filters
 			request.Headers.Returns(headers);
 		}
 
-		[Test]
-		public void AsManyRequestsAsLimit_NoException()
+		private void setupRepository(IHttpRequest request)
 		{
-			var request = Substitute.For<IHttpRequest>();
-			var response = Substitute.For<IHttpResponse>();
-			var configuration = Substitute.For<IResourceManager>();
-
-			request.TryResolve<IResourceManager>().Returns(configuration);
-			authenticate(request);
-			configuration.Get(RequestThrottler.ConfigurationKey, Arg.Any<ThrottlingConfiguration>()).Returns(
-				new ThrottlingConfiguration
-				{
-					NumberOfRequests = 2,
-					Period = TimeSpan.FromSeconds(30)
-				});
-
-			using (var subject = new RequestThrottler())
-			{
-				// no assertion due to using of delegates and IDisposable
-				subject.Handle(request, response, null);
-				subject.Handle(request, response, null);
-			}
+			request.TryResolve<IRequestCountRepository>().Returns(new RequestCountRepository());
 		}
 
-		[Test]
-		public void MoreRequestsThanLimit_Exception()
+		private void setupConfiguration(IHttpRequest request, ushort numberOfRequests, TimeSpan period)
 		{
-			var request = Substitute.For<IHttpRequest>();
-			var response = Substitute.For<IHttpResponse>();
 			var configuration = Substitute.For<IResourceManager>();
 
 			request.TryResolve<IResourceManager>().Returns(configuration);
-			authenticate(request);
 			configuration.Get(RequestThrottler.ConfigurationKey, Arg.Any<ThrottlingConfiguration>()).Returns(
 				new ThrottlingConfiguration
 				{
-					NumberOfRequests = 2,
-					Period = TimeSpan.FromSeconds(30)
+					NumberOfRequests = numberOfRequests,
+					Period = period
 				});
-
-			using (var subject = new RequestThrottler())
-			{
-				// no assertion due to using of delegates and IDisposable
-				subject.Handle(request, response, null);
-				subject.Handle(request, response, null);
-
-				try
-				{
-					subject.Handle(request, response, null);
-					Assert.Fail("An exception should be thrown");
-				}
-				catch (HttpError) { }
-			}
 		}
 	}
 }

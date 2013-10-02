@@ -7,27 +7,27 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 	{
 		public static readonly string ParameterName = "api_key";
 
-		private readonly string _apiKey;
+		private readonly bool _isMissing;
+		private readonly ObjectId _oid;
 
-		private ApiKey(string apiKey)
+		private ApiKey(ObjectId? oid)
 		{
-			_apiKey = apiKey;
+			_isMissing = !oid.HasValue;
+
+			_oid = oid.GetValueOrDefault(ObjectId.Empty);
 		}
 
 		public override string ToString()
 		{
-			return _apiKey;
+			return _oid.ToString();
 		}
 
-		public ObjectId? AsId()
+		public ObjectId AsId()
 		{
-			ObjectId oid;
-			return ObjectId.TryParse(_apiKey, out oid) ?
-				oid :
-				default(ObjectId?);
+			return _oid;
 		}
 
-		public bool IsMissing { get { return missing(_apiKey); } }
+		public bool IsMissing { get { return _isMissing; } }
 
 		public static ApiKey ExtractFrom(IHttpRequest request)
 		{
@@ -36,7 +36,13 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			{
 				apiKey = request.QueryString[ParameterName];
 			}
-			return new ApiKey(apiKey);
+			return new ApiKey(tryParse(apiKey));
+		}
+
+		private static ObjectId? tryParse(string apiKey)
+		{
+			ObjectId oid;
+			return ObjectId.TryParse(apiKey, out oid) ? oid : default(ObjectId?);
 		}
 
 		private static bool missing(string apiKey)

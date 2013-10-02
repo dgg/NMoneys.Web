@@ -15,22 +15,25 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 		public static readonly string ServiceName = "nMoneys";
 		public static readonly Assembly ServiceContainer = typeof(HostBootstrapper).Assembly;
 
-		private readonly IList<IDisposable> _disposables;
-		private readonly RequestThrottler _throttler;
-
-		public HostBootstrapper()
-		{
-			//create only one cache
-			_throttler = new RequestThrottler();
-			_disposables = new List<IDisposable>(5) { _throttler };
-		}
-
+		private readonly Stack<Action> _disposables = new Stack<Action>();
+		
 		public HostBootstrapper Bootstrap(Funq.Container container)
 		{
-			container.RegisterAutoWiredAs<KeyVerifier, IKeyVerifier>();
-			container.RegisterAutoWiredAs<AppSettings, IResourceManager>();
-
+			registerTrackingDisposables<KeyVerifier, IKeyVerifier>(container);
+			registerTrackingDisposables<AppSettings, IResourceManager>(container);
+			registerTrackingDisposables<RequestCountRepository, IRequestCountRepository>(container);
+			
 			return this;
+		}
+
+		private void registerTrackingDisposables<T, TService>(Funq.Container container) where T : class,  TService
+		{
+			container.RegisterAutoWiredAs<T, TService>();
+			// execute dispose later on
+			if (typeof(T).GetInterface("IDisposable") != null)
+			{
+				_disposables.Push(()=> ((IDisposable)container.Resolve<TService>()).Dispose());
+			}
 		}
 
 		public HostBootstrapper Bootstrap(
@@ -38,7 +41,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			List<Action<IHttpRequest, IHttpResponse, object>> responseFilters)
 		{
 			requestFilters.Add(ApiAuthentication.Handle);
-			requestFilters.Add(_throttler.Handle);
+			requestFilters.Add(RequestThrottler.Handle);
 
 			return this;
 		}
@@ -66,9 +69,9 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 
 		public void Dispose()
 		{
-			foreach (var disposable in _disposables)
+			while (_disposables.Count > 0)
 			{
-				disposable.Dispose();
+				_disposables.Pop()();
 			}
 		}
 	}

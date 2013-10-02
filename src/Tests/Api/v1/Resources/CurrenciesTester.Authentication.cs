@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using EasyHttp.Http;
+using MongoDB.Bson;
 using NMoneys;
 using NMoneys.Web.Api.v1.Infrastructure;
 using NSubstitute;
@@ -13,6 +14,8 @@ namespace Tests.Api.v1.Resources
 	[TestFixture, Category("Integration")]
 	public partial class CurrenciesTester
 	{
+		static string any_key { get { return ObjectId.Empty.ToString(); } }
+
 		[TestFixture, Category("Integration")]
 		public class Authentication : SingleHostPerFixture
 		{
@@ -37,7 +40,7 @@ namespace Tests.Api.v1.Resources
 				Replacing(verifier);
 
 				var client = new HttpClient(BaseUrl.ToString());
-				client.Request.AddExtraHeader(ApiKey.ParameterName, "any_key");
+				client.Request.AddExtraHeader(ApiKey.ParameterName, any_key);
 
 				var msg = new CurrencyMsg { IsoCode = CurrencyIsoCode.EUR };
 				HttpResponse response = client.Get(msg.ToUrl("GET"));
@@ -53,7 +56,7 @@ namespace Tests.Api.v1.Resources
 				Replacing(verifier);
 
 				var client = new HttpClient(BaseUrl.ToString());
-				client.Request.AddExtraHeader(ApiKey.ParameterName, "any_key");
+				client.Request.AddExtraHeader(ApiKey.ParameterName, any_key);
 
 				var msg = new CurrencyMsg { IsoCode = CurrencyIsoCode.EUR };
 				HttpResponse response = client.Get(msg.ToUrl("GET"));
@@ -71,7 +74,7 @@ namespace Tests.Api.v1.Resources
 				Replacing(verifier);
 
 				var client = new HttpClient(BaseUrl.ToString());
-				string urlWithApiKey = msg.ToUrl("GET") + "?api_key=any_key";
+				string urlWithApiKey = msg.ToUrl("GET") + "?api_key=" + any_key;
 				HttpResponse response = client.Get(urlWithApiKey);
 
 				Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
