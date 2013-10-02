@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Linq;
+﻿using System.Collections.Specialized;
 using System.Net;
 using EasyHttp.Http;
 using MongoDB.Bson;
-using NMoneys;
 using NMoneys.Web.Api.v1.Infrastructure;
 using NSubstitute;
 using NUnit.Framework;
-using ServiceStack.ServiceClient.Web;
+using Testing.Commons;
 using Tests.Api.Support;
-using CurrencyMsg = NMoneys.Web.Api.v1.Messages.Currency;
+using Tests.Api.v1.Resources.Support;
 
 namespace Tests.Api.v1.Resources
 {
@@ -25,9 +22,9 @@ namespace Tests.Api.v1.Resources
 			var verifier = Substitute.For<IKeyVerifier>();
 			Replacing(verifier);
 
-			HttpResponse response = get();
+			HttpResponse response = this.Get();
 
-			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+			Assert.That(response, Must.Not.Be.Ok(HttpStatusCode.Unauthorized));
 		}
 
 		[Test]
@@ -37,10 +34,10 @@ namespace Tests.Api.v1.Resources
 			verifier.Verify(Arg.Any<ApiKey>()).Returns(false);
 			Replacing(verifier);
 
-			HttpResponse response = get(client =>
+			HttpResponse response = this.Get(client =>
 				client.Request.AddExtraHeader(ApiKey.ParameterName, any_key));
 
-			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+			Assert.That(response, Must.Not.Be.Ok(HttpStatusCode.Unauthorized));
 		}
 
 		[Test]
@@ -50,10 +47,10 @@ namespace Tests.Api.v1.Resources
 			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
 			Replacing(verifier);
 
-			HttpResponse response = get(client =>
+			HttpResponse response = this.Get(client =>
 				client.Request.AddExtraHeader(ApiKey.ParameterName, any_key));
 
-			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+			Assert.That(response, Must.Be.Ok());
 		}
 
 		[Test]
@@ -63,29 +60,9 @@ namespace Tests.Api.v1.Resources
 			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
 			Replacing(verifier);
 
-			var response = get(new NameValueCollection { { ApiKey.ParameterName, any_key } });
+			var response = this.Get(new NameValueCollection { { ApiKey.ParameterName, any_key } });
 
-			Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-		}
-
-		public HttpResponse get(Action<HttpClient> setup = null)
-		{
-			var client = new HttpClient(BaseUrl.ToString());
-			if (setup != null) setup(client);
-			var msg = new CurrencyMsg { IsoCode = CurrencyIsoCode.EUR };
-			HttpResponse response = client.Get(msg.ToUrl("GET"));
-			return response;
-		}
-
-		public HttpResponse get(NameValueCollection query)
-		{
-			var client = new HttpClient(BaseUrl.ToString());
-			var msg = new CurrencyMsg { IsoCode = CurrencyIsoCode.EUR };
-
-			string qs = string.Concat("?",
-				string.Join("&", query.AllKeys.Select(k => k + "=" + query[k])));
-			HttpResponse response = client.Get(msg.ToUrl("GET") + qs);
-			return response;
+			Assert.That(response, Must.Be.Ok());
 		}
 	}
 }

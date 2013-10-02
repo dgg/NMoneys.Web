@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Linq;
 using EasyHttp.Http;
 using MongoDB.Bson;
 using NMoneys;
@@ -41,6 +43,24 @@ namespace Tests.Api.v1.Resources.Support
 		{
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ObjectId.Empty);
 			HttpResponse response = client.Get(AServiceUrl);
+			return response;
+		}
+
+		public static HttpResponse Get(this TesterBase tester, Action<HttpClient> setup = null)
+		{
+			var client = new HttpClient(tester.BaseUrl.ToString());
+			if (setup != null) setup(client);
+			HttpResponse response = client.Get(AServiceUrl);
+			return response;
+		}
+
+		public static HttpResponse Get(this TesterBase tester, NameValueCollection query)
+		{
+			var client = new HttpClient(tester.BaseUrl.ToString());
+			
+			string qs = string.Concat("?",
+				string.Join("&", query.AllKeys.Select(k => k + "=" + query[k])));
+			HttpResponse response = client.Get(AServiceUrl + qs);
 			return response;
 		}
 	}

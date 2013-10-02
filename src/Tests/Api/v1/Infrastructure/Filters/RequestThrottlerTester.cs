@@ -8,6 +8,7 @@ using NUnit.Framework;
 using ServiceStack.Common.Web;
 using ServiceStack.Configuration;
 using ServiceStack.ServiceHost;
+using Testing.Commons.Time;
 
 namespace Tests.Api.v1.Infrastructure.Filters
 {
@@ -22,7 +23,7 @@ namespace Tests.Api.v1.Infrastructure.Filters
 
 			authenticate(request);
 			setupRepository(request);
-			setupConfiguration(request, 3, TimeSpan.FromSeconds(30));
+			setupConfiguration(request, 3, 30.Seconds());
 
 			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
 			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
@@ -37,7 +38,7 @@ namespace Tests.Api.v1.Infrastructure.Filters
 
 			authenticate(request);
 			setupRepository(request);
-			setupConfiguration(request, 2, TimeSpan.FromSeconds(30));
+			setupConfiguration(request, 2, 30.Seconds());
 
 			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
 			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
@@ -51,7 +52,7 @@ namespace Tests.Api.v1.Infrastructure.Filters
 
 			authenticate(request);
 			setupRepository(request);
-			setupConfiguration(request, 2, TimeSpan.FromSeconds(30));
+			setupConfiguration(request, 2, 30.Seconds());
 
 			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
 			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
