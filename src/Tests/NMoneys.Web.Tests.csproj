@@ -89,6 +89,7 @@
     <Compile Include="Api\v1\Infrastructure\Filters\RequestThrottlerTester.cs" />
     <Compile Include="Api\v1\Resources\RatesAndLimitsTester.cs" />
     <Compile Include="Api\v1\Resources\RequestThrottlingTester.cs" />
+    <Compile Include="Api\v1\Resources\Support\RemainingSeconds.cs" />
     <Compile Include="Api\v1\Resources\Support\ExtendedAssertions.cs" />
     <Compile Include="Api\v1\Resources\Support\HeaderConstraint.cs" />
     <Compile Include="Api\v1\Resources\Support\TesterExtensions.cs" />
