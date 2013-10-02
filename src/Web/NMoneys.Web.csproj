@@ -196,6 +196,8 @@
     <Content Include="Content\src\CodeProject\09.Inside_Money.cs" />
     <Content Include="Content\src\CodeProject\12.Money_Arithmetic.cs" />
     <Compile Include="Content\src\SyntacticSupport.cs" />
+    <Compile Include="Controllers\SamplesController.cs" />
+    <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Models\GroupedByInitialInBatches.cs" />
     <Compile Include="Models\Enumerable.Extensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -247,11 +249,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Currencies.cshtml" />
-    <Content Include="Views\Home\Samples.cshtml" />
-    <Content Include="Views\Home\DisplayTemplates\GroupedByInitialInBatches.cshtml" />
-    <Content Include="Views\Home\DisplayTemplates\Snapshot.cshtml" />
-    <Content Include="Views\Home\DisplayTemplates\CodeSnippet.cshtml" />
+    <Content Include="Views\Currencies\Index.cshtml" />
+    <Content Include="Views\Samples\Index.cshtml" />
+    <Content Include="Views\Currencies\DisplayTemplates\GroupedByInitialInBatches.cshtml" />
+    <Content Include="Views\Currencies\DisplayTemplates\Snapshot.cshtml" />
+    <Content Include="Views\Samples\DisplayTemplates\CodeSnippet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
