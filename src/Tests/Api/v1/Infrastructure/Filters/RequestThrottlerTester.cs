@@ -78,7 +78,7 @@ namespace Tests.Api.v1.Infrastructure.Filters
 			var configuration = Substitute.For<IResourceManager>();
 
 			request.TryResolve<IResourceManager>().Returns(configuration);
-			configuration.Get(RequestThrottler.ConfigurationKey, Arg.Any<ThrottlingConfiguration>()).Returns(
+			configuration.Get(ThrottlingConfiguration.Key, Arg.Any<ThrottlingConfiguration>()).Returns(
 				new ThrottlingConfiguration
 				{
 					NumberOfRequests = numberOfRequests,

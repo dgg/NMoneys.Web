@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Caching;
-using NMoneys.Web.Api.v1.Infrastructure.Filters;
 
 namespace NMoneys.Web.Api.v1.Infrastructure
 {
@@ -9,7 +8,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 
 		public RequestCountRepository()
 		{
-			_cache = new MemoryCache(RequestThrottler.ConfigurationKey);
+			_cache = new MemoryCache(ThrottlingConfiguration.Key);
 		}
 
 		public void Dispose()

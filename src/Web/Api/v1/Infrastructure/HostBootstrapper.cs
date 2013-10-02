@@ -43,6 +43,8 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			requestFilters.Add(ApiAuthentication.Handle);
 			requestFilters.Add(RequestThrottler.Handle);
 
+			responseFilters.Add(RequestRates.Handle);
+
 			return this;
 		}
 

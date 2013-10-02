@@ -19,6 +19,17 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			return Count < maxNumberOfRequests;
 		}
 
+		public ushort Remaining(ushort maxNumberOfRequests)
+		{
+			return (ushort)(maxNumberOfRequests - Count);
+		}
+
+		public ushort Remaining(DateTimeOffset now)
+		{
+			if (now.Offset!= TimeSpan.Zero) throw new NotSupportedException("only UTC dates are allowed");
+			return (ushort)(Expiration-now).TotalSeconds;
+		}
+
 		public RequestCount Increase()
 		{
 			Count++;

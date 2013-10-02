@@ -6,12 +6,11 @@ namespace NMoneys.Web.Api.v1.Infrastructure.Filters
 {
 	public class RequestThrottler
 	{
-		public static readonly string ConfigurationKey = "throttling";
-
+		
 		public static void Handle(IHttpRequest request, IHttpResponse response, object dto)
 		{
 			var resources = request.TryResolve<IResourceManager>();
-			ThrottlingConfiguration configuration = resources.Get(ConfigurationKey, ThrottlingConfiguration.Empty());
+			ThrottlingConfiguration configuration = resources.Get(ThrottlingConfiguration.Key, ThrottlingConfiguration.Empty());
 			var repository = request.TryResolve<IRequestCountRepository>();
 
 			var key = ApiKey.ExtractFrom(request);

@@ -5,6 +5,8 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 {
 	public class ThrottlingConfiguration
 	{
+		public static readonly string Key = "throttling";
+
 		public ushort NumberOfRequests { get; set; }
 		public TimeSpan Period { get; set; }
 
@@ -21,6 +23,15 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			{
 				string seconds = Period.TotalSeconds.ToString(CultureInfo.InvariantCulture);
 				return seconds;
+			}
+		}
+
+		public string FormattedRequests
+		{
+			get
+			{
+				string requests = NumberOfRequests.ToString(CultureInfo.InvariantCulture);
+				return requests;
 			}
 		}
 
