@@ -14,9 +14,19 @@ namespace Tests.Api.v1.Resources.Support
 			 return new LambdaPropertyConstraint<HttpResponse>(r => r.StatusCode, Is.EqualTo(statusCode));
 		 }
 
+		 public static PropertyConstraint Ok(this Must.NotBeEntryPoint entry, int notDefinedStatusCode)
+		 {
+			 return new LambdaPropertyConstraint<HttpResponse>(r => r.StatusCode, Is.EqualTo((HttpStatusCode)notDefinedStatusCode));
+		 }
+
 		 public static PropertyConstraint Ok(this Must.BeEntryPoint entry)
 		 {
 			 return new LambdaPropertyConstraint<HttpResponse>(r => r.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+		 }
+
+		 public static HeaderConstraint Header(this Must.HaveEntryPoint entry, string header, Constraint constraint)
+		 {
+			 return new HeaderConstraint(header, constraint);
 		 }
 	}
 }
