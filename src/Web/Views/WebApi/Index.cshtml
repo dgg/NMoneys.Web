@@ -1,0 +1,41 @@
+﻿@model dynamic
+
+@{
+	ViewBag.Title = "nMoneys";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+	<article>
+		<h2><a id="Api"></a>An Api?<a href="#Api"></a></h2>
+		<p><em>NMoneys</em> provides a very simple web api that you can consume. </p>
+	</article>
+	<hr/>
+	<article>
+		<h2><a id="Content"></a>What's in the Api?<a href="#Content"></a></h2>
+		<p>Amongst the (still) limited capabilities of the api are:</p>
+		<ul>
+			<li>Getting an exceprt of all the currencies that are supported.</li>
+			<li>Get extended information about single currencies.</li>
+			<li>Formatting a numeric quantity.</li>
+		</ul>
+		<p>But, instead of me telling you&hellip;</p>
+	</article>
+	<hr />
+	<article>
+		<h2><a id="Doc"></a>Documentation<a href="#Doc"></a></h2>
+		<p>&hellip;why not digging into its documentation?</p>
+		<div class="span2 btn-toolbar">
+			<div class="btn-group">
+				<a class="btn" href="http://docs.nmoneys.apiary.io" target="_blank">Apiary</a>
+			</div>
+		</div>
+		<div class="span3 btn-toolbar pull-left">
+			<div class="btn-group">
+				<a class="btn" href="api/json/metadata?op=Currencies" target="_blank">Currencies</a>
+				<a class="btn" href="api/json/metadata?op=Currency" target="_blank">Currency</a>
+				<a class="btn" href="api/json/metadata?op=Format" target="_blank">Format</a>
+			</div>
+		</div>
+	</article>
+</section>

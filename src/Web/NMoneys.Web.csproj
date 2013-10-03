@@ -170,6 +170,7 @@
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NMoneysConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\img\logo.png" />
     <Content Include="Content\prettify.css" />
     <Content Include="Content\src\Quickstart\08.Extensions.cs" />
     <Content Include="Content\src\Quickstart\07.Formatting_Money.cs" />
@@ -196,6 +197,7 @@
     <Content Include="Content\src\CodeProject\09.Inside_Money.cs" />
     <Content Include="Content\src\CodeProject\12.Money_Arithmetic.cs" />
     <Compile Include="Content\src\SyntacticSupport.cs" />
+    <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\SamplesController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Models\GroupedByInitialInBatches.cs" />
@@ -254,6 +256,7 @@
     <Content Include="Views\Currencies\DisplayTemplates\GroupedByInitialInBatches.cshtml" />
     <Content Include="Views\Currencies\DisplayTemplates\Snapshot.cshtml" />
     <Content Include="Views\Samples\DisplayTemplates\CodeSnippet.cshtml" />
+    <Content Include="Views\WebApi\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

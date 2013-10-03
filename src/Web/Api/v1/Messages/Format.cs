@@ -16,8 +16,10 @@ namespace NMoneys.Web.Api.v1.Messages
 		public decimal Amount { get; set; }
 	}
 
+	[Api("something")]
 	public class FormatResponse
 	{
+		[ApiMember(Description = "something")]
 		public FormattedMoney Money { get; set; }
 	}
 }
