@@ -22,18 +22,18 @@ namespace NMoneys.Web.App_Start
 
 			currencies(bundles);
 
-			about(bundles);
+			samples(bundles);
 		}
 
-		private static void about(BundleCollection bundles)
+		private static void samples(BundleCollection bundles)
 		{
 			var prettify = new ScriptBundle("~/bundles/prettify", "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js")
 				.Include("~/Scripts/prettify.js");
 			prettify.CdnFallbackExpression = "prettyPrint";
 			bundles.Add(prettify);
 
-			bundles.Add(new ScriptBundle("~/bundles/app_about").Include(
-				"~/Scripts/app.About.js"));
+			bundles.Add(new ScriptBundle("~/bundles/app_samples").Include(
+				"~/Scripts/app.Samples.js"));
 
 			bundles.Add(new StyleBundle("~/Content/prettify", "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css")
 				.Include("~/Content/prettify.css"));
