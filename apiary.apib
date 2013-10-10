@@ -18,9 +18,15 @@ GET /currencies
 < X-Rate-Limit-Limit: number of requests allowed in period
 < X-Rate-Limit-Remaining: number of requests allowed in period
 < X-Rate-Limit-Reset: number of seconds left in period
-{ "snapshots": [
-{ "isoCode": "USD", "numericCode":978, "englishName": "Euro" }
-] }
+{
+	"snapshots": [
+		{
+			"isoCode": "USD",
+			"numericCode":978,
+			"englishName": "Euro"
+		}
+	]
+}
 
 
 Get detailed information about a currency.
@@ -32,7 +38,16 @@ GET /currencies/{isoCode}
 < X-Rate-Limit-Limit: number of requests allowed in period
 < X-Rate-Limit-Remaining: number of requests allowed in period
 < X-Rate-Limit-Reset: number of seconds left in period
-{"detail":{"isoCode":"EUR","numericCode":978,"englishName":"Euro","nativeName":"Euro","symbol":"€","isObsolete":false}}
+{
+	"detail": {
+		"isoCode":"EUR"
+		"numericCode":978,
+		"englishName":"Euro",
+		"nativeName":"Euro",
+		"symbol":"€",
+		"isObsolete":false
+	}
+}
 
 Allows formatting a monetary amount according to its currency.
 GET /currencies/{isoCode}/format/{amount}
@@ -43,7 +58,14 @@ GET /currencies/{isoCode}/format/{amount}
 < X-Rate-Limit-Limit: number of requests allowed in period
 < X-Rate-Limit-Remaining: number of requests allowed in period
 < X-Rate-Limit-Reset: number of seconds left in period
-{"money":{"amount":123,"isoCode":"EUR","representation":"123,00 €", "amountRepresentation":"123,00"}}
+{
+	"money": {
+		"amount":123,
+		"isoCode":"EUR"
+		"representation":"123,00 €",
+		"amountRepresentation":"123,00"
+	}
+}
 
 Allows formatting a monetary amount according to its currency.
 POST /currencies/{isoCode}/format
@@ -55,4 +77,11 @@ POST /currencies/{isoCode}/format
 < X-Rate-Limit-Limit: number of requests allowed in period
 < X-Rate-Limit-Remaining: number of requests allowed in period
 < X-Rate-Limit-Reset: number of seconds left in period
-{"money":{"amount":123.6,"isoCode":"EUR","representation":"123,60 €","amountRepresentation":"123,60"}}
+{
+	"money": {
+		"amount":123.6,
+		"isoCode":"EUR",
+		"representation":"123,60 €",
+		"amountRepresentation":"123,60"
+	}
+}
