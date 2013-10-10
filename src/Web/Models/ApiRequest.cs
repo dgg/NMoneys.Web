@@ -7,6 +7,6 @@ namespace NMoneys.Web.Models
 	{
 		[Required, EmailAddress]
 		public string Email { get; set; }
-		public string RequestedApi { get; set; }
+		public bool Requested { get; set; }
 	}
 }

@@ -44,6 +44,11 @@ textarea {
 	padding-top: 10px;
 }
 
+legend {
+	color: inherit;
+	font-size: 18px;
+}
+
 
 /* Custom styles
 -----------------------------------------------------------*/

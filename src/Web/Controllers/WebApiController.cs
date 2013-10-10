@@ -23,7 +23,8 @@ namespace NMoneys.Web.Controllers
 
 		public ActionResult Index()
 		{
-			return View();
+			var model = new ApiRequest();
+			return View(model);
 		}
 
 		[HttpPost]
@@ -34,18 +35,25 @@ namespace NMoneys.Web.Controllers
 				return View(model);
 			}
 
-			sendConfirmationEmail(model);
-
-			return View();
-		}
-
-		private void sendConfirmationEmail(ApiRequest model)
-		{
 			var confirmer = new MailAddress(model.Email);
 			ApiKey key = ApiKey.GenerateNew();
+
+			sendConfirmationEmail(key, confirmer);
+			storeRequest(key, confirmer);
+
+			model.Requested = true;
+			return View(model);
+		}
+
+		private void sendConfirmationEmail(ApiKey key, MailAddress confirmer)
+		{
 			Uri confirmUrl = writeConfirmationUrl(key, confirmer);
 
 			_sender.SendConfirmation(confirmer, key, confirmUrl);
+		}
+
+		private void storeRequest(ApiKey key, MailAddress confirmer)
+		{
 			// TODO: make async
 			_apiKeys.SavePending(key, confirmer, DateTimeOffset.UtcNow);
 		}

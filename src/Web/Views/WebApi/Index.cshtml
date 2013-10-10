@@ -1,5 +1,4 @@
-﻿@using NMoneys.Web.Views
-@model NMoneys.Web.Models.ApiRequest
+﻿@model NMoneys.Web.Models.ApiRequest
 
 @{
 	ViewBag.Title = "nMoneys";
@@ -9,55 +8,54 @@
 <section class="container">
 	<article>
 		<h2><a id="Api"></a>An Api?<a href="#Api"></a></h2>
-		<p><em>NMoneys</em> provides a very simple web api that you can consume. </p>
+		<p>
+			Nowadays, if you do not provide some sort of REST-y/Web-ish/JSON-able API, you are not <em>in</em>.<br />
+			And so, <em>NMoneys</em> provides a very simple web api.
+		</p>
 	</article>
-	<hr/>
+	<hr />
 	<article>
 		<h2><a id="Content"></a>What's in the Api?<a href="#Content"></a></h2>
 		<p>Amongst the (still) limited capabilities of the api are:</p>
 		<ul>
-			<li>Getting an exceprt of all the currencies that are supported.</li>
+			<li>Getting an subset of all the currencies that are supported.</li>
 			<li>Get extended information about single currencies.</li>
-			<li>Formatting a numeric quantity.</li>
+			<li>Formatting numeric quantities.</li>
 		</ul>
 		<p>But, instead of me telling you&hellip;</p>
 	</article>
 	<hr />
 	<article>
-		<h2><a id="Doc"></a>Documentation<a href="#Doc"></a></h2>
-		<p>&hellip;why not digging into its documentation?</p>
-		<div class="span2 btn-toolbar">
-			<div class="btn-group">
-				<a class="btn" href="http://docs.nmoneys.apiary.io" target="_blank">Apiary</a>
-			</div>
-		</div>
-		<div class="span3 btn-toolbar pull-left">
-			<div class="btn-group">
-				<a class="btn" href="api/json/metadata?op=Currencies" target="_blank">Currencies</a>
-				<a class="btn" href="api/json/metadata?op=Currency" target="_blank">Currency</a>
-				<a class="btn" href="api/json/metadata?op=Format" target="_blank">Format</a>
-			</div>
-		</div>
-	</article>
-	<article>
 		<h2>Want to use it?</h2>
-		<p>Request an PI key:</p>
-		@using (Html.BeginForm("Index", "WebApi", FormMethod.Post, new { @class = "form-horizontal", novalidate = "novalidate" }))
-		{
-			<div class="control-group">
-				@Html.LabelFor(m => m.Email, new {@class="control-label"})
-				<div class="controls">
-					@Html.TextBoxFor(m => m.Email, new{placeHolder = "Email", data_type="email", data_required="true"})
-					@Html.ValidationMessageFor(m => m.Email)
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<input type="submit" class="btn btn-primary" value="Submit" />
-				</div>
-			</div>
+		<p>&hellip; why not requesting an API key?.<br/>They are free and, trust me, I do not have any intention to spam you or sell your information. I promise.</p>
+		@{
+			Html.RenderPartial(Model.Requested ? "_requested" : "_requestForm", Model);
 		}
 	</article>
+	<hr/>
+	<article>
+		<h2><a id="Doc"></a>Documentation<a href="#Doc"></a></h2>
+		<p>&hellip; or why not diving into its documentation?</p>
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#apiary" data-toggle="tab">Home</a></li>
+			<li><a href="#metadata" data-toggle="tab">Local Metadata</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active" id="apiary">
+				Beautiful, interactive documentation is hosted in <a href="http://apiary.io/" target="_blank">Apiary</a>.&nbsp;&nbsp;
+				<a class="btn" href="http://docs.nmoneys.apiary.io" target="_blank">Check it out!</a>
+			</div>
+			<div class="tab-pane" id="metadata">
+				Maybe not as beautiful and definitely less interactive but equally useful is provided by <a href="http://www.servicestack.net/">ServiceStack</a>.&nbsp;&nbsp;
+				<div class="btn-group">
+					<a class="btn" href="api/json/metadata?op=Currencies" target="_blank">Currencies</a>
+					<a class="btn" href="api/json/metadata?op=Currency" target="_blank">Currency</a>
+					<a class="btn" href="api/json/metadata?op=Format" target="_blank">Format</a>
+				</div>
+			</div>
+		</div>
+	</article>
+	<hr/>
 </section>
 
 @section scripts

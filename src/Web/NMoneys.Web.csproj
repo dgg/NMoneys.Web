@@ -269,6 +269,8 @@
     <Content Include="Views\Currencies\DisplayTemplates\Snapshot.cshtml" />
     <Content Include="Views\Samples\DisplayTemplates\CodeSnippet.cshtml" />
     <Content Include="Views\WebApi\Index.cshtml" />
+    <Content Include="Views\WebApi\_requestForm.cshtml" />
+    <Content Include="Views\WebApi\_requested.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
