@@ -1,11 +1,11 @@
 ﻿using System.Configuration;
 using MongoDB.Driver;
 
-namespace NMoneys.Web.Api.v1.Infrastructure
+namespace NMoneys.Web.Infrastructure.Data
 {
-	public class MongoUrlBuilder
+	public class MongoUrlCreator
 	{
-		public MongoUrl Build()
+		public MongoUrl Create()
 		{
 			// try local first
 			ConnectionStringSettings connectionString = ConfigurationManager.ConnectionStrings["MongoDb"];

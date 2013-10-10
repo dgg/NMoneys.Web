@@ -157,7 +157,6 @@
     <Compile Include="Api\v1\Infrastructure\HostBootstrapper.cs" />
     <Compile Include="Api\v1\Infrastructure\IKeyVerifier.cs" />
     <Compile Include="Api\v1\Infrastructure\KeyVerifier.cs" />
-    <Compile Include="Api\v1\Infrastructure\MongoUrlbuilder.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\RequestThrottler.cs" />
     <Compile Include="Api\v1\Infrastructure\ThrottlingConfiguration.cs" />
     <Compile Include="Api\v1\Messages\Currencies.cs" />
@@ -197,9 +196,20 @@
     <Content Include="Content\src\CodeProject\09.Inside_Money.cs" />
     <Content Include="Content\src\CodeProject\12.Money_Arithmetic.cs" />
     <Compile Include="Content\src\SyntacticSupport.cs" />
+    <Compile Include="Controllers\Infrastructure\ApiKey.cs" />
+    <Compile Include="Controllers\Infrastructure\ApiKeyRepository.cs" />
+    <Compile Include="Controllers\Infrastructure\ConfirmationResponse.cs" />
+    <Compile Include="Controllers\Infrastructure\ConfirmationRequest.cs" />
+    <Compile Include="Controllers\Infrastructure\EmailSender.cs" />
+    <Compile Include="Controllers\Infrastructure\IApiKeyRepository.cs" />
+    <Compile Include="Controllers\Infrastructure\IEmailSender.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\SamplesController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
+    <Compile Include="Infrastructure\Data\ApiKeyDocument.cs" />
+    <Compile Include="Infrastructure\Data\MongoUrlCreator.cs" />
+    <Compile Include="Models\ApiConfirmation.cs" />
+    <Compile Include="Models\ApiRequest.cs" />
     <Compile Include="Models\GroupedByInitialInBatches.cs" />
     <Compile Include="Models\Enumerable.Extensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -229,6 +239,7 @@
     <None Include="Properties\PublishProfiles\web.pubxml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\app.Currencies.js" />
+    <Content Include="Scripts\app.Api.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\app.Samples.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
@@ -236,6 +247,7 @@
     <Content Include="Scripts\jquery.highlight.js" />
     <Content Include="Scripts\jquery.quicksearch.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\parsley.min.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />

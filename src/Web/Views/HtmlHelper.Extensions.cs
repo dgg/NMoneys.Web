@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -11,16 +13,16 @@ namespace NMoneys.Web.Views
 	public static class HtmlHelperExtensions
 	{
 		public static HtmlTag NavEntry<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText, string classIfCurrent = "active") where TController : Controller
-		 {
-			 RouteValueDictionary values = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
+		{
+			RouteValueDictionary values = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
 
-			 HtmlTag li = HtmlTextWriterTag.Li.asTag()
-				 .AddClassIf(isCurrentAction(helper, values), classIfCurrent)
-				 .AppendHtml(
-					helper.RouteLink(linkText, values).ToHtmlString());
+			HtmlTag li = HtmlTextWriterTag.Li.asTag()
+				.AddClassIf(isCurrentAction(helper, values), classIfCurrent)
+				.AppendHtml(
+				   helper.RouteLink(linkText, values).ToHtmlString());
 
-			 return li;
-		 }
+			return li;
+		}
 
 		private static HtmlTag asTag(this HtmlTextWriterTag tag)
 		{
@@ -60,7 +62,7 @@ namespace NMoneys.Web.Views
 		public static HtmlTag IconNavEntry<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string iconClass, string classIfCurrent = "active") where TController : Controller
 		{
 			RouteValueDictionary values = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
-			
+
 			string url = UrlHelper.GenerateUrl(null, null, null, null, null, null, values, helper.RouteCollection, helper.ViewContext.RequestContext, false);
 
 			var li = new HtmlTag("li")
