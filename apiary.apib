@@ -27,6 +27,11 @@ GET /currencies
 		}
 	]
 }
++++++
+< 401
++++++
+< 429
+Retry-After: number of seconds to wait before making a new request
 
 
 Get detailed information about a currency.
@@ -48,6 +53,13 @@ GET /currencies/{isoCode}
 		"isObsolete":false
 	}
 }
++++++
+< 401
++++++
+< 429
+Retry-After: number of seconds to wait before making a new request
++++++
+< 404
 
 Allows formatting a monetary amount according to its currency.
 GET /currencies/{isoCode}/format/{amount}
@@ -66,6 +78,13 @@ GET /currencies/{isoCode}/format/{amount}
 		"amountRepresentation":"123,00"
 	}
 }
++++++
+< 401
++++++
+< 429
+Retry-After: number of seconds to wait before making a new request
++++++
+< 404
 
 Allows formatting a monetary amount according to its currency.
 POST /currencies/{isoCode}/format
@@ -85,3 +104,10 @@ POST /currencies/{isoCode}/format
 		"amountRepresentation":"123,60"
 	}
 }
++++++
+< 401
++++++
+< 429
+Retry-After: number of seconds to wait before making a new request
++++++
+< 404

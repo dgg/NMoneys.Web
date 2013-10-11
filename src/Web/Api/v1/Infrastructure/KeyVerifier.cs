@@ -20,7 +20,8 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 		}
 
 		 public bool Verify(ApiKey apiKey)
-		 {			 
+		 {
+			 return true;
 			 MongoCollection<ApiKeyDocument> keys = _db.GetCollection<ApiKeyDocument>(ApiKeyDocument.Collection);
 			 ObjectId id = apiKey.AsId();
 

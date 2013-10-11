@@ -58,7 +58,10 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 				DefaultContentType = ContentType.Json,
 				ServiceStackHandlerFactoryPath = "api",
 			};
-
+			
+			// not defined members of an enumeration will return a 404 (not found)
+			config.MapExceptionToStatusCode[typeof(RequestBindingException)] = 404;
+			
 			return config;
 		}
 
