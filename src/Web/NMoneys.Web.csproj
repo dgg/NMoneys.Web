@@ -197,6 +197,7 @@
     <Content Include="Content\src\CodeProject\12.Money_Arithmetic.cs" />
     <Compile Include="Content\src\SyntacticSupport.cs" />
     <Compile Include="Controllers\Infrastructure\ApiKey.cs" />
+    <Compile Include="Controllers\Infrastructure\ApiKeyAttribute.cs" />
     <Compile Include="Controllers\Infrastructure\ApiKeyRepository.cs" />
     <Compile Include="Controllers\Infrastructure\ConfirmationResponse.cs" />
     <Compile Include="Controllers\Infrastructure\ConfirmationRequest.cs" />
@@ -271,6 +272,7 @@
     <Content Include="Views\WebApi\Index.cshtml" />
     <Content Include="Views\WebApi\_requestForm.cshtml" />
     <Content Include="Views\WebApi\_requested.cshtml" />
+    <Content Include="Views\WebApi\Confirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,7 +4,7 @@
 	ViewBag.Title = "nMoneys";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@System.Configuration.ConfigurationManager.AppSettings["email_api_key"]
+
 <section class="container">
 	<article>
 		<h2><a id="Api"></a>An Api?<a href="#Api"></a></h2>
@@ -37,21 +37,25 @@
 		<h2><a id="Doc"></a>Documentation<a href="#Doc"></a></h2>
 		<p>&hellip; or why not diving into its documentation?</p>
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#apiary" data-toggle="tab">Home</a></li>
+			<li class="active"><a href="#apiary" data-toggle="tab">Apiary</a></li>
 			<li><a href="#metadata" data-toggle="tab">Local Metadata</a></li>
+			<li><a href="#swagger" data-toggle="tab">Swagger</a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane active" id="apiary">
-				Beautiful, interactive documentation is hosted in <a href="http://apiary.io/" target="_blank">Apiary</a>.&nbsp;&nbsp;
+				Good-looking, interactive documentation is hosted in <a href="http://apiary.io/" target="_blank">Apiary</a>.&nbsp;&nbsp;
 				<a class="btn" href="http://docs.nmoneys.apiary.io" target="_blank">Check it out!</a>
 			</div>
 			<div class="tab-pane" id="metadata">
-				Maybe not as beautiful and definitely less interactive but equally useful is provided by <a href="http://www.servicestack.net/">ServiceStack</a>.&nbsp;&nbsp;
+				Good-looking enough and definitely less interactive but equally useful is provided by <a href="http://www.servicestack.net/">ServiceStack</a>.&nbsp;&nbsp;
 				<div class="btn-group">
 					<a class="btn" href="api/json/metadata?op=Currencies" target="_blank">Currencies</a>
 					<a class="btn" href="api/json/metadata?op=Currency" target="_blank">Currency</a>
 					<a class="btn" href="api/json/metadata?op=Format" target="_blank">Format</a>
 				</div>
+			</div>
+			<div class="tab-pane" id="swagger">
+				Very interactive <a href="https://github.com/wordnik/swagger-core">Swagger</a> documentation is on its way.
 			</div>
 		</div>
 	</article>

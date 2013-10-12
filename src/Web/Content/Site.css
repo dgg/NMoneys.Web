@@ -110,3 +110,5 @@ iframe{ border-width: 0;}
 }
 
 .nav-tabs em { font-size: smaller;}
+.confirmation-errors { padding-bottom: 0;}
+.api-steps ul { list-style: none; }

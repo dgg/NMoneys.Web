@@ -1,0 +1,61 @@
+﻿@model NMoneys.Web.Models.ApiConfirmation
+
+@{
+	ViewBag.Title = "nMoneys";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="container">
+	@if (ViewData.ModelState.IsValid)
+	{
+		<div class="alert alert-info">
+			<h2>Your key has been confirmed.</h2>
+		</div> 
+		<h3>@Model.ApiKey</h3>
+	 <br/>
+		<div class="api-steps span3">
+			<ul>
+				@done("Request API Key")
+				@done("Confirm API Key")
+				@notDone("Read the", @Html.ActionLink("documentation", "Index", "WebApi", ViewContext.RequestContext.HttpContext.Request.Url.Scheme, ViewContext.RequestContext.HttpContext.Request.Url.Host, "Doc", null, null))
+				@notDone("Start using the API!")
+			</ul>
+		</div>
+	}
+	else
+	{
+		<div class="alert alert-error confirmation-errors">
+			<h2>Your API key could not be confirmed.</h2>
+			@Html.ValidationSummary()
+		</div>
+	}
+
+</section>
+
+@helper done(string text)
+{
+	<li class="checkbox disabled checked">
+		<span class="icons">
+			<span class="first-icon fui-checkbox-unchecked"></span>
+			<span class="second-icon fui-checkbox-checked"></span>
+		</span>
+		&nbsp;@text
+	</li>
+}
+
+@helper notDone(string text, MvcHtmlString link = null)
+{
+	<li class="checkbox">
+		<span class="icons">
+			<span class="first-icon fui-checkbox-unchecked"></span>
+			<span class="second-icon fui-checkbox-checked"></span>
+		</span>
+		&nbsp;@text @link
+	</li>
+}
+
+@section scripts
+{
+	@Scripts.Render("~/bundles/parsley")
+	@Scripts.Render("~/bundles/app_api")
+}

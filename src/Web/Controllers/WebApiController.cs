@@ -73,9 +73,16 @@ namespace NMoneys.Web.Controllers
 
 		public ActionResult Confirm(ApiConfirmation model)
 		{
+			if (!ModelState.IsValid)
+			{
+				return View(model);
+			}
 
+			ApiKey toBeConfirmed = ApiKey.Parse(model.ApiKey);
+			// TODO: make async
+			_apiKeys.Confirm(toBeConfirmed, DateTimeOffset.UtcNow);
 
-			return View();
+			return View(model);
 		}
 	}
 }

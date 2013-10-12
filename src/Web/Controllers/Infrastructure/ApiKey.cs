@@ -21,6 +21,19 @@ namespace NMoneys.Web.Controllers.Infrastructure
 			return new ApiKey(ObjectId.GenerateNewId());
 		}
 
+		public static ApiKey Parse(string toBeParsed)
+		{
+			ObjectId oid = ObjectId.Parse(toBeParsed);
+			return new ApiKey(oid);
+		}
+
+		public static bool CanParse(string s)
+		{
+			ObjectId id;
+			bool canParse = ObjectId.TryParse(s, out id);
+			return canParse;
+		}
+
 		public override string ToString()
 		{
 			return _oid.ToString();
