@@ -112,3 +112,9 @@ iframe{ border-width: 0;}
 .nav-tabs em { font-size: smaller;}
 .confirmation-errors { padding-bottom: 0;}
 .api-steps ul { list-style: none; }
+
+.show-info { cursor: help }
+
+.quantities td:nth-child(even), th:nth-child(even) { color: #e74c3c; }
+.quantities td:nth-child(odd), th:nth-child(odd) { color:#1abc9c; }
+.quantities  th { text-align: center; background: #ecf0f1}
