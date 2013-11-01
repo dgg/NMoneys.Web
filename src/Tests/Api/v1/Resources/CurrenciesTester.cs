@@ -23,9 +23,8 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void Currency_UndefinedIsoCode_NotFound()
 		{
-			var verifier = Substitute.For<IKeyVerifier>();
-			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
-			Replacing(verifier);
+			this.DisableAuthentication();
+			this.FullThrottle();
 
 			var client = new HttpClient(BaseUrl.ToString());
 
@@ -41,9 +40,8 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void FormatCurrency_UndefinedIsoCode_NotFound()
 		{
-			var verifier = Substitute.For<IKeyVerifier>();
-			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
-			Replacing(verifier);
+			this.DisableAuthentication();
+			this.FullThrottle();
 
 			var client = new HttpClient(BaseUrl.ToString());
 
@@ -59,9 +57,8 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void AlternativeFormatCurrency_UndefinedIsoCode_NotFound()
 		{
-			var verifier = Substitute.For<IKeyVerifier>();
-			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
-			Replacing(verifier);
+			this.DisableAuthentication();
+			this.FullThrottle();
 
 			var client = new HttpClient(BaseUrl.ToString());
 

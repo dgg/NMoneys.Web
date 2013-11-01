@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EasyHttp.Http;
+using NMoneys.Web.Api.v1.Infrastructure;
 using NUnit.Framework;
 using Testing.Commons;
 using Testing.Commons.Time;
@@ -11,15 +12,17 @@ using Tests.Api.v1.Resources.Support;
 namespace Tests.Api.v1.Resources
 {
 	[TestFixture, Category("Integration")]
-	public class RatesAndLimitsTester : SingleHostPerTest
+	public class RatesAndLimitsTester : SingleHostPerFixture
 	{
 		[Test]
 		public void LimitHeader_AnyNumberOfRequests_AsPerThrottlingConfiguration()
 		{
-			this.AuthenticateRequest();
+			this.DisableAuthentication();
+			this.FullThrottle();
 			this.SetupThrottling(3, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
 
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Have.LimitHeader(Is.EqualTo("3")));
@@ -29,33 +32,31 @@ namespace Tests.Api.v1.Resources
 		}
 
 		[Test]
-		public void RemainingHeader_MaxNumberMinusRequestsInPeriod()
+		public void RemainingHeader_TotalMinusRepositoryCount()
 		{
-			this.AuthenticateRequest();
-			this.SetupThrottling(3, 10.Seconds());
+			this.DisableAuthentication();
+			this.FullThrottle();
+
+			var two = new RequestCount(TimeSpan.Zero).Increase();
+			this.SetupThrottling(3, 10.Seconds(), two);
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
 
 			HttpResponse response = this.Get(client);
-			Assert.That(response, Must.Have.RemainingHeader(Is.EqualTo("2")));
-
-			response = this.Get(client);
 			Assert.That(response, Must.Have.RemainingHeader(Is.EqualTo("1")));
-
-			response = this.Get(client);
-			Assert.That(response, Must.Have.RemainingHeader(Is.EqualTo("0")));
-
-			response = this.Get(client);
-			Assert.That(response, Must.Have.RetryHeader(Is.EqualTo("10")));
 		}
 
 		[Test]
 		public void ResetHeader_LessTimeOrEqualThanThrottlingPeriod()
 		{
-			this.AuthenticateRequest();
-			this.SetupThrottling(3, 10.Seconds());
+			this.DisableAuthentication();
+			this.FullThrottle();
+			var sixSecondsLeft = new RequestCount(5.Seconds());
+			this.SetupThrottling(3, 10.Seconds(), sixSecondsLeft);
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
 
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Have.ResetHeader(

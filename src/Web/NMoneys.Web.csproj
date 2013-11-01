@@ -148,11 +148,14 @@
     <Compile Include="Api\v1\Datatypes\CurrencyDetail.cs" />
     <Compile Include="Api\v1\Datatypes\CurrencySnapshot.cs" />
     <Compile Include="Api\v1\Datatypes\FormattedMoney.cs" />
-    <Compile Include="Api\v1\Infrastructure\Filters\ApiAuthentication.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\ApiAuthenticator.cs" />
     <Compile Include="Api\v1\Infrastructure\ApiKey.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\IApiAuthenticator.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\IRequestRater.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\IRequestThrottler.cs" />
     <Compile Include="Api\v1\Infrastructure\IRequestCountRepository.cs" />
     <Compile Include="Api\v1\Infrastructure\RequestCountRepository.cs" />
-    <Compile Include="Api\v1\Infrastructure\Filters\RequestRates.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\RequestRater.cs" />
     <Compile Include="Api\v1\Infrastructure\RequestCount.cs" />
     <Compile Include="Api\v1\Infrastructure\HostBootstrapper.cs" />
     <Compile Include="Api\v1\Infrastructure\IKeyVerifier.cs" />

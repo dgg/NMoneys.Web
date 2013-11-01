@@ -19,6 +19,10 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 		
 		public HostBootstrapper Bootstrap(Funq.Container container)
 		{
+			registerTrackingDisposables<ApiAuthenticator, IApiAuthenticator>(container);
+			registerTrackingDisposables<RequestThrottler, IRequestThrottler>(container);
+			registerTrackingDisposables<RequestRater, IRequestRater>(container);
+			
 			registerTrackingDisposables<KeyVerifier, IKeyVerifier>(container);
 			registerTrackingDisposables<AppSettings, IResourceManager>(container);
 			registerTrackingDisposables<RequestCountRepository, IRequestCountRepository>(container);
@@ -40,10 +44,10 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			List<Action<IHttpRequest, IHttpResponse, object>> requestFilters,
 			List<Action<IHttpRequest, IHttpResponse, object>> responseFilters)
 		{
-			requestFilters.Add(ApiAuthentication.Handle);
+			requestFilters.Add(ApiAuthenticator.Handle);
 			requestFilters.Add(RequestThrottler.Handle);
 
-			responseFilters.Add(RequestRates.Handle);
+			responseFilters.Add(RequestRater.Handle);
 
 			return this;
 		}

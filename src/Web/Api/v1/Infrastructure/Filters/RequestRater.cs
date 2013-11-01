@@ -5,9 +5,15 @@ using ServiceStack.ServiceHost;
 
 namespace NMoneys.Web.Api.v1.Infrastructure.Filters
 {
-	public class RequestRates
+	public class RequestRater : IRequestRater
 	{
 		public static void Handle(IHttpRequest request, IHttpResponse response, object dto)
+		{
+			var rater = request.TryResolve<IRequestRater>();
+			rater.Rate(request, response);
+		}
+
+		public void Rate(IHttpRequest request, IHttpResponse response)
 		{
 			ApiKey apiKey = ApiKey.ExtractFrom(request);
 			if (!apiKey.IsMissing)
@@ -26,7 +32,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure.Filters
 
 		private static void addResetHeader(IHttpResponse response, ThrottlingConfiguration configuration, RequestCount count)
 		{
-			string numberOfSecondsLeftInPeriod = count!= null ?
+			string numberOfSecondsLeftInPeriod = count != null ?
 				count.Remaining(DateTimeOffset.UtcNow).ToString(CultureInfo.InvariantCulture) :
 				configuration.FormattedSeconds;
 
@@ -36,7 +42,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure.Filters
 		private static void addRemainingHeader(IHttpResponse response, ThrottlingConfiguration configuration, RequestCount count)
 		{
 			string numberOfRequestLeftInPeriod = count != null ?
-				count.Remaining(configuration.NumberOfRequests).ToString(CultureInfo.InvariantCulture):
+				count.Remaining(configuration.NumberOfRequests).ToString(CultureInfo.InvariantCulture) :
 				configuration.FormattedRequests;
 			response.AddHeader("X-Rate-Limit-Remaining", numberOfRequestLeftInPeriod);
 		}

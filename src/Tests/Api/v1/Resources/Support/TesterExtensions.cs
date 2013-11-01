@@ -5,6 +5,7 @@ using EasyHttp.Http;
 using MongoDB.Bson;
 using NMoneys;
 using NMoneys.Web.Api.v1.Infrastructure;
+using NMoneys.Web.Api.v1.Infrastructure.Filters;
 using NSubstitute;
 using ServiceStack.Configuration;
 using ServiceStack.ServiceClient.Web;
@@ -15,14 +16,19 @@ namespace Tests.Api.v1.Resources.Support
 {
 	internal static class TesterExtensions
 	{
-		public static void AuthenticateRequest(this TesterBase tester)
+		public static void DisableAuthentication(this TesterBase tester)
 		{
-			var verifier = Substitute.For<IKeyVerifier>();
-			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
-			tester.Replacing(verifier);
+			var authenticator = Substitute.For<IApiAuthenticator>();
+			tester.Replacing(authenticator);
 		}
 
-		public static void SetupThrottling(this TesterBase tester, ushort numberOfRequests, TimeSpan period)
+		public static void FullThrottle(this TesterBase tester)
+		{
+			var throttler = Substitute.For<IRequestThrottler>();
+			tester.Replacing(throttler);
+		}
+
+		public static void Throttle(this TesterBase tester, ushort numberOfRequests, TimeSpan period)
 		{
 			var configuration = new ThrottlingConfiguration
 			{
@@ -36,12 +42,33 @@ namespace Tests.Api.v1.Resources.Support
 			tester.Replacing(manager);
 		}
 
+		public static IRequestCountRepository SetupThrottling(this TesterBase tester, ushort numberOfRequests, TimeSpan period, RequestCount count = null)
+		{
+			var configuration = new ThrottlingConfiguration
+			{
+				NumberOfRequests = numberOfRequests,
+				Period = period
+			};
+
+			var manager = Substitute.For<IResourceManager>();
+			manager.Get(ThrottlingConfiguration.Key, Arg.Any<ThrottlingConfiguration>())
+				.Returns(configuration);
+			tester.Replacing(manager);
+
+			var repository = Substitute.For<IRequestCountRepository>();
+			if (count != null)
+			{
+				repository.Get(Arg.Any<ApiKey>()).Returns(count);
+			}
+			tester.Replacing(repository);
+			return repository;
+		}
+
 		internal static readonly string AServiceUrl = new Currency { IsoCode = CurrencyIsoCode.EUR }
 				.ToUrl("GET");
 
 		public static HttpResponse Get(this TesterBase tester, HttpClient client)
 		{
-			client.Request.AddExtraHeader(ApiKey.ParameterName, ObjectId.Empty);
 			HttpResponse response = client.Get(AServiceUrl);
 			return response;
 		}

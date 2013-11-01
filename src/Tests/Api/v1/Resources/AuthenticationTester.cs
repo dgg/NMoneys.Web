@@ -1,7 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Net;
 using EasyHttp.Http;
-using MongoDB.Bson;
 using NMoneys.Web.Api.v1.Infrastructure;
 using NSubstitute;
 using NUnit.Framework;
@@ -14,8 +13,6 @@ namespace Tests.Api.v1.Resources
 	[TestFixture, Category("Integration")]
 	public class AuthenticationTester : SingleHostPerFixture
 	{
-		private static string any_key { get { return ObjectId.Empty.ToString(); } }
-
 		[Test]
 		public void MissingApiKey_NotAuthorized()
 		{
@@ -35,7 +32,7 @@ namespace Tests.Api.v1.Resources
 			Replacing(verifier);
 
 			HttpResponse response = this.Get(client =>
-				client.Request.AddExtraHeader(ApiKey.ParameterName, any_key));
+				client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue));
 
 			Assert.That(response, Must.Not.Be.Ok(HttpStatusCode.Unauthorized));
 		}
@@ -48,7 +45,7 @@ namespace Tests.Api.v1.Resources
 			Replacing(verifier);
 
 			HttpResponse response = this.Get(client =>
-				client.Request.AddExtraHeader(ApiKey.ParameterName, any_key));
+				client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue));
 
 			Assert.That(response, Must.Be.Ok());
 		}
@@ -60,7 +57,7 @@ namespace Tests.Api.v1.Resources
 			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
 			Replacing(verifier);
 
-			var response = this.Get(new NameValueCollection { { ApiKey.ParameterName, any_key } });
+			var response = this.Get(new NameValueCollection { { ApiKey.ParameterName, ApiKey.EmptyParameterValue } });
 
 			Assert.That(response, Must.Be.Ok());
 		}

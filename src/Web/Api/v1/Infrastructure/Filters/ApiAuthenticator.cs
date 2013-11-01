@@ -3,9 +3,15 @@ using ServiceStack.ServiceHost;
 
 namespace NMoneys.Web.Api.v1.Infrastructure.Filters
 {
-	public class ApiAuthentication
+	public class ApiAuthenticator : IApiAuthenticator
 	{
 		public static void Handle(IHttpRequest request, IHttpResponse response, object dto)
+		{
+			var authenticator = request.TryResolve<IApiAuthenticator>();
+			authenticator.Authenticate(request);
+		}
+
+		public void Authenticate(IHttpRequest request)
 		{
 			var verifier = request.TryResolve<IKeyVerifier>();
 

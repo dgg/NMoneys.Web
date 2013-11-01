@@ -16,7 +16,7 @@ namespace Tests.Api.v1.Infrastructure.Filters
 	public class RequestThrottlerTester
 	{
 		[Test]
-		public void LessRequestsThanLimit_NoException()
+		public void Throttle_LessRequestsThanLimit_NoException()
 		{
 			var request = Substitute.For<IHttpRequest>();
 			var response = Substitute.For<IHttpResponse>();
@@ -25,13 +25,14 @@ namespace Tests.Api.v1.Infrastructure.Filters
 			setupRepository(request);
 			setupConfiguration(request, 3, 30.Seconds());
 
-			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
-			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+			var subject = new RequestThrottler();
 
+			Assert.That(() => subject.Throttle(request, response), Throws.Nothing);
+			Assert.That(() => subject.Throttle(request, response), Throws.Nothing);
 		}
 		
 		[Test]
-		public void AsManyRequestsAsLimit_NoException()
+		public void Throttle_AsManyRequestsAsLimit_NoException()
 		{
 			var request = Substitute.For<IHttpRequest>();
 			var response = Substitute.For<IHttpResponse>();
@@ -40,12 +41,14 @@ namespace Tests.Api.v1.Infrastructure.Filters
 			setupRepository(request);
 			setupConfiguration(request, 2, 30.Seconds());
 
-			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
-			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
+			var subject = new RequestThrottler();
+
+			Assert.That(() => subject.Throttle(request, response), Throws.Nothing);
+			Assert.That(() => subject.Throttle(request, response), Throws.Nothing);
 		}
 
 		[Test]
-		public void MoreRequestsThanLimit_Exception()
+		public void Throttle_MoreRequestsThanLimit_Exception()
 		{
 			var request = Substitute.For<IHttpRequest>();
 			var response = Substitute.For<IHttpResponse>();
@@ -54,9 +57,11 @@ namespace Tests.Api.v1.Infrastructure.Filters
 			setupRepository(request);
 			setupConfiguration(request, 2, 30.Seconds());
 
-			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
-			Assert.That(() => RequestThrottler.Handle(request, response, null), Throws.Nothing);
-			Assert.That(() => RequestThrottler.Handle(request, response, null),
+			var subject = new RequestThrottler();
+
+			Assert.That(() => subject.Throttle(request, response), Throws.Nothing);
+			Assert.That(() => subject.Throttle(request, response), Throws.Nothing);
+			Assert.That(() => subject.Throttle(request, response),
 				Throws.InstanceOf<HttpError>());
 		}
 

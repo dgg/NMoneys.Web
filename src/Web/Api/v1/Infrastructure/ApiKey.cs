@@ -6,6 +6,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 	public class ApiKey
 	{
 		public static readonly string ParameterName = "api_key";
+		public static readonly string EmptyParameterValue = ObjectId.Empty.ToString();
 
 		private readonly bool _isMissing;
 		private readonly ObjectId _oid;

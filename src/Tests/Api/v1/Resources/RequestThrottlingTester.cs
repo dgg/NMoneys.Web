@@ -1,5 +1,5 @@
-﻿using System.Net;
-using EasyHttp.Http;
+﻿using EasyHttp.Http;
+using NMoneys.Web.Api.v1.Infrastructure;
 using NUnit.Framework;
 using Testing.Commons;
 using Testing.Commons.Time;
@@ -14,10 +14,12 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void LessRequestsThanLimit_Success()
 		{
-			this.AuthenticateRequest();
-			this.SetupThrottling(3, 10.Seconds());
+			this.DisableAuthentication();
+			this.Throttle(3, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Be.Ok());
 
@@ -28,10 +30,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void AsManyRequestsAsLimit_Success()
 		{
-			this.AuthenticateRequest();
-			this.SetupThrottling(2, 10.Seconds());
+			this.DisableAuthentication();
+			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
 			
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Be.Ok());
@@ -43,10 +46,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void MoreRequestsThanLimit_TooManyRequests()
 		{
-			this.AuthenticateRequest();
-			this.SetupThrottling(2, 10.Seconds());
+			this.DisableAuthentication();
+			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
 			
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Be.Ok());
@@ -60,10 +64,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void MoreRequestsThanLimit_RetryHeaderWithPeriod()
 		{
-			this.AuthenticateRequest();
-			this.SetupThrottling(2, 10.Seconds());
+			this.DisableAuthentication();
+			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
 			client.Request.Accept = HttpContentTypes.ApplicationJson;
 			
 			HttpResponse response = this.Get(client);
@@ -78,10 +83,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void MoreRequestsThanLimit_MessageWithThrottlingInformation()
 		{
-			this.AuthenticateRequest();
-			this.SetupThrottling(2, 10.Seconds());
+			this.DisableAuthentication();
+			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
+			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
 			client.Request.Accept = HttpContentTypes.ApplicationJson;
 
 			HttpResponse response = this.Get(client);
