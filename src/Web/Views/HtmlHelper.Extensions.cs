@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -82,6 +80,34 @@ namespace NMoneys.Web.Views
 				tag.AddClass(className);
 			}
 			return tag;
+		}
+
+		public static HtmlTag ModelInfo<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> lambda, string placement = "right", string cssClass = null, string tag = "span")
+		{
+			string title =  helper.ViewData.description(lambda);
+		
+			var span = new HtmlTag("span")
+				.AddClass("show-info")
+				.AddClassIf(!string.IsNullOrEmpty(cssClass), cssClass)
+				.Attr("title", title)
+				.Attr("data-placement", placement)
+				.Encoded(true)
+				.Text(lambda.Compile()(helper.ViewData.Model).ToString());
+
+			return span;
+		}
+
+		private static string description<T>(this ViewDataDictionary<T> model, Expression<Func<T, object>> lambda)
+		{
+			string description = ModelMetadata.FromLambdaExpression(lambda, model).Description;
+			if (string.IsNullOrEmpty(description)) description = model.name(lambda);
+			return description;
+		}
+
+		private static string name<T>(this ViewDataDictionary<T> model, Expression<Func<T, object>> lambda)
+		{
+			string description = ModelMetadata.FromLambdaExpression(lambda, model).PropertyName;
+			return description;
 		}
 	}
 }

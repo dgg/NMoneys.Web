@@ -17,8 +17,10 @@ namespace NMoneys.Web.Models
 			Details = new Detail(currency);
 		}
 
+		[Display(Description = "Padded Numeric Code")]
 		public string PaddedNumericCode { get; set; }
 
+		[Display(Description = "Alphabetic Code")]
 		public string AlphabeticCode { get; set; }
 
 		[Display(Description = "English Name")]
@@ -36,6 +38,18 @@ namespace NMoneys.Web.Models
 		public class Detail
 		{
 
+			public class Formatted
+			{
+				public Formatted(Money money)
+				{
+					Positive = money.ToString();
+					Negative = (-money).ToString();
+				}
+
+				public string Positive { get; set; }
+				public string Negative { get; set; }
+			}
+
 			decimal integral = 42m, fractional = 42.33333m, bigIntegral = 123456789m, bigFractional = 123456789.54321m;
 
 			public Detail(Currency currency)
@@ -47,36 +61,22 @@ namespace NMoneys.Web.Models
 				bigInteger = new Money(bigIntegral, currency),
 				bigFraction = new Money(bigFractional, currency);
 
-				Integral = integer.ToString();
-				NegativeIntegral = (-integer).ToString();
-
-				Fractional = fraction.ToString();
-				NegativeFractional = (-fraction).ToString();
-
-				BigIntegral = bigInteger.ToString();
-				BigNegativeIntegral = (-bigInteger).ToString();
-
-				BigFractional = bigFraction.ToString();
-				BigNegativeFractional = (-bigFraction).ToString();
+				Integral = new Formatted(integer);
+				Fractional = new Formatted(fraction);
+				BigIntegral = new Formatted(bigInteger);
+				BigFractional = new Formatted(bigFraction);
 			}
 
+			[Display(Description = "Numeric Code")]
 			public string NumericCode { get; set; }
 
-			public string Integral { get; set; }
+			public Formatted Integral { get; set; }
 
-			public string NegativeIntegral { get; set; }
+			public Formatted Fractional { get; set; }
 
-			public string Fractional { get; set; }
+			public Formatted BigIntegral { get; set; }
 
-			public string NegativeFractional { get; set; }
-
-			public string BigIntegral { get; set; }
-
-			public string BigNegativeIntegral { get; set; }
-
-			public string BigFractional { get; set; }
-
-			public string BigNegativeFractional { get; set; }
+			public Formatted BigFractional { get; set; }
 		}
 	}
 }

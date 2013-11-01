@@ -276,6 +276,8 @@
     <Content Include="Views\WebApi\_requestForm.cshtml" />
     <Content Include="Views\WebApi\_requested.cshtml" />
     <Content Include="Views\WebApi\Confirm.cshtml" />
+    <Content Include="Views\Currencies\DisplayTemplates\_detail.cshtml" />
+    <Content Include="Views\Currencies\DisplayTemplates\_amounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

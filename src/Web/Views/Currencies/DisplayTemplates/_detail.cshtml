@@ -1,0 +1,34 @@
+﻿@using NMoneys.Web.Views
+@model NMoneys.Web.Models.Snapshot
+
+<div class="modal hide fade" id="@(Model.AlphabeticCode)_modal" role="dialog" aria-hidden="true">
+	<header class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		&nbsp;
+	</header>
+	<article class="modal-body">
+		<div class="tabbable tabs-left">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#@(Model.AlphabeticCode)_codes" data-toggle="tab">Codes</a></li>
+				<li><a href="#@(Model.AlphabeticCode)_names" data-toggle="tab">Names</a></li>
+				<li><a href="#@(Model.AlphabeticCode)_formatting" data-toggle="tab">Formatting</a></li>
+			</ul>
+			<div class="tab-content">
+				<section class="tab-pane active" id="@(Model.AlphabeticCode)_codes">
+					<h3>@Html.ModelInfo(m => m.AlphabeticCode)</h3>
+					<h4>@Html.ModelInfo(m => m.Details.NumericCode)</h4>
+					<h4>@Html.ModelInfo(m => m.PaddedNumericCode)</h4>
+				</section>
+				<section class="tab-pane" id="@(Model.AlphabeticCode)_names">
+						<h3>@Html.ModelInfo(m => m.Symbol)</h3>
+						<h4>@Html.ModelInfo(m => m.EnglishName)</h4>
+						<h4>@Html.ModelInfo(m => m.NativeName)</h4>
+				</section>
+				<section class="tab-pane" id="@(Model.AlphabeticCode)_formatting">
+					@Html.Partial("DisplayTemplates/_amounts", Model.Details)
+				</section>
+			</div>
+		</div>
+	</article>
+</div>
+

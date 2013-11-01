@@ -1,0 +1,29 @@
+﻿@model NMoneys.Web.Models.Snapshot.Detail
+
+<table class="quantities table table-hover table-bordered">
+	<caption>Amounts</caption>
+	<thead>
+		<tr>
+			<th>Positive</th>
+			<th>Negative</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>@Model.Integral.Positive</td>
+			<td>@Model.Integral.Negative</td>
+		</tr>
+		<tr>
+			<td>@Model.Fractional.Positive</td>
+			<td>@Model.Fractional.Negative</td>
+		</tr>
+		<tr>
+			<td>@Model.BigIntegral.Positive</td>
+			<td>@Model.BigIntegral.Negative</td>
+		</tr>
+		<tr>
+			<td>@Model.BigFractional.Positive</td>
+			<td>@Model.BigFractional.Negative</td>
+		</tr>
+	</tbody>
+</table>
