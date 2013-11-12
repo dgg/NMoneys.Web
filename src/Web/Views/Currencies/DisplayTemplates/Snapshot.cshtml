@@ -3,13 +3,13 @@
 <article class="span2 tile snapshot" id="@Model.AlphabeticCode">
 	<div class="tabulated">
 		<div class="cell alphabetic-code">
-			<h3><a href="#@(Model.AlphabeticCode)_modal" role="button" data-toggle="modal">@Model.AlphabeticCode</a></h3>
+			<h3><a href="#@(Model.AlphabeticCode)_modal" role="button" data-toggle="modal" data-remote="@Url.Action("Detail", new { code = Model.AlphabeticCode })">@Model.AlphabeticCode</a></h3>
 		</div>
 		<div class="cell">
 			<div class="numeric-code">@Model.PaddedNumericCode</div>
 			<div class="symbol">@Model.Symbol</div>
 		</div>
-		
+
 	</div>
 	<div class="tabulated english-name">@Model.EnglishName</div>
 	<div class="tabulated native-name">@Model.NativeName</div>

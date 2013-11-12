@@ -18,5 +18,12 @@ namespace NMoneys.Web.Controllers
 
 			return View(byInitial);
 		} 
+
+		public ActionResult Detail(CurrencyIsoCode code)
+		{
+			Currency currency = Currency.Get(code);
+			var snapshot = new Snapshot(currency);
+			return PartialView(snapshot);
+		}
 	}
 }
