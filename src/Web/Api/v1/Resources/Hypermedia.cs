@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using NMoneys.Web.Api.v1.Infrastructure.UrlWriting;
 using NMoneys.Web.Api.v1.Messages.Hypermedia;
-using NMoneys.Web.Api.v1.Datatypes.Hypermedia;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
+using ServiceStack.WebHost.Endpoints;
 
 namespace NMoneys.Web.Api.v1.Resources
 {
@@ -11,12 +12,14 @@ namespace NMoneys.Web.Api.v1.Resources
 	{
 		public object Options(root request)
 		{
+			IAppHost host = GetAppHost();
+
 			var response = new rootResponse
 			{
 				_links = new[]
 				{
-					Link.Self(request),
-					new Link("currencies", new Messages.Currencies(), "GET")
+					host.Self(request),
+					host.Link("currencies", new Messages.Currencies(), "GET")
 				}
 			};
 
@@ -25,17 +28,19 @@ namespace NMoneys.Web.Api.v1.Resources
 
 		public object Options(currencies request)
 		{
+			IAppHost host = GetAppHost();
+
 			var currencyLinks = Currency.FindAll()
 				.OrderBy(c => c.AlphabeticCode, StringComparer.OrdinalIgnoreCase)
 				.Where(c => !c.IsObsolete)
-				.Select(c => new Link("currency", new Messages.Currency { IsoCode = c.IsoCode }, "GET"));
+				.Select(c => host.Link("currency", new Messages.Currency { IsoCode = c.IsoCode }, "GET"));
 
 			var response = new currenciesResponse
 			{
 				_links = new[]
 				{
-					Link.Self(request), 
-					Link.Self(new Messages.Currencies(), "GET")
+					host.Self(request), 
+					host.Self(new Messages.Currencies(), "GET")
 				}.Concat(
 					currencyLinks)
 				.ToArray()
@@ -46,15 +51,17 @@ namespace NMoneys.Web.Api.v1.Resources
 
 		public object Options(currency request)
 		{
+			IAppHost host = GetAppHost();
+
 			var response = new currencyResponse
 			{
 				_links = new[]
 				{
-					Link.Self(request),
-					Link.Self(new Messages.Currency{IsoCode = request.IsoCode}, "GET"),
-					Link.Parent(new Messages.Currencies(), "GET"),
-					new Link("format", new Messages.Format{ IsoCode = request.IsoCode }, "GET"), 
-					new Link("format", new Messages.Format{ IsoCode = request.IsoCode }, "POST")
+					host.Self(request),
+					host.Self(new Messages.Currency{IsoCode = request.IsoCode}, "GET"),
+					host.Parent(new Messages.Currencies(), "GET"),
+					host.Link("format", new Messages.Format{ IsoCode = request.IsoCode }, "GET"), 
+					host.Link("format", new Messages.Format{ IsoCode = request.IsoCode }, "POST")
 				}
 			};
 
@@ -63,14 +70,15 @@ namespace NMoneys.Web.Api.v1.Resources
 
 		public object Options(format request)
 		{
+			IAppHost host = GetAppHost();
 			var response = new currencyResponse
 			{
 				_links = new[]
 				{
-					Link.Self(request),
-					Link.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "GET"),
-					Link.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "POST"),
-					Link.Parent(new Messages.Currency{IsoCode = request.IsoCode}, "GET")
+					host.Self(request),
+					host.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "GET"),
+					host.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "POST"),
+					host.Parent(new Messages.Currency{IsoCode = request.IsoCode}, "GET")
 				}
 			};
 

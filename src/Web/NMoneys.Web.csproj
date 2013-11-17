@@ -163,6 +163,7 @@
     <Compile Include="Api\v1\Infrastructure\KeyVerifier.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\RequestThrottler.cs" />
     <Compile Include="Api\v1\Infrastructure\ThrottlingConfiguration.cs" />
+    <Compile Include="Api\v1\Infrastructure\UrlWriting\ServiceExtensions.cs" />
     <Compile Include="Api\v1\Messages\Currencies.cs" />
     <Compile Include="Api\v1\Messages\Currency.cs" />
     <Compile Include="Api\v1\Messages\Format.cs" />
