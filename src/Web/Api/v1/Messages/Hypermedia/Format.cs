@@ -6,7 +6,7 @@ namespace NMoneys.Web.Api.v1.Messages.Hypermedia
 	[Route("/v1/currencies/{isoCode}/format", "OPTIONS", Summary = "Allows formatting a monetary amount according to its currency.")]
 	[Route("/v1/currencies/{isoCode}/format/{amount}", "OPTIONS", Summary = "Allows formatting a monetary amount according to its currency.")]
 	[Api("Allows formatting a monetary amount according to its currency.")]
-	public class Format : IReturn<FormatResponse>
+	public class format : IReturn<formatResponse>
 	{
 		[ApiMember(IsRequired = true, ParameterType = "path, body", Verb = "GET, POST",
 			Description = "Three-letter ISO code of the currency to use for formatting.")]
@@ -17,8 +17,8 @@ namespace NMoneys.Web.Api.v1.Messages.Hypermedia
 		public decimal Amount { get; set; }
 	}
 
-	public class FormatResponse
+	public class formatResponse
 	{
-		public Link[] _Links { get; set; }
+		public Link[] _links { get; set; }
 	}
 }

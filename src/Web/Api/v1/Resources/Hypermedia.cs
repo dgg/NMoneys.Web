@@ -4,17 +4,14 @@ using NMoneys.Web.Api.v1.Messages.Hypermedia;
 using NMoneys.Web.Api.v1.Datatypes.Hypermedia;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
-using dtFormat = NMoneys.Web.Api.v1.Messages.Hypermedia.Format;
-using reqCurrencies = NMoneys.Web.Api.v1.Messages.Hypermedia.Currencies;
-using reqCurrency = NMoneys.Web.Api.v1.Messages.Hypermedia.Currency;
 
 namespace NMoneys.Web.Api.v1.Resources
 {
-	public class Hypermedia : Service, IOptions<Root>, IOptions<reqCurrencies>, IOptions<reqCurrency>, IOptions<dtFormat>
+	public class Hypermedia : Service, IOptions<root>, IOptions<currencies>, IOptions<currency>, IOptions<format>
 	{
-		public object Options(Root request)
+		public object Options(root request)
 		{
-			var response = new RootResponse
+			var response = new rootResponse
 			{
 				_links = new[]
 				{
@@ -26,16 +23,16 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(reqCurrencies request)
+		public object Options(currencies request)
 		{
 			var currencyLinks = Currency.FindAll()
 				.OrderBy(c => c.AlphabeticCode, StringComparer.OrdinalIgnoreCase)
 				.Where(c => !c.IsObsolete)
 				.Select(c => new Link("currency", new Messages.Currency { IsoCode = c.IsoCode }, "GET"));
 
-			var response = new CurrenciesResponse
+			var response = new currenciesResponse
 			{
-				_Links = new[]
+				_links = new[]
 				{
 					Link.Self(request), 
 					Link.Self(new Messages.Currencies(), "GET")
@@ -47,11 +44,11 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(reqCurrency request)
+		public object Options(currency request)
 		{
-			var response = new CurrencyResponse
+			var response = new currencyResponse
 			{
-				_Links = new[]
+				_links = new[]
 				{
 					Link.Self(request),
 					Link.Self(new Messages.Currency{IsoCode = request.IsoCode}, "GET"),
@@ -64,11 +61,11 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(dtFormat request)
+		public object Options(format request)
 		{
-			var response = new CurrencyResponse
+			var response = new currencyResponse
 			{
-				_Links = new[]
+				_links = new[]
 				{
 					Link.Self(request),
 					Link.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "GET"),
