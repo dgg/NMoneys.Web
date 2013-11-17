@@ -1,4 +1,5 @@
 ﻿using NMoneys.Web.Api.v1.Datatypes;
+using NMoneys.Web.Api.v1.Datatypes.Hypermedia;
 using ServiceStack.ServiceHost;
 
 namespace NMoneys.Web.Api.v1.Messages
