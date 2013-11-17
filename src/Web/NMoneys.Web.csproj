@@ -166,6 +166,10 @@
     <Compile Include="Api\v1\Messages\Currencies.cs" />
     <Compile Include="Api\v1\Messages\Currency.cs" />
     <Compile Include="Api\v1\Messages\Format.cs" />
+    <Compile Include="Api\v1\Messages\Hypermedia\currencies.cs" />
+    <Compile Include="Api\v1\Messages\Hypermedia\currency.cs" />
+    <Compile Include="Api\v1\Messages\Hypermedia\format.cs" />
+    <Compile Include="Api\v1\Messages\Hypermedia\root.cs" />
     <Compile Include="Api\v1\Resources\Currencies.cs" />
     <Compile Include="Api\v1\Resources\Hypermedia.cs" />
     <Compile Include="App_Start\ApiConfig.cs" />
@@ -283,7 +287,6 @@
     <Content Include="Views\Currencies\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Api\v1\Messages\Hypermedia\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
