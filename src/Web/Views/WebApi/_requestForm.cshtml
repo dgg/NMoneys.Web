@@ -1,7 +1,7 @@
 ﻿@model NMoneys.Web.Models.ApiRequest
 @using (Html.BeginForm("Index", "WebApi", FormMethod.Post, new { @class = "form-horizontal", novalidate = "novalidate" }))
 {
-	<fieldset>
+	<fieldset class="form-inline">
 		<legend>Request an API key</legend>
 		<div class="control-group">
 			@Html.LabelFor(m => m.Email, new { @class = "control-label" })

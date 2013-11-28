@@ -4,61 +4,34 @@
 	ViewBag.Title = "nMoneys";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <section class="container">
-	<article>
-		<h2><a id="Api"></a>An Api?<a href="#Api"></a></h2>
-		<p>
-			Nowadays, if you do not provide some sort of REST-y/Web-ish/JSON-able API, you are not <em>in</em>.<br />
-			And so, <em>NMoneys</em> provides a very simple web api.
-		</p>
-	</article>
+
+	<header class="login-form">
+		<div class="row-fluid">
+			<div class="span2"><img src="~/Content/img/api.png" /></div>
+			<div class="span4"><h2>Do with an API</h2></div>			
+		</div>
+	</header>
+	<p>
+		<em>NMoneys</em> needs to be credible.<br />
+		And nowadays, unless some sort of REST-y/ Web-ish/ JSON-able API is provided, a web application is not <em>feature complete</em> :-).<br/>
+		Welcome to the API economy.
+	</p>
 	<hr />
-	<article>
-		<h2><a id="Content"></a>What's in the Api?<a href="#Content"></a></h2>
-		<p>Amongst the (still) limited capabilities of the api are:</p>
-		<ul>
-			<li>Getting an subset of all the currencies that are supported.</li>
-			<li>Get extended information about single currencies.</li>
-			<li>Formatting numeric quantities.</li>
-		</ul>
-		<p>But, instead of me telling you&hellip;</p>
-	</article>
-	<hr />
-	<article>
+	<section>
 		<h2>Want to use it?</h2>
-		<p>&hellip; why not requesting an API key?.<br/>They are free and, trust me, I do not have any intention to spam you or sell your information. I promise.</p>
+		<p>Instead of being told&hellip;</p>
+		<p>&hellip; why don't you request an API key?</p>
+		<p>The process is straightforward, it is as inexpensive as being free and, you are not going to be spammed or your data sold to any 3rd party.<br />
+			Never</p>
 		@{
 			Html.RenderPartial(Model.Requested ? "_requested" : "_requestForm", Model);
 		}
-	</article>
+	</section>
+	<hr />
+	@{Html.RenderPartial("_features");}
 	<hr/>
-	<article>
-		<h2><a id="Doc"></a>Documentation<a href="#Doc"></a></h2>
-		<p>&hellip; or why not diving into its documentation?</p>
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#apiary" data-toggle="tab">Apiary</a></li>
-			<li><a href="#metadata" data-toggle="tab">Local Metadata</a></li>
-			<li><a href="#swagger" data-toggle="tab">Swagger</a></li>
-		</ul>
-		<div class="tab-content">
-			<div class="tab-pane active" id="apiary">
-				Good-looking, interactive documentation is hosted in <a href="http://apiary.io/" target="_blank">Apiary</a>.&nbsp;&nbsp;
-				<a class="btn" href="http://docs.nmoneys.apiary.io" target="_blank">Check it out!</a>
-			</div>
-			<div class="tab-pane" id="metadata">
-				Good-looking enough and definitely less interactive but equally useful is provided by <a href="http://www.servicestack.net/">ServiceStack</a>.&nbsp;&nbsp;
-				<div class="btn-group">
-					<a class="btn" href="api/json/metadata?op=Currencies" target="_blank">Currencies</a>
-					<a class="btn" href="api/json/metadata?op=Currency" target="_blank">Currency</a>
-					<a class="btn" href="api/json/metadata?op=Format" target="_blank">Format</a>
-				</div>
-			</div>
-			<div class="tab-pane" id="swagger">
-				Very interactive <a href="https://github.com/wordnik/swagger-core">Swagger</a> documentation is on its way.
-			</div>
-		</div>
-	</article>
+	@Html.Partial("_documentation")
 	<hr/>
 </section>
 

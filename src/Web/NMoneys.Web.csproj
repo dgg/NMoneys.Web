@@ -179,6 +179,9 @@
     <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NMoneysConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\img\search.png" />
+    <Content Include="Content\img\doc.png" />
+    <Content Include="Content\img\api.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\prettify.css" />
     <Content Include="Content\src\Quickstart\08.Extensions.cs" />
@@ -286,6 +289,8 @@
     <Content Include="Views\Currencies\DisplayTemplates\_detail.cshtml" />
     <Content Include="Views\Currencies\_amounts.cshtml" />
     <Content Include="Views\Currencies\Detail.cshtml" />
+    <Content Include="Views\WebApi\_features.cshtml" />
+    <Content Include="Views\WebApi\_documentation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
