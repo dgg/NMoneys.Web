@@ -1,4 +1,6 @@
-﻿header, footer, nav, section {
+﻿@import url('http://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,latin-ext');
+
+header, footer, nav, section {
 	display: block;
 }
 
@@ -49,6 +51,38 @@ legend {
 	font-size: 18px;
 }
 
+body {
+	font-family: 'Noto Sans', "Helvetica Neue", Helvetica, sans-serif;
+	line-height: initial;
+}
+
+nav {
+	line-height: 1.231;
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+	font-family: 'Noto Sans',"Helvetica Neue",Helvetica,sans-serif
+}
+.navbar-new {
+	font-family: 'Noto Sans',"Helvetica Neue",Helvetica,sans-serif
+}
+.tagsinput input {
+	font-family: 'Noto Sans',"Helvetica Neue",Helvetica,sans-serif
+}
 
 /* Custom styles
 -----------------------------------------------------------*/
