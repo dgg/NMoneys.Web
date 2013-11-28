@@ -1,1 +1,0 @@
-purge: bundle exec ruby src/scheduled/purge.rb
