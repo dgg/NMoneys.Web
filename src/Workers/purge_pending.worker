@@ -1,0 +1,8 @@
+runtime "ruby"
+# exec is the file that will be executed:
+exec "purge_pending.rb"
+
+gem "mongo"
+gem "bson_ext"
+
+remote
