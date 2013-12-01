@@ -264,7 +264,9 @@
     <Content Include="Scripts\parsley.min.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
