@@ -14,12 +14,12 @@ namespace NMoneys.Web.Controllers.Infrastructure
 			if (ushort.TryParse(ConfigurationManager.AppSettings["https_port"], NumberStyles.Integer, CultureInfo.InvariantCulture, out port))
 			{
 				base.HandleNonHttpsRequest(filterContext);
-				var builder = new UriBuilder(filterContext.HttpContext.Request.Url);
-				builder.Scheme = Uri.UriSchemeHttps;
-				if (port != 443)
+				var builder = new UriBuilder(filterContext.HttpContext.Request.Url)
 				{
-					builder.Port = port;
-				}
+					Scheme = Uri.UriSchemeHttps,
+					Port = port
+				};
+
 
 				filterContext.Result = new RedirectResult(builder.Uri.ToString());
 			}
