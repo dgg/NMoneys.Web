@@ -1,12 +1,12 @@
 ﻿@model NMoneys.Web.Models.ApiRequest
-@using (Html.BeginForm("Index", "WebApi", FormMethod.Post, new { @class = "form-horizontal", novalidate = "novalidate" }))
+@using (Html.BeginForm("Index", "WebApi", FormMethod.Post, new { @class = "form-horizontal", novalidate = "novalidate", parsley_validate = "parsley_validate" }))
 {
 	<fieldset class="form-inline">
 		<legend>Request an API key</legend>
 		<div class="control-group">
 			@Html.LabelFor(m => m.Email, new { @class = "control-label" })
 			<div class="controls">
-				@Html.TextBoxFor(m => m.Email, new { placeHolder = "Email", data_type = "email", data_required = "true" })
+				@Html.TextBoxFor(m => m.Email, new { id="Email", placeHolder = "Email", parsley_type = "email", parsley_required = "true" })
 				@Html.ValidationMessageFor(m => m.Email)
 			</div>
 		</div>

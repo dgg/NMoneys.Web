@@ -1,10 +1,8 @@
-﻿using System.Collections.Specialized;
-using System.Net;
+﻿using System.Net;
 using EasyHttp.Http;
 using MongoDB.Bson;
 using NMoneys;
 using NMoneys.Web.Api.v1.Infrastructure;
-using NSubstitute;
 using NUnit.Framework;
 using ServiceStack.ServiceClient.Web;
 using Testing.Commons;
@@ -23,10 +21,8 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void Currency_UndefinedIsoCode_NotFound()
 		{
-			this.DisableAuthentication();
-			this.FullThrottle();
-
 			var client = new HttpClient(BaseUrl.ToString());
+			this.DisableAuthentication().FullThrottle().DisableEnforcer();
 
 			string qs = string.Format("?{0}={1}", ApiKey.ParameterName, any_key);
 			string undefinedIsoCodeUrl = new CurrencyMsg { IsoCode = CurrencyIsoCode.EUR }
@@ -40,10 +36,8 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void FormatCurrency_UndefinedIsoCode_NotFound()
 		{
-			this.DisableAuthentication();
-			this.FullThrottle();
-
 			var client = new HttpClient(BaseUrl.ToString());
+			this.DisableAuthentication().FullThrottle().DisableEnforcer();
 
 			string qs = string.Format("?{0}={1}", ApiKey.ParameterName, any_key);
 			string undefinedIsoCodeUrl = new FormatMsg { IsoCode = CurrencyIsoCode.EUR, Amount = 42 }
@@ -57,10 +51,8 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void AlternativeFormatCurrency_UndefinedIsoCode_NotFound()
 		{
-			this.DisableAuthentication();
-			this.FullThrottle();
-
 			var client = new HttpClient(BaseUrl.ToString());
+			this.DisableAuthentication().FullThrottle().DisableEnforcer();
 
 			string qs = string.Format("?{0}={1}", ApiKey.ParameterName, any_key);
 			string undefinedIsoCodeUrl = new FormatMsg { IsoCode = CurrencyIsoCode.EUR }

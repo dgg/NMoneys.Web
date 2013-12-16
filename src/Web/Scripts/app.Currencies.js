@@ -11,6 +11,8 @@
 				if (searchTerms) {
 					$snapshots.unhighlight().highlight(searchTerms);
 					$titles.hide();
+					
+					ga('send', 'event', 'Currencies', 'Search', searchTerms);
 				}
 				else {
 					$snapshots.unhighlight();

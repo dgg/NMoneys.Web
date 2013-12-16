@@ -16,16 +16,25 @@ namespace Tests.Api.v1.Resources.Support
 {
 	internal static class TesterExtensions
 	{
-		public static void DisableAuthentication(this TesterBase tester)
+		public static TesterBase DisableEnforcer(this TesterBase tester)
+		{
+			var enforcer = Substitute.For<IHttpsEnforcer>();
+			tester.Replacing(enforcer);
+			return tester;
+		}
+
+		public static TesterBase DisableAuthentication(this TesterBase tester)
 		{
 			var authenticator = Substitute.For<IApiAuthenticator>();
 			tester.Replacing(authenticator);
+			return tester;
 		}
 
-		public static void FullThrottle(this TesterBase tester)
+		public static TesterBase FullThrottle(this TesterBase tester)
 		{
 			var throttler = Substitute.For<IRequestThrottler>();
 			tester.Replacing(throttler);
+			return tester;
 		}
 
 		public static void Throttle(this TesterBase tester, ushort numberOfRequests, TimeSpan period)

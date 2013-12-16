@@ -14,11 +14,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void LessRequestsThanLimit_Success()
 		{
-			this.DisableAuthentication();
 			this.Throttle(3, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+			this.DisableEnforcer().DisableAuthentication();
 
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Be.Ok());
@@ -30,11 +30,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void AsManyRequestsAsLimit_Success()
 		{
-			this.DisableAuthentication();
 			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+			this.DisableEnforcer().DisableAuthentication();
 			
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Be.Ok());
@@ -46,11 +46,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void MoreRequestsThanLimit_TooManyRequests()
 		{
-			this.DisableAuthentication();
 			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+			this.DisableEnforcer().DisableAuthentication();
 			
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Be.Ok());
@@ -64,12 +64,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void MoreRequestsThanLimit_RetryHeaderWithPeriod()
 		{
-			this.DisableAuthentication();
 			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
-			client.Request.Accept = HttpContentTypes.ApplicationJson;
+			this.DisableEnforcer().DisableAuthentication();
 			
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Be.Ok());
@@ -83,11 +82,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void MoreRequestsThanLimit_MessageWithThrottlingInformation()
 		{
-			this.DisableAuthentication();
 			this.Throttle(2, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+			this.DisableEnforcer().DisableAuthentication();
 			client.Request.Accept = HttpContentTypes.ApplicationJson;
 
 			HttpResponse response = this.Get(client);

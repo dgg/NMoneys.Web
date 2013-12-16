@@ -7,7 +7,7 @@ namespace Tests.Api.Support
 		private TestHost _host;
 		protected TestHost Host { get { return _host; } }
 
-		private readonly Uri _baseUrl = new Uri("http://localhost:8081/");
+		private readonly Uri _baseUrl = new Uri("http://localhost:8082/");
 		public Uri BaseUrl { get { return _baseUrl; } }
 
 		protected void StartHost()

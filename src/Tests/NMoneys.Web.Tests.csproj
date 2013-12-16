@@ -86,6 +86,7 @@
     <Compile Include="Api\Support\SingleHostPerTest.cs" />
     <Compile Include="Api\Support\TesterBase.cs" />
     <Compile Include="Api\Support\TestHost.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\HttpsEnforcerTester.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\RequestThrottlerTester.cs" />
     <Compile Include="Api\v1\Resources\CurrenciesTester.cs" />
     <Compile Include="Api\v1\Resources\RatesAndLimitsTester.cs" />

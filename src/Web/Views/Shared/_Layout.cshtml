@@ -71,4 +71,12 @@
 			ga('send', 'pageview');
 		</script>
 	}
+	else
+	{
+		<script>
+			var ga = function () {
+				console.log(arguments);
+			};
+		</script>
+	}
 }

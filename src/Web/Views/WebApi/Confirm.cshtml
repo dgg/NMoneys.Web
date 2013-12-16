@@ -11,7 +11,7 @@
 		<div class="alert alert-info">
 			<h2>Your key has been confirmed.</h2>
 		</div> 
-		<h3>@Model.ApiKey</h3>
+		<h3 id="apiKeyConfirmed">@Model.ApiKey</h3>
 	 <br/>
 		<div class="api-steps span3">
 			<ul>
@@ -25,7 +25,7 @@
 	else
 	{
 		<div class="alert alert-error confirmation-errors">
-			<h2>Your API key could not be confirmed.</h2>
+			<h2 id="apiKeyNotConfirmed">Your API key could not be confirmed.</h2>
 			@Html.ValidationSummary()
 		</div>
 	}

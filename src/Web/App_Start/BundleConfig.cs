@@ -8,7 +8,7 @@ namespace NMoneys.Web.App_Start
 		public static void RegisterBundles(BundleCollection bundles)
 		{
 			bundles.UseCdn = true;
-			BundleTable.EnableOptimizations = true;
+			//BundleTable.EnableOptimizations = true;
 
 			jQuery(bundles);
 
@@ -29,7 +29,7 @@ namespace NMoneys.Web.App_Start
 
 		private static void webApi(BundleCollection bundles)
 		{
-			var parsley = new ScriptBundle("~/bundles/parsley", "//cdnjs.cloudflare.com/ajax/libs/parsley.js/1.1.16/parsley.min.js")
+			var parsley = new ScriptBundle("~/bundles/parsley", "//cdnjs.cloudflare.com/ajax/libs/parsley.js/1.2.2/parsley.min.js")
 				.Include("~/Scripts/parsley.min.js");
 			parsley.CdnFallbackExpression = "window.parsley";
 			bundles.Add(parsley);

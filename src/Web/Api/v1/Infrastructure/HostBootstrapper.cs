@@ -22,6 +22,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			registerTrackingDisposables<ApiAuthenticator, IApiAuthenticator>(container);
 			registerTrackingDisposables<RequestThrottler, IRequestThrottler>(container);
 			registerTrackingDisposables<RequestRater, IRequestRater>(container);
+			registerTrackingDisposables<HttpsEnforcer, IHttpsEnforcer>(container);
 			
 			registerTrackingDisposables<KeyVerifier, IKeyVerifier>(container);
 			registerTrackingDisposables<AppSettings, IResourceManager>(container);
@@ -46,9 +47,10 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 		{
 			requestFilters.Add(ApiAuthenticator.Handle);
 			requestFilters.Add(RequestThrottler.Handle);
-
+			requestFilters.Add(HttpsEnforcer.Handle);
+			
 			responseFilters.Add(RequestRater.Handle);
-
+			
 			return this;
 		}
 

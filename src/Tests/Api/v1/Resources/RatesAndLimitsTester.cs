@@ -17,12 +17,11 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void LimitHeader_AnyNumberOfRequests_AsPerThrottlingConfiguration()
 		{
-			this.DisableAuthentication();
-			this.FullThrottle();
 			this.SetupThrottling(3, 10.Seconds());
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+			this.DisableEnforcer().DisableAuthentication().FullThrottle();
 
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Have.LimitHeader(Is.EqualTo("3")));
@@ -34,14 +33,12 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void RemainingHeader_TotalMinusRepositoryCount()
 		{
-			this.DisableAuthentication();
-			this.FullThrottle();
-
 			var two = new RequestCount(TimeSpan.Zero).Increase();
 			this.SetupThrottling(3, 10.Seconds(), two);
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+			this.DisableEnforcer().DisableAuthentication().FullThrottle();
 
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Have.RemainingHeader(Is.EqualTo("1")));
@@ -50,13 +47,12 @@ namespace Tests.Api.v1.Resources
 		[Test]
 		public void ResetHeader_LessTimeOrEqualThanThrottlingPeriod()
 		{
-			this.DisableAuthentication();
-			this.FullThrottle();
 			var sixSecondsLeft = new RequestCount(5.Seconds());
 			this.SetupThrottling(3, 10.Seconds(), sixSecondsLeft);
 
 			var client = new HttpClient(BaseUrl.ToString());
 			client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue);
+			this.DisableEnforcer().DisableAuthentication().FullThrottle();
 
 			HttpResponse response = this.Get(client);
 			Assert.That(response, Must.Have.ResetHeader(

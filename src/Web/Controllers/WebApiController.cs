@@ -7,6 +7,7 @@ using NMoneys.Web.Models;
 
 namespace NMoneys.Web.Controllers
 {
+	[ConfigurableRequireHttps]
 	public class WebApiController : Controller
 	{
 		private readonly IEmailSender _sender;

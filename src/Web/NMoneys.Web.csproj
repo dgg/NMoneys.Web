@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -151,7 +151,9 @@
     <Compile Include="Api\v1\Datatypes\Hypermedia\Link.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\ApiAuthenticator.cs" />
     <Compile Include="Api\v1\Infrastructure\ApiKey.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\HttpsEnforcer.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\IApiAuthenticator.cs" />
+    <Compile Include="Api\v1\Infrastructure\Filters\IHttpsEnforcer.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\IRequestRater.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\IRequestThrottler.cs" />
     <Compile Include="Api\v1\Infrastructure\IRequestCountRepository.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Controllers\Infrastructure\ApiKey.cs" />
     <Compile Include="Controllers\Infrastructure\ApiKeyAttribute.cs" />
     <Compile Include="Controllers\Infrastructure\ApiKeyRepository.cs" />
+    <Compile Include="Controllers\Infrastructure\ConfigurableRequireHttpsAttribute.cs" />
     <Compile Include="Controllers\Infrastructure\ConfirmationResponse.cs" />
     <Compile Include="Controllers\Infrastructure\ConfirmationRequest.cs" />
     <Compile Include="Controllers\Infrastructure\EmailSender.cs" />
@@ -316,7 +319,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>50311</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:59399/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

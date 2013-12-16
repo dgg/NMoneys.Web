@@ -44,8 +44,10 @@ namespace Tests.Api.v1.Resources
 			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
 			Replacing(verifier);
 
-			HttpResponse response = this.Get(client =>
-				client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue));
+			HttpResponse response = this
+				.DisableEnforcer()
+				.Get(client =>
+					client.Request.AddExtraHeader(ApiKey.ParameterName, ApiKey.EmptyParameterValue));
 
 			Assert.That(response, Must.Be.Ok());
 		}
@@ -56,8 +58,10 @@ namespace Tests.Api.v1.Resources
 			var verifier = Substitute.For<IKeyVerifier>();
 			verifier.Verify(Arg.Any<ApiKey>()).Returns(true);
 			Replacing(verifier);
-
-			var response = this.Get(new NameValueCollection { { ApiKey.ParameterName, ApiKey.EmptyParameterValue } });
+			
+			var response = this
+				.DisableEnforcer()
+				.Get(new NameValueCollection { { ApiKey.ParameterName, ApiKey.EmptyParameterValue } });
 
 			Assert.That(response, Must.Be.Ok());
 		}
