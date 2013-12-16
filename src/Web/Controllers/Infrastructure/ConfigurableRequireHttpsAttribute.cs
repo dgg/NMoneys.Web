@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
+using System.Web;
 using System.Web.Mvc;
 
 namespace NMoneys.Web.Controllers.Infrastructure
@@ -23,6 +24,20 @@ namespace NMoneys.Web.Controllers.Infrastructure
 
 				filterContext.Result = new RedirectResult(builder.Uri.ToString());
 			}
+		}
+
+		public override void OnAuthorization(AuthorizationContext filterContext)
+		{
+			HttpRequestBase request = filterContext.HttpContext.Request;
+			if (!request.IsSecureConnection && !originatingProtocolIsHttps(request))
+			{
+				HandleNonHttpsRequest(filterContext);
+			}
+		}
+
+		private static bool originatingProtocolIsHttps(HttpRequestBase request)
+		{
+			return StringComparer.OrdinalIgnoreCase.Equals(request.Headers["X-Forwarded-Proto"], Uri.UriSchemeHttps);
 		}
 	}
 }
