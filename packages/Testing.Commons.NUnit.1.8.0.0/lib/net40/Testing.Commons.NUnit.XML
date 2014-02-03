@@ -1042,7 +1042,7 @@
             </summary>
             <param name="subject"> Instance of the type not raising the event.</param>
         </member>
-        <member name="M:Testing.Commons.NUnit.Constraints.NoPropertyChangedConstraint`1.Matches(NUnit.Framework.Constraints.ActualValueDelegate)">
+        <member name="M:Testing.Commons.NUnit.Constraints.NoPropertyChangedConstraint`1.Matches``1(NUnit.Framework.Constraints.ActualValueDelegate{``0})">
             <summary>
             Test whether the constraint is satisfied by an
             ActualValueDelegate that returns the value to be tested.
@@ -1070,7 +1070,7 @@
             </summary>
             <param name="subject"> Instance of the type not raising the event.</param>
         </member>
-        <member name="M:Testing.Commons.NUnit.Constraints.NoPropertyChangingConstraint`1.Matches(NUnit.Framework.Constraints.ActualValueDelegate)">
+        <member name="M:Testing.Commons.NUnit.Constraints.NoPropertyChangingConstraint`1.Matches``1(NUnit.Framework.Constraints.ActualValueDelegate{``0})">
             <summary>
             Test whether the constraint is satisfied by an
             ActualValueDelegate that returns the value to be tested.
@@ -1150,7 +1150,7 @@
         </member>
         <member name="P:Testing.Commons.NUnit.Constraints.RaisingConstraint`2.Matched">
             <summary>
-            Return value of <see cref="M:NUnit.Framework.Constraints.Constraint.Matches(NUnit.Framework.Constraints.ActualValueDelegate)"/>.
+            Return value of <see cref="!:Constraint.Matches(ActualValueDelegate)"/>.
             </summary>
         </member>
         <member name="P:Testing.Commons.NUnit.Constraints.RaisingConstraint`2.EventName">
@@ -1172,7 +1172,7 @@
             <param name="subject"> Instance of the event raising type.</param>
             <param name="eventArgsConstraint">Constraint to be applied to the event arg property.</param>
         </member>
-        <member name="M:Testing.Commons.NUnit.Constraints.PropertyChangedConstraint`1.Matches(NUnit.Framework.Constraints.ActualValueDelegate)">
+        <member name="M:Testing.Commons.NUnit.Constraints.PropertyChangedConstraint`1.Matches``1(NUnit.Framework.Constraints.ActualValueDelegate{``0})">
             <summary>
             Test whether the constraint is satisfied by an
             ActualValueDelegate that returns the value to be tested.
@@ -1208,7 +1208,7 @@
             <param name="subject"> Instance of the event raising type.</param>
             <param name="eventArgsConstraint">Constraint to be applied to the event arg property.</param>
         </member>
-        <member name="M:Testing.Commons.NUnit.Constraints.PropertyChangingConstraint`1.Matches(NUnit.Framework.Constraints.ActualValueDelegate)">
+        <member name="M:Testing.Commons.NUnit.Constraints.PropertyChangingConstraint`1.Matches``1(NUnit.Framework.Constraints.ActualValueDelegate{``0})">
             <summary>
             Test whether the constraint is satisfied by an
             ActualValueDelegate that returns the value to be tested.

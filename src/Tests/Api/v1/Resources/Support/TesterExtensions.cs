@@ -2,42 +2,40 @@
 using System.Collections.Specialized;
 using System.Linq;
 using EasyHttp.Http;
-using MongoDB.Bson;
 using NMoneys;
 using NMoneys.Web.Api.v1.Infrastructure;
 using NMoneys.Web.Api.v1.Infrastructure.Filters;
 using NSubstitute;
 using ServiceStack.Configuration;
 using ServiceStack.ServiceClient.Web;
-using Tests.Api.Support;
 using Currency = NMoneys.Web.Api.v1.Messages.Currency;
 
 namespace Tests.Api.v1.Resources.Support
 {
 	internal static class TesterExtensions
 	{
-		public static TesterBase DisableEnforcer(this TesterBase tester)
+		public static Testing.Commons.ServiceStack.v3.HostTesterBase DisableEnforcer(this Testing.Commons.ServiceStack.v3.HostTesterBase tester)
 		{
 			var enforcer = Substitute.For<IHttpsEnforcer>();
 			tester.Replacing(enforcer);
 			return tester;
 		}
 
-		public static TesterBase DisableAuthentication(this TesterBase tester)
+		public static Testing.Commons.ServiceStack.v3.HostTesterBase DisableAuthentication(this Testing.Commons.ServiceStack.v3.HostTesterBase tester)
 		{
 			var authenticator = Substitute.For<IApiAuthenticator>();
 			tester.Replacing(authenticator);
 			return tester;
 		}
 
-		public static TesterBase FullThrottle(this TesterBase tester)
+		public static Testing.Commons.ServiceStack.v3.HostTesterBase FullThrottle(this Testing.Commons.ServiceStack.v3.HostTesterBase tester)
 		{
 			var throttler = Substitute.For<IRequestThrottler>();
 			tester.Replacing(throttler);
 			return tester;
 		}
 
-		public static void Throttle(this TesterBase tester, ushort numberOfRequests, TimeSpan period)
+		public static void Throttle(this Testing.Commons.ServiceStack.v3.HostTesterBase tester, ushort numberOfRequests, TimeSpan period)
 		{
 			var configuration = new ThrottlingConfiguration
 			{
@@ -51,7 +49,7 @@ namespace Tests.Api.v1.Resources.Support
 			tester.Replacing(manager);
 		}
 
-		public static IRequestCountRepository SetupThrottling(this TesterBase tester, ushort numberOfRequests, TimeSpan period, RequestCount count = null)
+		public static IRequestCountRepository SetupThrottling(this Testing.Commons.ServiceStack.v3.HostTesterBase tester, ushort numberOfRequests, TimeSpan period, RequestCount count = null)
 		{
 			var configuration = new ThrottlingConfiguration
 			{
@@ -76,13 +74,13 @@ namespace Tests.Api.v1.Resources.Support
 		internal static readonly string AServiceUrl = new Currency { IsoCode = CurrencyIsoCode.EUR }
 				.ToUrl("GET");
 
-		public static HttpResponse Get(this TesterBase tester, HttpClient client)
+		public static HttpResponse Get(this Testing.Commons.ServiceStack.v3.HostTesterBase tester, HttpClient client)
 		{
 			HttpResponse response = client.Get(AServiceUrl);
 			return response;
 		}
 
-		public static HttpResponse Get(this TesterBase tester, Action<HttpClient> setup = null)
+		public static HttpResponse Get(this Testing.Commons.ServiceStack.v3.HostTesterBase tester, Action<HttpClient> setup = null)
 		{
 			var client = new HttpClient(tester.BaseUrl.ToString());
 			if (setup != null) setup(client);
@@ -90,7 +88,7 @@ namespace Tests.Api.v1.Resources.Support
 			return response;
 		}
 
-		public static HttpResponse Get(this TesterBase tester, NameValueCollection query)
+		public static HttpResponse Get(this Testing.Commons.ServiceStack.v3.HostTesterBase tester, NameValueCollection query)
 		{
 			var client = new HttpClient(tester.BaseUrl.ToString());
 			

@@ -6,13 +6,12 @@ using NMoneys.Web.Api.v1.Infrastructure;
 using NUnit.Framework;
 using Testing.Commons;
 using Testing.Commons.Time;
-using Tests.Api.Support;
 using Tests.Api.v1.Resources.Support;
 
 namespace Tests.Api.v1.Resources
 {
 	[TestFixture, Category("Integration")]
-	public class RatesAndLimitsTester : SingleHostPerFixture
+	public class RatesAndLimitsTester : PerFixture
 	{
 		[Test]
 		public void LimitHeader_AnyNumberOfRequests_AsPerThrottlingConfiguration()

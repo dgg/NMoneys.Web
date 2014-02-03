@@ -71,7 +71,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 			return config;
 		}
 
-		public EndpointHostConfig BootstrapAll<T>(T host) where T : IAppHost, IDisposable
+		public EndpointHostConfig BootstrapAll<T>(T host) where T : IAppHost
 		{
 			return Bootstrap(host.GetContainer())
 				.Bootstrap(host.RequestFilters, host.ResponseFilters)

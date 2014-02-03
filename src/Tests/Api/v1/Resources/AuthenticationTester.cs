@@ -5,13 +5,12 @@ using NMoneys.Web.Api.v1.Infrastructure;
 using NSubstitute;
 using NUnit.Framework;
 using Testing.Commons;
-using Tests.Api.Support;
 using Tests.Api.v1.Resources.Support;
 
 namespace Tests.Api.v1.Resources
 {
 	[TestFixture, Category("Integration")]
-	public class AuthenticationTester : SingleHostPerFixture
+	public class AuthenticationTester : PerFixture
 	{
 		[Test]
 		public void MissingApiKey_NotAuthorized()

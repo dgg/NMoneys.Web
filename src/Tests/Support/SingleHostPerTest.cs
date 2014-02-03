@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace Tests.Api.Support
+namespace Testing.Commons.ServiceStack.v3
 {
-	public abstract class SingleHostPerTest: TesterBase
+	public abstract class SingleHostPerTest : HostTesterBase
 	{
 		[SetUp]
 		public void SetUp()

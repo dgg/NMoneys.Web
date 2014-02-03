@@ -6,7 +6,6 @@ using NMoneys.Web.Api.v1.Infrastructure;
 using NUnit.Framework;
 using ServiceStack.ServiceClient.Web;
 using Testing.Commons;
-using Tests.Api.Support;
 using Tests.Api.v1.Resources.Support;
 using CurrencyMsg = NMoneys.Web.Api.v1.Messages.Currency;
 using FormatMsg = NMoneys.Web.Api.v1.Messages.Format;
@@ -14,7 +13,7 @@ using FormatMsg = NMoneys.Web.Api.v1.Messages.Format;
 namespace Tests.Api.v1.Resources
 {
 	[TestFixture]
-	public class CurrenciesTester : SingleHostPerFixture
+	public class CurrenciesTester : PerFixture
 	{
 		private static string any_key { get { return ObjectId.Empty.ToString(); } }
 

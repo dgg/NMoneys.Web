@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-namespace Tests.Api.Support
+namespace Testing.Commons.ServiceStack.v3
 {
-	public abstract class SingleHostPerFixture : TesterBase
+	public abstract class SingleHostPerFixture : HostTesterBase
 	{
 		[TestFixtureSetUp]
 		public void SetUp()
