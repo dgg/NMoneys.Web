@@ -48,7 +48,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 
 		private static bool missing(string apiKey)
 		{
-			return string.IsNullOrEmpty(apiKey);
+			return string.IsNullOrWhiteSpace(apiKey);
 		}
 	}
 }

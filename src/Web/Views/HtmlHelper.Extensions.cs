@@ -88,7 +88,7 @@ namespace NMoneys.Web.Views
 		
 			var span = new HtmlTag("span")
 				.AddClass("show-info")
-				.AddClassIf(!string.IsNullOrEmpty(cssClass), cssClass)
+				.AddClassIf(!string.IsNullOrWhiteSpace(cssClass), cssClass)
 				.Attr("title", title)
 				.Attr("data-placement", placement)
 				.Encoded(true)
@@ -100,7 +100,7 @@ namespace NMoneys.Web.Views
 		private static string description<T>(this ViewDataDictionary<T> model, Expression<Func<T, object>> lambda)
 		{
 			string description = ModelMetadata.FromLambdaExpression(lambda, model).Description;
-			if (string.IsNullOrEmpty(description)) description = model.name(lambda);
+			if (string.IsNullOrWhiteSpace(description)) description = model.name(lambda);
 			return description;
 		}
 

@@ -14,26 +14,26 @@ namespace NMoneys.Web.Controllers.Infrastructure
 
 			var jsonClient = new JsonServiceClient("https://mandrillapp.com/api/1.0/");
 
-			/*jsonClient.PostAsync<dynamic>("messages/send-template", 
+			jsonClient.PostAsync<ConfirmationResponse[]>("messages/send-template", 
 				new ConfirmationRequest(emailApiKey, "api-key-confirmation", confirmer, toBeConfirmed, confirmationUrl),
 					success =>
 					{
-						if (!rejected(success) && hasId(success))
+						if (!isRejected(success) && hasId(success))
 						{
 							Debug.Write(success[0]._id);
 						}
 					},
-					(error, ex) => Debug.Fail(error.message));*/
+					(error, ex) => Debug.Fail(error[0].Failure));
 		 }
 
-		private bool rejected(dynamic response)
+		private bool isRejected(ConfirmationResponse[] response)
 		{
-			return !string.IsNullOrEmpty(response[0].reject_reason);
+			return response[0].IsRejected;
 		}
 
-		private bool hasId(dynamic response)
+		private bool hasId(ConfirmationResponse[] response)
 		{
-			return !string.IsNullOrEmpty(response[0]._id);
+			return response[0].HasId;
 		}
 	}
 }
