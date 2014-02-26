@@ -220,11 +220,13 @@
     <Compile Include="Controllers\Infrastructure\EmailSender.cs" />
     <Compile Include="Controllers\Infrastructure\IApiKeyRepository.cs" />
     <Compile Include="Controllers\Infrastructure\IEmailSender.cs" />
+    <Compile Include="Controllers\Infrastructure\NonStandardSecurePortRedirector.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Controllers\SamplesController.cs" />
     <Compile Include="Controllers\CurrenciesController.cs" />
     <Compile Include="Infrastructure\Data\ApiKeyDocument.cs" />
     <Compile Include="Infrastructure\Data\MongoUrlCreator.cs" />
+    <Compile Include="Infrastructure\Web\SecureRequestSpecification.cs" />
     <Compile Include="Models\ApiConfirmation.cs" />
     <Compile Include="Models\ApiRequest.cs" />
     <Compile Include="Models\GroupedByInitialInBatches.cs" />

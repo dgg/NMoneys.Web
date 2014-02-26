@@ -10,7 +10,7 @@ namespace Testing.Commons.ServiceStack.v3
 		private TestHost _host;
 		protected TestHost Host { get { return _host; } }
 
-		protected virtual ushort TestPort { get { return 49160; } }
+		protected virtual ushort TestPort { get { return 49161; } }
 		protected abstract string ServiceName { get; }
 		protected abstract IEnumerable<Assembly> AssembliesWithServices { get; }
 		protected abstract void Boootstrap(IAppHost arg);
