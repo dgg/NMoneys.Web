@@ -1331,6 +1331,44 @@
             <exception cref="T:NMoneys.DifferentCurrencyException">If <paramref name="money"/> does not have the same <see cref="P:NMoneys.Money.CurrencyCode"/> as this instance.</exception>
             <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than  <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
         </member>
+        <member name="M:NMoneys.Money.Add(NMoneys.Money,NMoneys.Money)">
+            <summary>
+            Adds two specified <see cref="T:NMoneys.Money"/> values.
+            </summary>
+            <remarks>Both instances must have the same <see cref="P:NMoneys.Money.CurrencyCode"/> in order to be added, otherwise an exception will be thrown.</remarks>
+            <param name="first">The first value to add.</param>
+            <param name="second">The second value to add.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the sum of <paramref name="first"/> and <paramref name="second"/> amounts
+            and the same <see cref="P:NMoneys.Money.CurrencyCode"/> as any of the arguments.</returns>
+            <exception cref="T:NMoneys.DifferentCurrencyException">If <paramref name="first"/> does not have the same <see cref="P:NMoneys.Money.CurrencyCode"/>
+            as <paramref name="second"/>.</exception>
+            <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
+            <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
+        </member>
+        <member name="M:NMoneys.Money.Total(NMoneys.Money[])">
+            <summary>
+            Creates an instance of <see cref="T:NMoneys.Money"/> witht the total value of an array.
+            </summary>
+            <remarks>All moneys have to have the same currency, otherwise and exception will be thrown.</remarks>
+            <param name="moneys">A not null and not empty array of moneys.</param>
+            <returns>An <see cref="T:NMoneys.Money"/> instance which <see cref="P:NMoneys.Money.Amount"/> is the sum of all amounts of the moneys in the array,
+            and <see cref="T:NMoneys.Currency"/> the same as all the moneys in the array.</returns>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="moneys"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">If <paramref name="moneys"/> is empty.</exception>
+            <exception cref="T:NMoneys.DifferentCurrencyException">If any of the currencies of <paramref name="moneys"/> differ.</exception>
+        </member>
+        <member name="M:NMoneys.Money.Total(System.Collections.Generic.IEnumerable{NMoneys.Money})">
+            <summary>
+            Creates an instance of <see cref="T:NMoneys.Money"/> witht the total value of an collection of moneys.
+            </summary>
+            <remarks></remarks>
+            <param name="moneys">A not null and not empty collection of moneys.</param>
+            <returns>An <see cref="T:NMoneys.Money"/> instance which <see cref="P:NMoneys.Money.Amount"/> is the sum of all amounts of the moneys in the collection,
+            and <see cref="T:NMoneys.Currency"/> the same as all the moneys in the collection.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="moneys"/> is null.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="moneys"/> is empty.</exception>
+            <exception cref="T:NMoneys.DifferentCurrencyException">If any of the currencies of <paramref name="moneys"/> differ.</exception>
+        </member>
         <member name="M:NMoneys.Money.Minus(NMoneys.Money)">
             <summary>
             Substracts one specified <see cref="T:NMoneys.Money"/> from another.
@@ -1341,6 +1379,20 @@
             and the same <see cref="P:NMoneys.Money.CurrencyCode"/> as this instance.</returns>
             <exception cref="T:NMoneys.DifferentCurrencyException">If <paramref name="money"/> does not have the same <see cref="P:NMoneys.Money.CurrencyCode"/> as this instance.</exception>
             <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
+        </member>
+        <member name="M:NMoneys.Money.Subtract(NMoneys.Money,NMoneys.Money)">
+            <summary>
+            Substracts one specified <see cref="T:NMoneys.Money"/> from another.
+            </summary>
+            <remarks>Both instances must have the same <see cref="P:NMoneys.Money.CurrencyCode"/> in order to be substracted, otherwise an exception will be thrown.</remarks>
+            <param name="first">The minuend.</param>
+            <param name="second">The subtrahend.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the result of substracting <paramref name="second"/> from <paramref name="first"/> amounts
+            and the same <see cref="P:NMoneys.Money.CurrencyCode"/> as any of the arguments.</returns>
+            <exception cref="T:NMoneys.DifferentCurrencyException">If <paramref name="first"/> does not have the same <see cref="P:NMoneys.Money.CurrencyCode"/>
+            as <paramref name="second"/>.</exception>
+            <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
+            <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
         </member>
         <member name="M:NMoneys.Money.Abs">
             <summary>
@@ -1493,6 +1545,30 @@
             <returns>a <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the result of applying <paramref name="unaryOperation"/> to the previous <see cref="P:NMoneys.Money.Amount"/>.</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="unaryOperation"/> is null.</exception>
         </member>
+        <member name="M:NMoneys.Money.Times(System.Int64)">
+            <summary>
+            Multiplies the specified <see cref="T:NMoneys.Money"/> by an integral factor.
+            </summary>
+            <remarks>Be careful when using very large factors (in the order of <see cref="F:System.UInt64.MaxValue"/>)
+            since they cannot be converted to <see cref="T:System.Int64"/>.</remarks>
+            <param name="factor">The factor to multiply by.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the product of <see cref="P:NMoneys.Money.Amount"/> and <paramref name="factor"/>.</returns>
+            <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
+            <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
+        </member>
+        <member name="M:NMoneys.Money.Multiply(NMoneys.Money,System.Int64)">
+            <summary>
+            Multiplies the specified <see cref="T:NMoneys.Money"/> by an integral factor.
+            </summary>
+            <remarks>Be careful when using very large factors (in the order of <see cref="F:System.UInt64.MaxValue"/>)
+            since they cannot be converted to <see cref="T:System.Int64"/>.</remarks>
+            <param name="money">The instance which amount will be multiplied.</param>
+            <param name="factor">The factor to multiply by.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the product of <see cref="P:NMoneys.Money.Amount"/> and <paramref name="factor"/>
+            and the same <see cref="P:NMoneys.Money.CurrencyCode"/> as <paramref name="money"/>.</returns>
+            <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
+            <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
+        </member>
         <member name="M:NMoneys.Money.Allocate(System.Int32)">
             <summary>
             Allocates the sum of money fully and 'fairly', delegating the distribution to a default allocator
@@ -1572,20 +1648,6 @@
             <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
             <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
         </member>
-        <member name="M:NMoneys.Money.Add(NMoneys.Money,NMoneys.Money)">
-            <summary>
-            Adds two specified <see cref="T:NMoneys.Money"/> values.
-            </summary>
-            <remarks>Both instances must have the same <see cref="P:NMoneys.Money.CurrencyCode"/> in order to be added, otherwise an exception will be thrown.</remarks>
-            <param name="first">The first value to add.</param>
-            <param name="second">The second value to add.</param>
-            <returns>A <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the sum of <paramref name="first"/> and <paramref name="second"/> amounts
-            and the same <see cref="P:NMoneys.Money.CurrencyCode"/> as any of the arguments.</returns>
-            <exception cref="T:NMoneys.DifferentCurrencyException">If <paramref name="first"/> does not have the same <see cref="P:NMoneys.Money.CurrencyCode"/>
-            as <paramref name="second"/>.</exception>
-            <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
-            <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
-        </member>
         <member name="M:NMoneys.Money.op_Subtraction(NMoneys.Money,NMoneys.Money)">
             <summary>
             Substracts one specified <see cref="T:NMoneys.Money"/> from another.
@@ -1600,43 +1662,18 @@
             <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
             <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
         </member>
-        <member name="M:NMoneys.Money.Subtract(NMoneys.Money,NMoneys.Money)">
+        <member name="M:NMoneys.Money.op_Multiply(NMoneys.Money,System.Int64)">
             <summary>
-            Substracts one specified <see cref="T:NMoneys.Money"/> from another.
+            Multiplies the specified <see cref="T:NMoneys.Money"/> by an integral factor.
             </summary>
-            <remarks>Both instances must have the same <see cref="P:NMoneys.Money.CurrencyCode"/> in order to be substracted, otherwise an exception will be thrown.</remarks>
-            <param name="first">The minuend.</param>
-            <param name="second">The subtrahend.</param>
-            <returns>A <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the result of substracting <paramref name="second"/> from <paramref name="first"/> amounts
-            and the same <see cref="P:NMoneys.Money.CurrencyCode"/> as any of the arguments.</returns>
-            <exception cref="T:NMoneys.DifferentCurrencyException">If <paramref name="first"/> does not have the same <see cref="P:NMoneys.Money.CurrencyCode"/>
-            as <paramref name="second"/>.</exception>
+            <remarks>Be careful when using very large factors (in the order of <see cref="F:System.UInt64.MaxValue"/>)
+            since they cannot be converted to <see cref="T:System.Int64"/>.</remarks>
+            <param name="money">The instance which amount will be multiplied.</param>
+            <param name="factor">The factor to multiply by.</param>
+            <returns>A <see cref="T:NMoneys.Money"/> with <see cref="P:NMoneys.Money.Amount"/> as the product of <see cref="P:NMoneys.Money.Amount"/> and <paramref name="factor"/>
+            and the same <see cref="P:NMoneys.Money.CurrencyCode"/> as <paramref name="money"/>.</returns>
             <exception cref="T:System.OverflowException">The <see cref="P:NMoneys.Money.Amount"/> of the result is less than
             <see cref="F:System.Decimal.MinValue"/> or greater than <see cref="F:System.Decimal.MaxValue"/>.</exception>
-        </member>
-        <member name="M:NMoneys.Money.Total(NMoneys.Money[])">
-            <summary>
-            Creates an instance of <see cref="T:NMoneys.Money"/> witht the total value of an array.
-            </summary>
-            <remarks>All moneys have to have the same currency, otherwise and exception will be thrown.</remarks>
-            <param name="moneys">A not null and not empty array of moneys.</param>
-            <returns>An <see cref="T:NMoneys.Money"/> instance which <see cref="P:NMoneys.Money.Amount"/> is the sum of all amounts of the moneys in the array,
-            and <see cref="T:NMoneys.Currency"/> the same as all the moneys in the array.</returns>
-            <exception cref="T:System.ArgumentNullException">If <paramref name="moneys"/> is null.</exception>
-            <exception cref="T:System.ArgumentException">If <paramref name="moneys"/> is empty.</exception>
-            <exception cref="T:NMoneys.DifferentCurrencyException">If any of the currencies of <paramref name="moneys"/> differ.</exception>
-        </member>
-        <member name="M:NMoneys.Money.Total(System.Collections.Generic.IEnumerable{NMoneys.Money})">
-            <summary>
-            Creates an instance of <see cref="T:NMoneys.Money"/> witht the total value of an collection of moneys.
-            </summary>
-            <remarks></remarks>
-            <param name="moneys">A not null and not empty collection of moneys.</param>
-            <returns>An <see cref="T:NMoneys.Money"/> instance which <see cref="P:NMoneys.Money.Amount"/> is the sum of all amounts of the moneys in the collection,
-            and <see cref="T:NMoneys.Currency"/> the same as all the moneys in the collection.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="moneys"/> is null.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="moneys"/> is empty.</exception>
-            <exception cref="T:NMoneys.DifferentCurrencyException">If any of the currencies of <paramref name="moneys"/> differ.</exception>
         </member>
         <member name="M:NMoneys.Money.Parse(System.String,NMoneys.Currency)">
             <summary>
@@ -2443,7 +2480,7 @@
         </member>
         <member name="F:NMoneys.CurrencyIsoCode.CLF">
             <summary>
-            Unidades de fomento
+            Unidad de Fomento
             </summary>
         </member>
         <member name="F:NMoneys.CurrencyIsoCode.CLP">

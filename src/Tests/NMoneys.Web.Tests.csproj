@@ -51,8 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\mongocsharpdriver.1.8.2\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
-    <Reference Include="NMoneys">
-      <HintPath>..\..\packages\NMoneys.3.2.0.0\lib\Net20-client\NMoneys.dll</HintPath>
+    <Reference Include="NMoneys, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NMoneys.3.4.0.0\lib\Net20-client\NMoneys.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute, Version=1.7.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

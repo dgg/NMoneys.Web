@@ -65,8 +65,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NMoneys">
-      <HintPath>..\..\packages\NMoneys.3.2.0.0\lib\Net20-client\NMoneys.dll</HintPath>
+    <Reference Include="NMoneys, Version=3.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NMoneys.3.4.0.0\lib\Net20-client\NMoneys.dll</HintPath>
     </Reference>
     <Reference Include="NMoneys.Exchange">
       <HintPath>..\..\packages\NMoneys.Exchange.2.1.1.0\lib\Net20-client\NMoneys.Exchange.dll</HintPath>
