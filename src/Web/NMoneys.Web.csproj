@@ -275,7 +275,7 @@
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery.highlight.js" />
     <Content Include="Scripts\jquery.quicksearch.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.7.1.js" />
     <Content Include="Scripts\parsley.min.js" />
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\_references.js" />
