@@ -12,7 +12,7 @@ The following is a section of resources related to ISO 4217 currencies
 Provides information about resources available through the API.
 OPTIONS /
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 < 200
 < Content-Type: application/json
 < X-Rate-Limit-Limit: number of requests allowed in period
@@ -41,7 +41,7 @@ Retry-After: number of seconds to wait before making a new request
 Provides information about current supported currencies.
 OPTIONS /currencies
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 < 200
 < Content-Type: application/json
 < X-Rate-Limit-Limit: number of requests allowed in period
@@ -76,7 +76,7 @@ Retry-After: number of seconds to wait before making a new request
 List current supported currencies.
 GET /currencies
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 < 200
 < Content-Type: application/json
 < X-Rate-Limit-Limit: number of requests allowed in period
@@ -102,7 +102,7 @@ Retry-After: number of seconds to wait before making a new request
 Provides information about a currency.
 OPTIONS /currencies/{isoCode}
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 < 200
 < Content-Type: application/json
 < X-Rate-Limit-Limit: number of requests allowed in period
@@ -148,7 +148,7 @@ Retry-After: number of seconds to wait before making a new request
 Get detailed information about a currency.
 GET /currencies/{isoCode}
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 < 200
 < Content-Type: application/json
 < X-Rate-Limit-Limit: number of requests allowed in period
@@ -175,7 +175,7 @@ Retry-After: number of seconds to wait before making a new request
 Provides information about formatting a monetary amount according to its currency.
 OPTIONS /currencies/{isoCode}/format/{amount}
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 < 200
 < Content-Type: application/json
 < X-Rate-Limit-Limit: number of requests allowed in period
@@ -216,7 +216,7 @@ Retry-After: number of seconds to wait before making a new request
 Allows formatting a monetary amount according to its currency.
 GET /currencies/{isoCode}/format/{amount}
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 < 200
 < Content-Type: application/json
 < X-Rate-Limit-Limit: number of requests allowed in period
@@ -241,7 +241,7 @@ Retry-After: number of seconds to wait before making a new request
 Provides information about formatting a monetary amount according to its currency.
 OPTIONS /currencies/{isoCode}/format
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 { "amount": "123.6" }
 < 200
 < Content-Type: application/json
@@ -283,7 +283,7 @@ Retry-After: number of seconds to wait before making a new request
 Allows formatting a monetary amount according to its currency.
 POST /currencies/{isoCode}/format
 > Accept: application/json
-> Api-Key: your API key
+> Api_Key: your API key
 { "amount": "123.6" }
 < 200
 < Content-Type: application/json
