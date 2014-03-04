@@ -16,7 +16,7 @@ namespace NMoneys.Web.Api.v1.Infrastructure
 
 		public bool IsLessThan(ushort maxNumberOfRequests)
 		{
-			return Count < maxNumberOfRequests;
+			return Count <= maxNumberOfRequests;
 		}
 
 		public ushort Remaining(ushort maxNumberOfRequests)

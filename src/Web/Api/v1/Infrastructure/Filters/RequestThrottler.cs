@@ -15,13 +15,9 @@ namespace NMoneys.Web.Api.v1.Infrastructure.Filters
 			if (!key.IsMissing && configuration.ThrottlingEnabled)
 			{
 				var repository = request.TryResolve<IRequestCountRepository>();
-				RequestCount count = repository.Get(key);
-				if (count == null)
-				{
-					count = new RequestCount(configuration.Period);
-					repository.Add(key, count);
-				}
-				else if (count.IsLessThan(configuration.NumberOfRequests))
+				RequestCount count = repository.Ensure(key, () => new RequestCount(configuration.Period));
+
+				if (count.IsLessThan(configuration.NumberOfRequests))
 				{
 					repository.Update(key, count.Increase());
 				}
@@ -39,4 +35,4 @@ namespace NMoneys.Web.Api.v1.Infrastructure.Filters
 			throttler.Throttle(request, response);
 		}
 	}
-} 
+}
