@@ -5,10 +5,6 @@ HOST: https://nmoneys.apphb.com/api/v1
 Welcome to NMoneys' API documentation. Here you will find what you can do with this API
 ---
 
---
-Currency Resources
-The following is a section of resources related to ISO 4217 currencies
---
 Provides information about resources available through the API.
 OPTIONS /
 > Accept: application/json
@@ -22,12 +18,12 @@ OPTIONS /
 	"_links": [
 		{
 			"rel": "_self",
-			"href":"/api/v1",
+			"href": "/api/v1",
 			"method": "OPTIONS"
 		},
 		{
 			"rel": "self",
-			"href":"/api/v1/currencies",
+			"href": "/api/v1/currencies",
 			"method": "GET"
 		}
 	]
@@ -37,6 +33,11 @@ OPTIONS /
 +++++
 < 429
 Retry-After: number of seconds to wait before making a new request
+
+--
+Currency Resources
+Resources related to ISO 4217 currencies.
+--
 
 Provides information about current supported currencies.
 OPTIONS /currencies
@@ -51,17 +52,17 @@ OPTIONS /currencies
 	"_links": [
 		{
 			"rel": "_self",
-			"href":"/v1/api/currencies",
+			"href": "/v1/api/currencies",
 			"method": "OPTIONS"
 		},
 		{
 			"rel": "self",
-			"href":"/v1/api/currencies",
+			"href": "/v1/api/currencies",
 			"method": "GET"
 		},
 		{
 			"rel": "currency",
-			"href":"/v1/api/currencies/EUR",
+			"href": "/v1/api/currencies/EUR",
 			"method": "GET"
 		},
 		...
@@ -87,7 +88,7 @@ GET /currencies
 		...,
 		{
 			"isoCode": "USD",
-			"numericCode":978,
+			"numericCode": 978,
 			"englishName": "Euro"
 		},
 		...
@@ -112,29 +113,29 @@ OPTIONS /currencies/{isoCode}
 	"_links": [
 		{
 			"rel": "_self",
-			"href":"/v1/api/currency/EUR",
+			"href": "/v1/api/currency/EUR",
 			"method": "OPTIONS"
 		},
 		{
 			"rel": "self",
-			"href":"/v1/api/currency/EUR",
+			"href": "/v1/api/currency/EUR",
 			"method": "GET"
 		},
 		{
 			"rel": "parent",
-			"href":"/v1/api/currencies",
+			"href": "/v1/api/currencies",
 			"method": "GET"
 		},
 		{
 			"rel": "format",
-			"href":"/v1/api/currencies/EUR/format/0",
+			"href": "/v1/api/currencies/EUR/format/0",
 			"method": "GET"
 		},
 		{
 			"rel": "parent",
-			"href":"/v1/api/currencies/EUR/format",
+			"href": "/v1/api/currencies/EUR/format",
 			"method": "POST"
-		},
+		}
 	]
 }
 +++++
@@ -156,12 +157,12 @@ GET /currencies/{isoCode}
 < X-Rate-Limit-Reset: number of seconds left in period
 {
 	"detail": {
-		"isoCode":"EUR"
-		"numericCode":978,
-		"englishName":"Euro",
-		"nativeName":"Euro",
-		"symbol":"€",
-		"isObsolete":false
+		"isoCode": "EUR",
+		"numericCode": 978,
+		"englishName": "Euro",
+		"nativeName": "Euro",
+		"symbol": "€",
+		"isObsolete": false
 	}
 }
 +++++
@@ -171,6 +172,11 @@ GET /currencies/{isoCode}
 Retry-After: number of seconds to wait before making a new request
 +++++
 < 404
+
+--
+Money Resources
+Resources related to monetary quantities.
+--
 
 Provides information about formatting a monetary amount according to its currency.
 OPTIONS /currencies/{isoCode}/format/{amount}
@@ -224,10 +230,10 @@ GET /currencies/{isoCode}/format/{amount}
 < X-Rate-Limit-Reset: number of seconds left in period
 {
 	"money": {
-		"amount":123,
-		"isoCode":"EUR"
-		"representation":"123,00 €",
-		"amountRepresentation":"123,00"
+		"amount": 123,
+		"isoCode": "EUR",
+		"representation": "123,00 €",
+		"amountRepresentation": "123,00"
 	}
 }
 +++++
@@ -257,17 +263,17 @@ OPTIONS /currencies/{isoCode}/format
 		},
 		{
 			"rel": "self",
-			"href":"/api/v1/currencies/EUR/format/0",
+			"href": "/api/v1/currencies/EUR/format/0",
 			"method": "GET"
 		},
 		{
 			"rel": "self",
-			"href":"/api/v1/currencies/EUR/format",
+			"href": "/api/v1/currencies/EUR/format",
 			"method": "POST"
 		},
 		{
 			"rel": "parent",
-			"href":"/api/v1/currencies/EUR",
+			"href": "/api/v1/currencies/EUR",
 			"method": "GET"
 		}
 	]
@@ -292,10 +298,10 @@ POST /currencies/{isoCode}/format
 < X-Rate-Limit-Reset: number of seconds left in period
 {
 	"money": {
-		"amount":123.6,
-		"isoCode":"EUR",
-		"representation":"123,60 €",
-		"amountRepresentation":"123,60"
+		"amount": 123.6,
+		"isoCode": "EUR",
+		"representation": "123,60 €",
+		"amountRepresentation": "123,60"
 	}
 }
 +++++
