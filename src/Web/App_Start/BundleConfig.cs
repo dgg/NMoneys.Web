@@ -79,7 +79,7 @@ namespace NMoneys.Web.App_Start
 
 		private static void jQuery(BundleCollection bundles)
 		{
-			var jquery = new ScriptBundle("~/bundles/jquery", "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js").Include("~/Scripts/jquery-{version}.js");
+			var jquery = new ScriptBundle("~/bundles/jquery", "//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js").Include("~/Scripts/jquery-{version}.js");
 			jquery.CdnFallbackExpression = "window.jQuery";
 			bundles.Add(jquery);
 		}

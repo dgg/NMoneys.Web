@@ -265,13 +265,13 @@
     <Content Include="Content\fonts\Flat-UI-Icons.woff" />
     <Content Include="Content\fonts\icomoon-session.json" />
     <None Include="Properties\PublishProfiles\web.pubxml" />
-    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\app.Currencies.js" />
     <Content Include="Scripts\app.Api.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\app.Samples.js" />
-    <Content Include="Scripts\jquery-2.0.3.js" />
-    <Content Include="Scripts\jquery-2.0.3.min.js" />
+    <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.0.js" />
+    <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery.highlight.js" />
     <Content Include="Scripts\jquery.quicksearch.js" />
     <Content Include="Scripts\modernizr-2.7.1.js" />
@@ -291,7 +291,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Currencies\Index.cshtml" />
     <Content Include="Views\Samples\Index.cshtml" />
@@ -307,6 +306,7 @@
     <Content Include="Views\Currencies\Detail.cshtml" />
     <Content Include="Views\WebApi\_features.cshtml" />
     <Content Include="Views\WebApi\_documentation.cshtml" />
+    <Content Include="Scripts\jquery-2.1.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
