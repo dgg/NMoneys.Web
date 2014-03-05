@@ -33,32 +33,17 @@ namespace Tests.Api.v1.Resources
 		}
 
 		[Test]
-		public void FormatCurrency_UndefinedIsoCode_NotFound()
-		{
-			var client = new HttpClient(BaseUrl.ToString());
-			this.DisableAuthentication().FullThrottle().DisableEnforcer();
-
-			string qs = string.Format("?{0}={1}", ApiKey.ParameterName, any_key);
-			string undefinedIsoCodeUrl = new FormatMsg { IsoCode = CurrencyIsoCode.EUR, Amount = 42 }
-				.ToUrl("PUT")
-				.Replace("EUR", "NotAnIsoCode");
-
-			HttpResponse response = client.Get(undefinedIsoCodeUrl + qs);
-			Assert.That(response, Must.Not.Be.Ok(HttpStatusCode.NotFound));
-		}
-
-		[Test]
 		public void AlternativeFormatCurrency_UndefinedIsoCode_NotFound()
 		{
 			var client = new HttpClient(BaseUrl.ToString());
 			this.DisableAuthentication().FullThrottle().DisableEnforcer();
 
 			string qs = string.Format("?{0}={1}", ApiKey.ParameterName, any_key);
-			string undefinedIsoCodeUrl = new FormatMsg { IsoCode = CurrencyIsoCode.EUR }
-				.ToUrl("PUT")
+			string undefinedIsoCodeUrl = new FormatMsg { IsoCode = CurrencyIsoCode.EUR, Amount = 42}
+				.ToUrl("GET")
 				.Replace("EUR", "NotAnIsoCode");
 
-			HttpResponse response = client.Put(undefinedIsoCodeUrl + qs, new { amount = 42 }, HttpContentTypes.ApplicationJson);
+			HttpResponse response = client.Get(undefinedIsoCodeUrl + qs, HttpContentTypes.ApplicationJson);
 			Assert.That(response, Must.Not.Be.Ok(HttpStatusCode.NotFound));
 		}
 	}

@@ -130,11 +130,6 @@ OPTIONS /currencies/{isoCode}
 			"rel": "format",
 			"href": "/v1/api/currencies/EUR/format/0",
 			"method": "GET"
-		},
-		{
-			"rel": "parent",
-			"href": "/v1/api/currencies/EUR/format",
-			"method": "POST"
 		}
 	]
 }
@@ -200,11 +195,6 @@ OPTIONS /currencies/{isoCode}/format/{amount}
 			"method": "GET"
 		},
 		{
-			"rel": "self",
-			"href":"/api/v1/currencies/EUR/format",
-			"method": "POST"
-		},
-		{
 			"rel": "parent",
 			"href":"/api/v1/currencies/EUR",
 			"method": "GET"
@@ -234,74 +224,6 @@ GET /currencies/{isoCode}/format/{amount}
 		"isoCode": "EUR",
 		"representation": "123,00 €",
 		"amountRepresentation": "123,00"
-	}
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
-+++++
-< 404
-
-Provides information about formatting a monetary amount according to its currency.
-OPTIONS /currencies/{isoCode}/format
-> Accept: application/json
-> Api_Key: your API key
-{ "amount": "123.6" }
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"_links": [
-		{
-			"rel": "_self",
-			"href":"/api/v1/currencies/EUR/format/0",
-			"method": "OPTIONS"
-		},
-		{
-			"rel": "self",
-			"href": "/api/v1/currencies/EUR/format/0",
-			"method": "GET"
-		},
-		{
-			"rel": "self",
-			"href": "/api/v1/currencies/EUR/format",
-			"method": "POST"
-		},
-		{
-			"rel": "parent",
-			"href": "/api/v1/currencies/EUR",
-			"method": "GET"
-		}
-	]
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
-+++++
-< 404
-
-Allows formatting a monetary amount according to its currency.
-POST /currencies/{isoCode}/format
-> Accept: application/json
-> Api_Key: your API key
-{ "amount": "123.6" }
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"money": {
-		"amount": 123.6,
-		"isoCode": "EUR",
-		"representation": "123,60 €",
-		"amountRepresentation": "123,60"
 	}
 }
 +++++

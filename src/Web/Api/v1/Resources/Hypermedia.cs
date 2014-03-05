@@ -60,8 +60,7 @@ namespace NMoneys.Web.Api.v1.Resources
 					host.Self(request),
 					host.Self(new Messages.Currency{IsoCode = request.IsoCode}, "GET"),
 					host.Parent(new Messages.Currencies(), "GET"),
-					host.Link("format", new Messages.Format{ IsoCode = request.IsoCode }, "GET"), 
-					host.Link("format", new Messages.Format{ IsoCode = request.IsoCode }, "POST")
+					host.Link("format", new Messages.Format{ IsoCode = request.IsoCode }, "GET")
 				}
 			};
 
@@ -77,7 +76,6 @@ namespace NMoneys.Web.Api.v1.Resources
 				{
 					host.Self(request),
 					host.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "GET"),
-					host.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "POST"),
 					host.Parent(new Messages.Currency{IsoCode = request.IsoCode}, "GET")
 				}
 			};

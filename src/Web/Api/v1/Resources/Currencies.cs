@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Linq;
-using NMoneys.Web.Api.v1.Datatypes;
 using NMoneys.Web.ApiModel.v1.Datatypes;
 using ServiceStack.ServiceHost;
+using ServiceStack.ServiceInterface;
 
 namespace NMoneys.Web.Api.v1.Resources
 {
-	public class Currencies : IService
+	public class Currencies : Service,
+		IGet<Messages.Currencies>,
+		IGet<Messages.Currency>,
+		IGet<Messages.Format>
 	{
 		public object Get(Messages.Currencies request)
 		{
@@ -51,17 +54,7 @@ namespace NMoneys.Web.Api.v1.Resources
 			};
 		}
 
-		/*public object Get(Messages.Format request)
-		{
-			return format(request);
-		}*/
-
-		public object Put(Messages.Format request)
-		{
-			return format(request);
-		}
-
-		private Messages.FormatResponse format(Messages.Format request)
+		public object Get(Messages.Format request)
 		{
 			var money = new Money(request.Amount, request.IsoCode);
 			var formatted = new FormattedMoney
