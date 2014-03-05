@@ -43,16 +43,9 @@
     <Compile Include="v1\Datatypes\CurrencySnapshot.cs" />
     <Compile Include="v1\Datatypes\FormattedMoney.cs" />
     <Compile Include="v1\Datatypes\Discovery\Link.cs" />
-    <Compile Include="v1\Messages\Discovery\ICurrencies.cs" />
-    <Compile Include="v1\Messages\Discovery\ICurrency.cs" />
     <Compile Include="v1\Messages\Discovery\IDiscoveryResponse.cs" />
-    <Compile Include="v1\Messages\Discovery\IFormat.cs" />
-    <Compile Include="v1\Messages\Discovery\IRoot.cs" />
-    <Compile Include="v1\Messages\ICurrencies.cs" />
     <Compile Include="v1\Messages\ICurrenciesResponse.cs" />
-    <Compile Include="v1\Messages\ICurrency.cs" />
     <Compile Include="v1\Messages\ICurrencyResponse.cs" />
-    <Compile Include="v1\Messages\IFormat.cs" />
     <Compile Include="v1\Messages\IFormatResponse.cs" />
   </ItemGroup>
   <ItemGroup />

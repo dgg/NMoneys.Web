@@ -6,7 +6,7 @@ namespace NMoneys.Web.Api.v1.Messages
 {
 	[Route("/v1/currencies/{isoCode}/format/{amount}", "GET", Summary = "Allows formatting a monetary amount according to its currency.")]
 	[Api("Allows formatting a monetary amount according to its currency.")]
-	public class Format : IReturn<FormatResponse>, IFormat
+	public class Format : IReturn<FormatResponse>
 	{
 		[ApiMember(IsRequired = true, ParameterType = "path", Verb = "GET",
 			Description = "Three-letter ISO code of the currency to use for formatting.")]

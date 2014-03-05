@@ -10,9 +10,9 @@ namespace NMoneys.Web.Api.v1.Resources
 {
 	public class Discovery : Service,
 		IOptions<DiscoverRoot>,
-		IOptions<Messages.Discovery.DiscoverCurrencies>,
-		IOptions<Messages.Discovery.DiscoverCurrency>,
-		IOptions<Messages.Discovery.DiscoverFormat>
+		IOptions<DiscoverCurrencies>,
+		IOptions<DiscoverCurrency>,
+		IOptions<DiscoverFormat>
 	{
 		public object Options(DiscoverRoot request)
 		{
@@ -30,7 +30,7 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(Messages.Discovery.DiscoverCurrencies request)
+		public object Options(DiscoverCurrencies request)
 		{
 			IAppHost host = GetAppHost();
 
@@ -53,7 +53,7 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(Messages.Discovery.DiscoverCurrency request)
+		public object Options(DiscoverCurrency request)
 		{
 			IAppHost host = GetAppHost();
 
@@ -71,7 +71,7 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(Messages.Discovery.DiscoverFormat request)
+		public object Options(DiscoverFormat request)
 		{
 			IAppHost host = GetAppHost();
 			var response = new DiscoveryResponse
