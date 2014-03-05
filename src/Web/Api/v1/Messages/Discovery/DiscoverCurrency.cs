@@ -1,18 +1,13 @@
-﻿using NMoneys.Web.Api.v1.Datatypes.Hypermedia;
+﻿using NMoneys.Web.ApiModel.v1.Messages.Discovery;
 using ServiceStack.ServiceHost;
 
-namespace NMoneys.Web.Api.v1.Messages.Hypermedia
+namespace NMoneys.Web.Api.v1.Messages.Discovery
 {
 	[Route("/v1/currencies/{isoCode}", "OPTIONS", Summary = "Provides information about a currency.")]
 	[Api("Provides information about a currency.")]
-	public class currency : IReturn<currencyResponse>
+	public class DiscoverCurrency : IReturn<DiscoveryResponse>, ICurrency
 	{
 		[ApiMember(IsRequired = true, ParameterType = "path", Description = "Three-letter ISO code of the currency to return.")]
 		public CurrencyIsoCode IsoCode { get; set; }
-	}
-
-	public class currencyResponse
-	{
-		public Link[] _links { get; set; }
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using NMoneys.Web.Api.v1.Datatypes.Hypermedia;
+using NMoneys.Web.ApiModel.v1.Datatypes.Discovery;
 using ServiceStack.Common;
 using ServiceStack.ServiceClient.Web;
 using ServiceStack.ServiceHost;

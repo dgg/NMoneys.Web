@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Linq;
 using NMoneys.Web.Api.v1.Infrastructure.UrlWriting;
-using NMoneys.Web.Api.v1.Messages.Hypermedia;
+using NMoneys.Web.Api.v1.Messages.Discovery;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.WebHost.Endpoints;
 
 namespace NMoneys.Web.Api.v1.Resources
 {
-	public class Hypermedia : Service, IOptions<root>, IOptions<currencies>, IOptions<currency>, IOptions<format>
+	public class Discovery : Service,
+		IOptions<DiscoverRoot>,
+		IOptions<Messages.Discovery.DiscoverCurrencies>,
+		IOptions<Messages.Discovery.DiscoverCurrency>,
+		IOptions<Messages.Discovery.DiscoverFormat>
 	{
-		public object Options(root request)
+		public object Options(DiscoverRoot request)
 		{
 			IAppHost host = GetAppHost();
 
-			var response = new rootResponse
+			var response = new DiscoveryResponse
 			{
 				_links = new[]
 				{
@@ -26,7 +30,7 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(currencies request)
+		public object Options(Messages.Discovery.DiscoverCurrencies request)
 		{
 			IAppHost host = GetAppHost();
 
@@ -35,7 +39,7 @@ namespace NMoneys.Web.Api.v1.Resources
 				.Where(c => !c.IsObsolete)
 				.Select(c => host.Link("currency", new Messages.Currency { IsoCode = c.IsoCode }, "GET"));
 
-			var response = new currenciesResponse
+			var response = new DiscoveryResponse
 			{
 				_links = new[]
 				{
@@ -49,11 +53,11 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(currency request)
+		public object Options(Messages.Discovery.DiscoverCurrency request)
 		{
 			IAppHost host = GetAppHost();
 
-			var response = new currencyResponse
+			var response = new DiscoveryResponse
 			{
 				_links = new[]
 				{
@@ -67,10 +71,10 @@ namespace NMoneys.Web.Api.v1.Resources
 			return response;
 		}
 
-		public object Options(format request)
+		public object Options(Messages.Discovery.DiscoverFormat request)
 		{
 			IAppHost host = GetAppHost();
-			var response = new currencyResponse
+			var response = new DiscoveryResponse
 			{
 				_links = new[]
 				{

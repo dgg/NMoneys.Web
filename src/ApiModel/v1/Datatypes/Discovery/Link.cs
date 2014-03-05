@@ -1,6 +1,6 @@
 using System;
 
-namespace NMoneys.Web.Api.v1.Datatypes.Hypermedia
+namespace NMoneys.Web.ApiModel.v1.Datatypes.Discovery
 {
 	public class Link
 	{
