@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NMoneys.Web.Api.v1.Datatypes;
+using NMoneys.Web.ApiModel.v1.Datatypes;
 using ServiceStack.ServiceHost;
 
 namespace NMoneys.Web.Api.v1.Resources
@@ -50,12 +51,12 @@ namespace NMoneys.Web.Api.v1.Resources
 			};
 		}
 
-		public object Get(Messages.Format request)
+		/*public object Get(Messages.Format request)
 		{
 			return format(request);
-		}
+		}*/
 
-		public object Post(Messages.Format request)
+		public object Put(Messages.Format request)
 		{
 			return format(request);
 		}

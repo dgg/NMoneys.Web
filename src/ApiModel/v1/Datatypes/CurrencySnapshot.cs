@@ -1,4 +1,4 @@
-﻿namespace NMoneys.Web.Api.v1.Datatypes
+namespace NMoneys.Web.ApiModel.v1.Datatypes
 {
 	public class CurrencySnapshot
 	{

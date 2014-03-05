@@ -154,9 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\AppHost.cs" />
-    <Compile Include="Api\v1\Datatypes\CurrencyDetail.cs" />
-    <Compile Include="Api\v1\Datatypes\CurrencySnapshot.cs" />
-    <Compile Include="Api\v1\Datatypes\FormattedMoney.cs" />
     <Compile Include="Api\v1\Datatypes\Hypermedia\Link.cs" />
     <Compile Include="Api\v1\Infrastructure\Filters\ApiAuthenticator.cs" />
     <Compile Include="Api\v1\Infrastructure\ApiKey.cs" />
@@ -313,6 +310,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApiModel\NMoneys.Web.ApiModel.csproj">
+      <Project>{4C1EBB79-A531-4EE9-80BA-069D865D15BE}</Project>
+      <Name>NMoneys.Web.ApiModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

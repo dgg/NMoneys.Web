@@ -145,6 +145,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApiModel\NMoneys.Web.ApiModel.csproj">
+      <Project>{4c1ebb79-a531-4ee9-80ba-069d865d15be}</Project>
+      <Name>NMoneys.Web.ApiModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Web\NMoneys.Web.csproj">
       <Project>{7b5567a3-40cf-4237-be76-cef194106008}</Project>
       <Name>NMoneys.Web</Name>

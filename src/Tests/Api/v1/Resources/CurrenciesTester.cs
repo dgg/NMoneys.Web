@@ -40,7 +40,7 @@ namespace Tests.Api.v1.Resources
 
 			string qs = string.Format("?{0}={1}", ApiKey.ParameterName, any_key);
 			string undefinedIsoCodeUrl = new FormatMsg { IsoCode = CurrencyIsoCode.EUR, Amount = 42 }
-				.ToUrl("GET")
+				.ToUrl("PUT")
 				.Replace("EUR", "NotAnIsoCode");
 
 			HttpResponse response = client.Get(undefinedIsoCodeUrl + qs);
@@ -55,10 +55,10 @@ namespace Tests.Api.v1.Resources
 
 			string qs = string.Format("?{0}={1}", ApiKey.ParameterName, any_key);
 			string undefinedIsoCodeUrl = new FormatMsg { IsoCode = CurrencyIsoCode.EUR }
-				.ToUrl("POST")
+				.ToUrl("PUT")
 				.Replace("EUR", "NotAnIsoCode");
 
-			HttpResponse response = client.Post(undefinedIsoCodeUrl + qs, new { amount = 42 }, HttpContentTypes.ApplicationJson);
+			HttpResponse response = client.Put(undefinedIsoCodeUrl + qs, new { amount = 42 }, HttpContentTypes.ApplicationJson);
 			Assert.That(response, Must.Not.Be.Ok(HttpStatusCode.NotFound));
 		}
 	}
