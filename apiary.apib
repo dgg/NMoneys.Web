@@ -39,7 +39,7 @@ Currency Resources
 Resources related to ISO 4217 currencies.
 --
 
-Provides information about current supported currencies.
+Provides information about supported currencies. Obsolete currencies are returned.
 OPTIONS /currencies
 > Accept: application/json
 > Api_Key: your API key
@@ -79,7 +79,7 @@ OPTIONS /currencies
 < 429
 Retry-After: number of seconds to wait before making a new request
 
-List current supported currencies.
+List supported currencies. Obsolete currencies are returned.
 GET /currencies
 > Accept: application/json
 > Api_Key: your API key
@@ -92,11 +92,18 @@ GET /currencies
 	"snapshots": [
 		...,
 		{
-			"isoCode": "USD",
+			"isoCode": "EUR",
 			"numericCode": 978,
 			"englishName": "Euro"
 		},
-		...
+		...,
+		{
+			"isoCode": "ZMK",
+			"numericCode": 894,
+			"englishName": "Zambian Kwacha",
+			"isObsolete" : true
+		},
+		...,
 	]
 }
 +++++

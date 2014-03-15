@@ -15,7 +15,6 @@ namespace NMoneys.Web.Api.v1.Resources
 		{
 			CurrencySnapshot[] snapshots = Currency.FindAll()
 				.OrderBy(c => c.AlphabeticCode, StringComparer.OrdinalIgnoreCase)
-				.Where(c => !c.IsObsolete)
 				.Select(c =>
 				{
 					var snapshot = new CurrencySnapshot
@@ -23,6 +22,7 @@ namespace NMoneys.Web.Api.v1.Resources
 						IsoCode = c.IsoCode,
 						NumericCode = c.NumericCode,
 						EnglishName = c.EnglishName,
+						IsObsolete = c.IsObsolete ? true : default(bool?)
 					};
 					return snapshot;
 				})

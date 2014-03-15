@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NMoneys">
-      <HintPath>..\..\packages\NMoneys.3.4.0.0\lib\Net20-client\NMoneys.dll</HintPath>
+    <Reference Include="NMoneys, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NMoneys.3.4.1.0\lib\Net20-client\NMoneys.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -48,7 +49,6 @@
     <Compile Include="v1\Messages\ICurrencyResponse.cs" />
     <Compile Include="v1\Messages\IFormatResponse.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿@model NMoneys.Web.Models.Snapshot
 
-<article class="span2 tile snapshot" id="@Model.AlphabeticCode">
+<article class="span2 tile snapshot @(Model.Obsolete ? "obsolete" : string.Empty)" id="@Model.AlphabeticCode">
 	<div class="tabulated">
 		<div class="cell alphabetic-code">
 			<h3><a href="#@(Model.AlphabeticCode)_modal" role="button" data-toggle="modal" data-remote="@Url.Action("Detail", new { code = Model.AlphabeticCode })">@Model.AlphabeticCode</a></h3>

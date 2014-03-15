@@ -131,6 +131,9 @@ iframe{ border-width: 0;}
 .snapshot {
 	text-align: left;
 }
+	.snapshot.obsolete a:not(:hover) {
+		color: #7f8c8d;
+	}
 
 	.snapshot .alphabetic-code {
 		margin-right: 5px;
@@ -177,3 +180,8 @@ iframe{ border-width: 0;}
 .quantities td:nth-child(even), th:nth-child(even) { color: #e74c3c; }
 .quantities td:nth-child(odd), th:nth-child(odd) { color:#1abc9c; }
 .quantities  th { text-align: center; background: #ecf0f1}
+
+.modal-header > .obsolete {
+	color: #7f8c8d;
+	font-weight: bolder;
+}
