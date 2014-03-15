@@ -105,6 +105,10 @@ a:hover, a:focus {
 	color: #95a5a6;
 }
 
+body {
+	background-color: #fafafa
+}
+
 /* Custom styles
 -----------------------------------------------------------*/
 nav {
