@@ -84,6 +84,27 @@ input[type="color"],
 	font-family: 'Noto Sans',"Helvetica Neue",Helvetica,sans-serif
 }
 
+.navbar-inverse .nav > li.active > a, .navbar-inverse .nav > li.active > a:hover {
+	background-color: #95a5a6;
+	border-bottom-color: #7f8c8d;
+}
+
+.navbar .nav > li > a:hover, .navbar .nav > li > a:focus {
+	color: #95a5a6;
+}
+
+.navbar .brand:hover {
+	color: #95a5a6;
+}
+
+a {
+	color: #34495e;
+}
+
+a:hover, a:focus {
+	color: #95a5a6;
+}
+
 /* Custom styles
 -----------------------------------------------------------*/
 nav {
