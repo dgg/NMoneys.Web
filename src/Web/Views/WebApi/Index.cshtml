@@ -38,4 +38,32 @@
 {
 	@Scripts.Render("~/bundles/parsley")
 	@Scripts.Render("~/bundles/app_api")
+	<script type="text/javascript">
+		$(function() {
+			$(function () {
+				var uri = 'https://localhost:44300/api/v1/currencies/format';
+				var myData =
+				{
+					quantities: [
+						{
+							amount: 1,
+							isoCode:
+								'EUR'
+						},
+						{
+							amount: 2,
+							isoCode:
+								'EUR'
+						}
+					]
+				};
+				$.get({
+					url: uri,
+					data: myData
+				}, function (d) {
+					console.log(d);
+				});
+			});
+		});
+	</script>
 }
