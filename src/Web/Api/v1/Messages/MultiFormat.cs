@@ -9,7 +9,7 @@ namespace NMoneys.Web.Api.v1.Messages
 	public class MultiFormat : IReturn<MultiFormatResponse>
 	{
 		[ApiMember(IsRequired = true, ParameterType = "body", Verb = "POST",
-			Description = "Three-letter ISO code of the currency to use for formatting.")]
+			Description = "Quantities to be formatted.")]
 		public FormatableQuantity[] Quantities { get; set; }
 	}
 
