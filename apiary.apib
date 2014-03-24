@@ -1,247 +1,396 @@
+FORMAT: 1A
 HOST: https://nmoneys.apphb.com/api/v1
 
---- nMoneys API v1 ---
----
+# nMoneys API v1
 Welcome to NMoneys' API documentation. Here you will find what you can do with this API
----
 
+# /
+## OPTIONS
 Provides information about resources available through the API.
-OPTIONS /
-> Accept: application/json
-> Api_Key: your API key
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"_links": [
-		{
-			"rel": "_self",
-			"href": "/api/v1",
-			"method": "OPTIONS"
-		},
-		{
-			"rel": "currencies",
-			"href": "/api/v1/currencies",
-			"method": "GET"
-		}
-	]
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
 
---
-Currency Resources
-Resources related to ISO 4217 currencies.
---
++ Request
+    + Headers
 
+            Api_Key: your API key.
+            Accept: application/json
++ Response 200 (application/json)
+    + Headers
+            
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+            
+            {
+                "_links": [
+                    {
+                        "rel": "_self",
+                        "href": "/v1/api/currencies",
+                        "method": "OPTIONS"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "/v1/api/currencies",
+                        "method": "GET"
+                    },
+                    {
+                        "rel": "currency",
+                        "href": "/v1/api/currencies/AED",
+                        "method": "GET"
+                    },
+                    ...
+                    {
+                        "rel": "currency",
+                        "href": "/v1/api/currencies/ZWL",
+                        "method": "GET"
+                    }
+                ]
+            }
++ Response 401
++ Response 429
+    + Headers
+    
+            Retry-After: number of seconds to wait before making a new request
+
+# Group Currency resources
+Resources related to ISO 4217 currencies
+
+# /currencies
+## OPTIONS
 Provides information about supported currencies. Obsolete currencies are returned.
-OPTIONS /currencies
-> Accept: application/json
-> Api_Key: your API key
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"_links": [
-		{
-			"rel": "_self",
-			"href": "/v1/api/currencies",
-			"method": "OPTIONS"
-		},
-		{
-			"rel": "self",
-			"href": "/v1/api/currencies",
-			"method": "GET"
-		},
-		{
-			"rel": "currency",
-			"href": "/v1/api/currencies/AED",
-			"method": "GET"
-		},
-		...
-		{
-			"rel": "currency",
-			"href": "/v1/api/currencies/ZWL",
-			"method": "GET"
-		}
-	]
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
 
++ Request
+    + Headers
+    
+            Accept: application/json
+            Api_Key: your API key
++ Response 200
+    + Headers
+            
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+            
+            {
+                "_links":
+                [
+                    {
+                        "rel": "_self",
+                        "href": "/v1/api/currencies",
+                        "method": "OPTIONS"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "/v1/api/currencies",
+                        "method": "GET"
+                    },
+                    {
+                        "rel": "currency",
+                        "href": "/v1/api/currencies/AED",
+                        "method": "GET"
+                    },
+                    ...
+                    {
+                        "rel": "currency",
+                        "href": "/v1/api/currencies/ZWL",
+                        "method": "GET"
+                    },
+                    {
+                        "rel": "format",
+                        "href": "/v1/api/currencies/format",
+                        "method": "POST"
+                    },
+                ]
+            }
++ Response 401
++ Response 429
+    + Headers
+    
+            Retry-After: number of seconds to wait before making a new request
+
+## GET
 List supported currencies. Obsolete currencies are returned.
-GET /currencies
-> Accept: application/json
-> Api_Key: your API key
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"snapshots": [
-		...,
-		{
-			"isoCode": "EUR",
-			"numericCode": 978,
-			"englishName": "Euro"
-		},
-		...,
-		{
-			"isoCode": "ZMK",
-			"numericCode": 894,
-			"englishName": "Zambian Kwacha",
-			"isObsolete" : true
-		},
-		...,
-	]
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
 
++ Request
+    + Headers
+        
+            Accept: application/json
+            Api_Key: your API key
++ Response 200 (application/json)
+    + Headers
+        
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+    
+            {
+                "snapshots":
+                [
+                    ...,
+                    {
+                        "isoCode": "EUR",
+                        "numericCode": 978,
+                        "englishName": "Euro"
+                    },
+                    ...,
+                    {
+                        "isoCode": "ZMK",
+                        "numericCode": 894,
+                        "englishName": "Zambian Kwacha",
+                        "isObsolete" : true
+                    },
+                    ...,
+                ]
+            }
++ Response 401
++ Response 429
+    + Headers
+
+            Retry-After: number of seconds to wait before making a new request
+
+# /currencies/{isoCode}
+## OPTIONS
 Provides information about a currency.
-OPTIONS /currencies/{isoCode}
-> Accept: application/json
-> Api_Key: your API key
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"_links": [
-		{
-			"rel": "_self",
-			"href": "/v1/api/currency/EUR",
-			"method": "OPTIONS"
-		},
-		{
-			"rel": "self",
-			"href": "/v1/api/currency/EUR",
-			"method": "GET"
-		},
-		{
-			"rel": "parent",
-			"href": "/v1/api/currencies",
-			"method": "GET"
-		},
-		{
-			"rel": "format",
-			"href": "/v1/api/currencies/EUR/format/0",
-			"method": "GET"
-		}
-	]
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
-+++++
-< 404
 
++ Parameters
+    + isoCode (`EUR`)... Three-letter ISO code of the currency to return.
++ Request
+    + Headers
+        
+            Accept: application/json
+            Api_Key: your API key
++ Response 200
+    + Headers
+        
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+    
+            {
+                "_links":
+                [
+                    {
+                        "rel": "_self",
+                        "href": "/v1/api/currency/EUR",
+                        "method": "OPTIONS"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "/v1/api/currency/EUR",
+                        "method": "GET"
+                    },
+                    {
+                        "rel": "parent",
+                        "href": "/v1/api/currencies",
+                        "method": "GET"
+                    },
+                    {
+                        "rel": "format",
+                        "href": "/v1/api/currencies/EUR/format/0",
+                        "method": "GET"
+                    }
+                ]
+            }
++ Response 401
++ Response 429
+
+## GET
 Get detailed information about a currency.
-GET /currencies/{isoCode}
-> Accept: application/json
-> Api_Key: your API key
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"detail": {
-		"isoCode": "EUR",
-		"numericCode": 978,
-		"englishName": "Euro",
-		"nativeName": "Euro",
-		"symbol": "€",
-		"isObsolete": false
-	}
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
-+++++
-< 404
 
---
-Money Resources
++ Parameters
+    + isoCode (`EUR`)... Three-letter ISO code of the currency to return.
++ Request
+    + Headers
+        
+            Accept: application/json
+            Api_Key: your API key
++ Response 200 (application/json)
+    + Headers
+
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+
+            {
+                "detail":
+                {
+                    "isoCode": "EUR",
+                    "numericCode": 978,
+                    "englishName": "Euro",
+                    "nativeName": "Euro",
+                    "symbol": "€",
+                    "isObsolete": false
+                }
+            }
++ Response 401
++ Response 429
+    + Headers
+        
+            Retry-After: number of seconds to wait before making a new request
+
+# Group Money resources
 Resources related to monetary quantities.
---
 
+# /currencies/{isoCode}/format/{amount}
+## OPTIONS
 Provides information about formatting a monetary amount according to its currency.
-OPTIONS /currencies/{isoCode}/format/{amount}
-> Accept: application/json
-> Api_Key: your API key
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"_links": [
-		{
-			"rel": "_self",
-			"href":"/api/v1/currencies/EUR/format/123",
-			"method": "OPTIONS"
-		},
-		{
-			"rel": "self",
-			"href":"/api/v1/currencies/EUR/format/123",
-			"method": "GET"
-		},
-		{
-			"rel": "parent",
-			"href":"/api/v1/currencies/EUR",
-			"method": "GET"
-		}
-	]
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
-+++++
-< 404
 
++ Parameters
+    + isoCode (`EUR`)... Three-letter ISO code of the currency to return.
+    + amount (number, `123.45`) ... Amount of the monetary quantity to be formatted.
++ Request
+    + Headers
+
+            Accept: application/json
+            Api_Key: your API key
++ Response 200
+    + Headers
+
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+
+            {
+                "_links":
+                [
+                    {
+                        "rel": "_self",
+                        "href":"/api/v1/currencies/EUR/format/123",
+                        "method": "OPTIONS"
+                    },
+                    {
+                        "rel": "self", 
+                        "href":"/api/v1/currencies/EUR/format/123",
+                        "method": "GET"
+                    },
+                    {
+                        "rel": "parent",
+                        "href":"/api/v1/currencies/EUR",
+                        "method": "GET"
+                    }
+                ]
+            }
++ Response 401
++ Response 429
+    + Headers
+        
+            Retry-After: number of seconds to wait before making a new request
+
+## GET
 Allows formatting a monetary amount according to its currency.
-GET /currencies/{isoCode}/format/{amount}
-> Accept: application/json
-> Api_Key: your API key
-< 200
-< Content-Type: application/json
-< X-Rate-Limit-Limit: number of requests allowed in period
-< X-Rate-Limit-Remaining: number of requests allowed in period
-< X-Rate-Limit-Reset: number of seconds left in period
-{
-	"money": {
-		"amount": 123,
-		"isoCode": "EUR",
-		"representation": "123,00 €",
-		"amountRepresentation": "123,00"
-	}
-}
-+++++
-< 401
-+++++
-< 429
-Retry-After: number of seconds to wait before making a new request
-+++++
-< 404
+
++ Parameters
+    + isoCode (`EUR`)... Three-letter ISO code of the currency to return.
+    + amount (number, `123.45`) ... Amount of the monetary quantity to be formatted.
++ Request
+    + Headers
+        
+            Accept: application/json
+            Api_Key: your API key
++ Response 200 (application/json)
+    + Headers
+    
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+    
+            {
+                "money":
+                {
+                    "amount": 123,
+                    "isoCode": "EUR",
+                    "representation": "123,00 €",
+                    "amountRepresentation": "123,00"
+                }
+            }
++ Response 401
++ Response 429
+    + Headers
+    
+            Retry-After: number of seconds to wait before making a new request
+
+# /currencies/format
+## OPTIONS
+Provides information about formatting multiple monetary amounts according to their currency.
+
++ Request
+    + Headers
+
+            Accept: application/json
+            Api_Key: your API key
++ Response 200
+    + Headers
+
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+
+            {
+                "_links":
+                [
+                    {
+                        "rel": "_self",
+                        "href":"/api/v1/currencies/format",
+                        "method": "OPTIONS"
+                    },
+                    {
+                        "rel": "self", 
+                        "href":"/api/v1/currencies/format",
+                        "method": "POST"
+                    },
+                    {
+                        "rel": "parent",
+                        "href":"/api/v1/currencies/EUR",
+                        "method": "GET"
+                    }
+                ]
+            }
++ Response 401
++ Response 429
+    + Headers
+        
+            Retry-After: number of seconds to wait before making a new request
+
+## POST
+Allows formatting monetary amounts according to their currencies.
+
++ Request
+    + Headers
+        
+            Accept: application/json
+            Api_Key: your API key
+
+    + Body
+    
+            {"quantities":[{"amount":123,"isoCode":"EUR"}]}
++ Response 200 (application/json)
+    + Headers
+    
+            X-Rate-Limit-Limit: number of requests allowed in period
+            X-Rate-Limit-Remaining: number of requests allowed in period
+            X-Rate-Limit-Reset: number of seconds left in period
+    + Body
+    
+            {
+                "moneys":
+                [
+                    {
+                        "amount": 123,
+                        "isoCode": "EUR",
+                        "representation": "123,00 €",
+                        "amountRepresentation": "123,00"
+                    }
+                }
+            }
++ Response 401
++ Response 429
+    + Headers
+    
+            Retry-After: number of seconds to wait before making a new request

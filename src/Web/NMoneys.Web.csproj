@@ -173,12 +173,14 @@
     <Compile Include="Api\v1\Infrastructure\UrlWriting\ServiceExtensions.cs" />
     <Compile Include="Api\v1\Messages\Currencies.cs" />
     <Compile Include="Api\v1\Messages\Currency.cs" />
+    <Compile Include="Api\v1\Messages\Discovery\DiscoverMultiFormat.cs" />
     <Compile Include="Api\v1\Messages\Discovery\DiscoveryResponse.cs" />
     <Compile Include="Api\v1\Messages\Format.cs" />
     <Compile Include="Api\v1\Messages\Discovery\DiscoverCurrencies.cs" />
     <Compile Include="Api\v1\Messages\Discovery\DiscoverCurrency.cs" />
     <Compile Include="Api\v1\Messages\Discovery\DiscoverFormat.cs" />
     <Compile Include="Api\v1\Messages\Discovery\DiscoverRoot.cs" />
+    <Compile Include="Api\v1\Messages\MultiFormat.cs" />
     <Compile Include="Api\v1\Resources\Currencies.cs" />
     <Compile Include="Api\v1\Resources\Discovery.cs" />
     <Compile Include="App_Start\ApiConfig.cs" />
@@ -346,7 +348,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>REM csc $(ProjectDir)Content\src\SyntacticSupport.cs</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

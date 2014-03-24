@@ -2,6 +2,7 @@
 using System.Linq;
 using NMoneys.Web.Api.v1.Infrastructure.UrlWriting;
 using NMoneys.Web.Api.v1.Messages.Discovery;
+using NMoneys.Web.ApiModel.v1.Datatypes;
 using ServiceStack.ServiceHost;
 using ServiceStack.ServiceInterface;
 using ServiceStack.WebHost.Endpoints;
@@ -12,7 +13,8 @@ namespace NMoneys.Web.Api.v1.Resources
 		IOptions<DiscoverRoot>,
 		IOptions<DiscoverCurrencies>,
 		IOptions<DiscoverCurrency>,
-		IOptions<DiscoverFormat>
+		IOptions<DiscoverFormat>,
+		IOptions<DiscoverMultiFormat>
 	{
 		public object Options(DiscoverRoot request)
 		{
@@ -45,8 +47,9 @@ namespace NMoneys.Web.Api.v1.Resources
 				{
 					host.Self(request), 
 					host.Self(new Messages.Currencies(), "GET")
-				}.Concat(
-					currencyLinks)
+				}
+				.Concat(currencyLinks)
+				.Concat(new[]{ host.Link("format", new Messages.MultiFormat { Quantities = new []{new FormatableQuantity()}}, "POST") })
 				.ToArray()
 			};
 
@@ -81,6 +84,22 @@ namespace NMoneys.Web.Api.v1.Resources
 					host.Self(request),
 					host.Self(new Messages.Format{ IsoCode = request.IsoCode, Amount = request.Amount}, "GET"),
 					host.Parent(new Messages.Currency{IsoCode = request.IsoCode}, "GET")
+				}
+			};
+
+			return response;
+		}
+
+		public object Options(DiscoverMultiFormat request)
+		{
+			IAppHost host = GetAppHost();
+			var response = new DiscoveryResponse
+			{
+				_links = new[]
+				{
+					host.Self(request),
+					host.Self(new Messages.MultiFormat { Quantities = new []{new FormatableQuantity()}}, "POST"),
+					host.Parent(new Messages.Currencies(), "GET")
 				}
 			};
 

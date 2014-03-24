@@ -9,7 +9,8 @@ namespace NMoneys.Web.Api.v1.Resources
 	public class Currencies : Service,
 		IGet<Messages.Currencies>,
 		IGet<Messages.Currency>,
-		IGet<Messages.Format>
+		IGet<Messages.Format>,
+		IPost<Messages.MultiFormat>
 	{
 		public object Get(Messages.Currencies request)
 		{
@@ -57,6 +58,15 @@ namespace NMoneys.Web.Api.v1.Resources
 		public object Get(Messages.Format request)
 		{
 			var money = new Money(request.Amount, request.IsoCode);
+			FormattedMoney formatted = format(money);
+			return new Messages.FormatResponse
+			{
+				Money = formatted
+			};
+		}
+
+		private FormattedMoney format(Money money)
+		{
 			var formatted = new FormattedMoney
 			{
 				Amount = money.Amount,
@@ -64,9 +74,18 @@ namespace NMoneys.Web.Api.v1.Resources
 				AmountRepresentation = money.Format("{0:N}"),
 				Representation = money.ToString()
 			};
-			return new Messages.FormatResponse
+			return formatted;
+		}
+
+
+		public object Post(Messages.MultiFormat request)
+		{
+			FormattedMoney[] formatted = request.Quantities
+				.Select(q => format(new Money(q.Amount, q.IsoCode)))
+				.ToArray();
+			return new Messages.MultiFormatResponse
 			{
-				Money = formatted
+				Moneys = formatted
 			};
 		}
 	}
