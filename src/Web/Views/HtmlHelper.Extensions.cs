@@ -63,11 +63,11 @@ namespace NMoneys.Web.Views
 
 			string url = UrlHelper.GenerateUrl(null, null, null, null, null, null, values, helper.RouteCollection, helper.ViewContext.RequestContext, false);
 
-			var li = new HtmlTag("li")
+			var li = HtmlTextWriterTag.Li.asTag()
 				.AddClassIf(isCurrentAction(helper, values), classIfCurrent)
 				.Append(
 					new LinkTag(string.Empty, url).Append(
-						new HtmlTag("span").AddClass(iconClass)
+						HtmlTextWriterTag.Span.asTag().AddClass(iconClass)
 					)
 				);
 			return li;
