@@ -2,6 +2,7 @@
 
 namespace NMoneys.Web.Controllers
 {
+	[OutputCache(CacheProfile = "home")]
 	public class HomeController : Controller
 	{
 		public ActionResult Index()
