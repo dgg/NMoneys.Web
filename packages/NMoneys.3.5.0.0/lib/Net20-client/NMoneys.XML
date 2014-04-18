@@ -1044,6 +1044,12 @@
             This parameter is passed uninitialized.</param>
             <returns>true if the <paramref name="numericCode"/> parameter was converted successfully; otherwise, false.</returns>
         </member>
+        <member name="F:NMoneys.Currency.Code.Comparer">
+            <summary>
+            Provides a performant implementation of <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> for instances of <see cref="T:NMoneys.CurrencyIsoCode"/>.
+            </summary>
+            <remarks><seealso href="http://www.codeproject.com/Articles/33528/Accelerating-Enum-Based-Dictionaries-with-Generic">Source</seealso></remarks>
+        </member>
         <member name="T:NMoneys.Money">
             <summary>
             A monetary quantity in a given currency
