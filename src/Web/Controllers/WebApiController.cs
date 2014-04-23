@@ -2,11 +2,13 @@
 using System.Net.Mail;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.SessionState;
 using NMoneys.Web.Controllers.Infrastructure;
 using NMoneys.Web.Models;
 
 namespace NMoneys.Web.Controllers
 {
+	[SessionState(SessionStateBehavior.Disabled)]
 	[ConfigurableRequireHttps]
 	public class WebApiController : Controller
 	{

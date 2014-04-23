@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.SessionState;
 using NMoneys.Web.Models;
 
 namespace NMoneys.Web.Controllers
 {
+	[SessionState(SessionStateBehavior.Disabled)]
 	public class CurrenciesController: Controller
 	{
 		[OutputCache(CacheProfile = "snapshots")]

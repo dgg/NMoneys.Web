@@ -1,9 +1,11 @@
 ﻿using System.IO;
 using System.Web.Mvc;
+using System.Web.SessionState;
 using NMoneys.Web.Models;
 
 namespace NMoneys.Web.Controllers
 {
+	[SessionState(SessionStateBehavior.Disabled)]
 	public class SamplesController: Controller
 	{
 		[OutputCache(CacheProfile = "samples")]
