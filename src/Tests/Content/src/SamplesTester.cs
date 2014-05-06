@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using Microsoft.CSharp;
+using NUnit.Core;
 using NUnit.Framework;
 
 namespace Tests.Content.src
@@ -38,7 +39,36 @@ namespace Tests.Content.src
 			Assert.That(results.Errors, Is.Empty);
 		}
 
+		[Test]
+		public void CodeProject_TestsPass()
+		{
+			CompilerResults results = compile(false,
+				dir("Content\\src"),
+				dir("Content\\src\\CodeProject"));
+
+			var testResults = test(results);
+
+			Assert.That(testResults.IsFailure, Is.False);
+		}
+
+		[Test]
+		public void CodeProject_Exchange_TestsPass()
+		{
+			CompilerResults results = compile(false,
+				dir("Content\\src"),
+				dir("Content\\src\\CodeProject_Exchange"));
+
+			var testResults = test(results);
+
+			Assert.That(testResults.IsFailure, Is.False);
+		}
+
 		private CompilerResults compile(params DirectoryInfo[] directories)
+		{
+			return compile(true, directories);
+		}
+
+		private CompilerResults compile(bool inMemory, params DirectoryInfo[] directories)
 		{
 			var provider = new CSharpCodeProvider();
 			var parameters = new CompilerParameters();
@@ -47,7 +77,7 @@ namespace Tests.Content.src
 			parameters.ReferencedAssemblies.Add("NUnit.Framework.dll");
 			parameters.ReferencedAssemblies.Add("System.Xml.dll");
 			parameters.ReferencedAssemblies.Add("System.Core.dll");
-			parameters.GenerateInMemory = true;
+			parameters.GenerateInMemory = inMemory;
 
 			CompilerResults results = provider.CompileAssemblyFromFile(
 				parameters,
@@ -63,6 +93,18 @@ namespace Tests.Content.src
 		{
 			string fullPath = Path.Combine(TestContext.CurrentContext.TestDirectory, path);
 			return new DirectoryInfo(fullPath);
+		}
+
+		private TestResult test(CompilerResults results)
+		{
+			CoreExtensions.Host.InitializeService();
+			var package = new TestPackage(results.PathToAssembly);
+			var builder = new TestSuiteBuilder();
+			TestSuite suite = builder.Build(package);
+			TestResult test = suite.Run(NullListener.NULL, TestFilter.Empty);
+
+			return test;
+
 		}
 	}
 }
