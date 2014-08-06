@@ -1,0 +1,635 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- THIS STUFF GOES IN THE HEADER TEMPLATE -->
+<style type="text/css">
+pre.source-code {
+  font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; 
+  color: #000000;
+  background-color: #eee;
+  font-size: 12px;
+  border: 1px dashed #999999;
+  line-height: 14px;
+  padding: 5px;
+  overflow: auto;
+  width: 100%
+}
+p.warning {
+  color: #000000;
+  background-color: #FFB6C1;
+  font-size: 12px;
+  border: 3px double #333333;
+  line-height: 14px;
+  padding: 5px;
+  overflow: auto;
+  width: 100%
+}
+</style> 
+<SCRIPT LANGUAGE="JavaScript"> 
+<!-- 
+var Color= new Array();
+Color[1] = "ff";
+Color[2] = "ee";
+Color[3] = "dd";
+Color[4] = "cc";
+Color[5] = "bb";
+Color[6] = "aa";
+Color[7] = "99";
+
+function fadeIn(where) {
+  if (where >= 1) {
+      document.getElementById('fade').style.backgroundColor = "#ffff" + Color[where];
+    if (where > 1) {
+      where -= 1;
+      setTimeout("fadeIn("+where+")", 200);
+    } else {
+      where -= 1;
+      setTimeout("fadeIn("+where+")", 200);
+      document.getElementById('fade').style.backgroundColor = "transparent";
+    }
+  }
+}
+
+function format() {
+    var strIn = document.getElementById("textin").value;
+    var strOut = null;
+    if ( document.getElementById("embedstyle").checked ) {
+        strOut = "<pre style=\"font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; color: #000000; background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px; overflow: auto; width: 100%\"><code>";
+        hideElement("style");
+    } else {
+        strOut = "<pre class=\"c-sharp\" name=\"code\">\n";
+        showElement("style");
+    }
+    var strOut25 = null;
+    var line = 1;
+    var strTab;
+    var hasVerticalPipe = false;
+    var j;
+    
+    if ( document.getElementById("tab4").checked ) {
+	strTab = "    ";
+    } else if ( document.getElementById("tab2").checked ) {
+	strTab = "  ";
+    } else {
+        strTab = "        ";
+    }
+
+    for ( i = 0; i < strIn.length; i++ ) {
+        var code = strIn.charCodeAt(i);
+        switch( code ) {
+            case 9: // tab
+                strOut += strTab;
+		break;
+            case 10:  // line-feed
+            case 13:  
+                strOut += "\n";
+                line += 1;
+                if ( line == 26 ) {
+                    strOut25 = strOut + "[only the first 25 lines shown in this example]\n\n";
+                }
+                j = i + 1;
+                if ( code == 13 && j < strIn.length && strIn.charCodeAt(j) == 10 ) {
+                    i++;
+                }
+                break;
+            case 34:
+                strOut += "&quot;";
+                break;
+            case 38:
+                strOut += "&amp;";
+                break;
+            case 60:
+                strOut += "&lt;";
+                break;
+            case 62:
+                strOut += "&gt;";
+                break;
+            case 124: // vertical pipe (blogger modifies this)
+                strOut += "&#124;";
+                hasVerticalPipe = true;
+                break;
+            default:
+                if ( code >= 32 && code <= 127 ) {
+                    strOut += strIn.charAt(i);
+                } else {
+                    strOut += "&#" + code + ";";
+                }
+                break;
+        } // switch
+    } // for
+    strOut += "\n</pre>";
+    var textoutelement = document.getElementById("textout")
+    textoutelement.value = strOut;
+    textoutelement.focus();
+    textoutelement.select();
+
+    if ( hasVerticalPipe ) {
+        showElement( "vert-pipe-warning" );
+    } else {
+        hideElement( "vert-pipe-warning" );
+    }
+
+    var resultselement = document.getElementById("results");
+    if ( strOut25 != null ) {
+        resultselement.innerHTML = strOut25;
+    } else {
+        resultselement.innerHTML = strOut;
+    }
+
+    fadeIn(7);
+}
+
+function onloadEvent() {
+    var textinelement = document.getElementById("textin");
+    textinelement.focus();
+    textinelement.select();
+}
+
+function showElement(strId) {
+	var ref = document.getElementById(strId);
+	if ( ref.style) { ref = ref.style; }
+	ref.display = '';
+}
+
+function hideElement(strId) {
+	var ref = document.getElementById(strId);
+	if ( ref.style) { ref = ref.style; }
+	ref.display = 'none';
+}
+//-->
+</SCRIPT> 
+<!-- END STUFF GOES IN THE HEADER TEMPLATE -->
+<title>Format My Source Code for Blogging</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta name="generator" content="Blogger" />
+<link rel="icon" type="image/vnd.microsoft.icon" href="http://www.blogger.com/favicon.ico"/>
+<link rel="alternate" type="application/atom+xml" title="Format My Source Code for Blogging - Atom" href="http://formatmysourcecode.blogspot.com/feeds/posts/default" />
+<link rel="alternate" type="application/rss+xml" title="Format My Source Code for Blogging - RSS" href="http://formatmysourcecode.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="service.post" type="application/atom+xml" title="Format My Source Code for Blogging - Atom" href="http://www.blogger.com/feeds/22626731/posts/default" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.blogger.com/rsd.g?blogID=22626731" />
+ <link rel="stylesheet" type="text/css" href="http://www.blogger.com/css/blog_controls.css"/> <link rel="stylesheet" type="text/css" href="http://www.blogger.com/dyn-css/authorization.css?targetBlogID=22626731&zx=2256fe75-2968-4c22-bebd-9cab1ae68d4c"/><script type="text/javascript" src="http://www.blogger.com/js/backlink.js"></script>
+<script type="text/javascript" src="http://www.blogger.com/js/backlink_control.js"></script>
+<script type="text/javascript">var BL_backlinkURL = "http://www.blogger.com/dyn-js/backlink_count.js";var BL_blogId = "22626731";</script>
+
+
+  <style type="text/css">
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Minima
+Designer: Douglas Bowman
+URL:      www.stopdesign.com
+Date:     26 Feb 2004
+----------------------------------------------- */
+
+
+body {
+  background:#fff;
+  margin:0;
+  padding:40px 20px;
+  font:x-small Georgia,Serif;
+  text-align:center;
+  color:#333;
+  font-size/* */:/**/small;
+  font-size: /**/small;
+  }
+a:link {
+  color:#58a;
+  text-decoration:none;
+  }
+a:visited {
+  color:#969;
+  text-decoration:none;
+  }
+a:hover {
+  color:#c60;
+  text-decoration:underline;
+  }
+a img {
+  border-width:0;
+  }
+
+
+/* Header
+----------------------------------------------- */
+@media all {
+  #header {
+    width:660px;
+    margin:0 auto 10px;
+    border:1px solid #ccc;
+    }
+  }
+@media handheld {
+  #header {
+    width:90%;
+    }
+  }
+#blog-title {
+  margin:5px 5px 0;
+  padding:20px 20px .25em;
+  border:1px solid #eee;
+  border-width:1px 1px 0;
+  font-size:200%;
+  line-height:1.2em;
+  font-weight:normal;
+  color:#666;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  }
+#blog-title a {
+  color:#666;
+  text-decoration:none;
+  }
+#blog-title a:hover {
+  color:#c60;
+  }
+#description {
+  margin:0 5px 5px;
+  padding:0 20px 20px;
+  border:1px solid #eee;
+  border-width:0 1px 1px;
+  max-width:700px;
+  font:78%/1.4em "Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:#999;
+  }
+
+
+/* Content
+----------------------------------------------- */
+@media all {
+  #content {
+    width:660px;
+    margin:0 auto;
+    padding:0;
+    text-align:left;
+    }
+  #main {
+    width:410px;
+    float:left;
+    }
+  #sidebar {
+    width:220px;
+    float:right;
+    }
+  }
+@media handheld {
+  #content {
+    width:90%;
+    }
+  #main {
+    width:100%;
+    float:none;
+    }
+  #sidebar {
+    width:100%;
+    float:none;
+    }
+  }
+
+/* Headings
+----------------------------------------------- */
+h2 {
+  margin:1.5em 0 .75em;
+  font:78%/1.4em "Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:#999;
+  }
+
+
+/* Posts
+----------------------------------------------- */
+@media all {
+  .date-header {
+    margin:1.5em 0 .5em;
+    }
+  .post {
+    margin:.5em 0 1.5em;
+    border-bottom:1px dotted #ccc;
+    padding-bottom:1.5em;
+    }
+  }
+@media handheld {
+  .date-header {
+    padding:0 1.5em 0 1.5em;
+    }
+  .post {
+    padding:0 1.5em 0 1.5em;
+    }
+  }
+.post-title {
+  margin:.25em 0 0;
+  padding:0 0 4px;
+  font-size:140%;
+  font-weight:normal;
+  line-height:1.4em;
+  color:#c60;
+  }
+.post-title a, .post-title a:visited, .post-title strong {
+  display:block;
+  text-decoration:none;
+  color:#c60;
+  font-weight:normal;
+  }
+.post-title strong, .post-title a:hover {
+  color:#333;
+  }
+.post div {
+  margin:0 0 .75em;
+  line-height:1.6em;
+  }
+p.post-footer {
+  margin:-.25em 0 0;
+  color:#ccc;
+  }
+.post-footer em, .comment-link {
+  font:78%/1.4em "Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  }
+.post-footer em {
+  font-style:normal;
+  color:#999;
+  margin-right:.6em;
+  }
+.comment-link {
+  margin-left:.6em;
+  }
+.post img {
+  padding:4px;
+  border:1px solid #ddd;
+  }
+.post blockquote {
+  margin:1em 20px;
+  }
+.post blockquote p {
+  margin:.75em 0;
+  }
+
+
+/* Comments
+----------------------------------------------- */
+#comments h4 {
+  margin:1em 0;
+  font:bold 78%/1.6em "Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  color:#999;
+  }
+#comments h4 strong {
+  font-size:130%;
+  }
+#comments-block {
+  margin:1em 0 1.5em;
+  line-height:1.6em;
+  }
+#comments-block dt {
+  margin:.5em 0;
+  }
+#comments-block dd {
+  margin:.25em 0 0;
+  }
+#comments-block dd.comment-timestamp {
+  margin:-.25em 0 2em;
+  font:78%/1.4em "Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  }
+#comments-block dd p {
+  margin:0 0 .75em;
+  }
+.deleted-comment {
+  font-style:italic;
+  color:gray;
+  }
+
+
+/* Sidebar Content
+----------------------------------------------- */
+#sidebar ul {
+  margin:0 0 1.5em;
+  padding:0 0 1.5em;
+  border-bottom:1px dotted #ccc;
+  list-style:none;
+  }
+#sidebar li {
+  margin:0;
+  padding:0 0 .25em 15px;
+  text-indent:-15px;
+  line-height:1.5em;
+  }
+#sidebar p {
+  color:#666;
+  line-height:1.5em;
+  }
+
+
+/* Profile
+----------------------------------------------- */
+#profile-container {
+  margin:0 0 1.5em;
+  border-bottom:1px dotted #ccc;
+  padding-bottom:1.5em;
+  }
+.profile-datablock {
+  margin:.5em 0 .5em;
+  }
+.profile-img {
+  display:inline;
+  }
+.profile-img img {
+  float:left;
+  padding:4px;
+  border:1px solid #ddd;
+  margin:0 8px 3px 0;
+  }
+.profile-data {
+  margin:0;
+  font:bold 78%/1.6em "Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  }
+.profile-data strong {
+  display:none;
+  }
+.profile-textblock {
+  margin:0 0 .5em;
+  }
+.profile-link {
+  margin:0;
+  font:78%/1.4em "Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  }
+
+
+/* Footer
+----------------------------------------------- */
+#footer {
+  width:660px;
+  clear:both;
+  margin:0 auto;
+  }
+#footer hr {
+  display:none;
+  }
+#footer p {
+  margin:0;
+  padding-top:15px;
+  font:78%/1.6em "Trebuchet MS",Trebuchet,Verdana,Sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  }
+  </style>
+
+<link rel="me" href="http://www.blogger.com/profile/10710797803413263120" />
+<link rel="openid.server" href="http://www.blogger.com/openid-server.g" />
+<!-- --><style type="text/css">@import url(http://www.blogger.com/css/navbar/classic.css);
+div.b-mobile {display:none;}
+</style>
+
+</head>
+<!-- THE BODY ELEMENT NEEDS THE ONLOAD EVENT -->
+<body onLoad="javascript:onloadEvent()"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener("load",
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+
+<div></div>
+
+<div id="header">
+
+  <p id="description">A javascript web application application that will format source code text into html for inserting into your blog.</p>
+
+</div>
+
+<!-- Begin #content -->
+<div id="content">
+
+
+<!-- Begin #main -->
+<div id="main"><div id="main2">
+
+
+
+    
+  <h2 class="date-header"></h2>
+  
+
+  
+     
+  <!-- Begin .post -->
+  <div class="post">
+         
+
+	         <div class="post-body">
+<form>
+<p>
+<textarea wrap="off" rows="5" cols="50" id="textin">Paste your text here.</textarea><br/>
+<table>
+    <tr>
+        <td><button onclick="format()" type="button">Format Text</button></td>
+        <td>
+            Tab size: <input type="radio" name="tabsize" id="tab2">2</input> <input type="radio" name="tabsize" id="tab4" checked="true">4</input> <input type="radio" name="tabsize" id="tab8">8</input><br/>
+            Embed Stylesheet: <input type="checkbox" id="embedstyle" checked="true"></input><br/>
+        </td>
+    </tr>
+</table>
+</p>
+<p>
+<div class="step-instr" id="fade">Copy the HTML below to your clipboard. Insert the HTML of your blog or wiki.<br/>
+<textarea wrap="off" rows="12" cols="50" id="textout">formatted HTML will appear in here.</textarea></div>
+</form>
+</p>
+<div id="vert-pipe-warning" style="display: none">
+<p class="warning">
+<b>Vertival Pipe Character Warning:</b><br/>
+The text contains the vertical pipe character '|' which Blogger's editor may remove.  Blogger's editor on the web has two edit tabs: "Edit HTML" and "Compose".  The "Compose" tab will remove all | characters!  Use the "Edit HTML" tab only.
+</p>
+</div>
+<div id="results"><pre class="source-code"><code>This is an example of what your text will look like.
+    &#8226; Tabs are converted to spaces.
+    &#8226; Quotes and other special characters are converted to HTML.
+    &#8226; Everything is enclose in HTML's 'pre' and 'code' tags.
+    &#8226; Style is set:
+        &#8226; Fixed width font.
+        &#8226; Shaded box.
+        &#8226; Dotted line border.
+
+</code></pre>
+</div>
+<p>
+<div id="style" style="display: none">
+Example Stylesheet:<br/>
+<textarea wrap="off" rows="13" cols="50" id="textout"><style type="text/css">
+pre.source-code {
+  font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; 
+  color: #000000;
+  background-color: #eee;
+  font-size: 12px;
+  border: 1px dashed #999999;
+  line-height: 14px;
+  padding: 5px;
+  overflow: auto;
+  width: 100%
+}
+</style></textarea>
+</div>
+</p>
+<!-- END STUFF IN POST --><div style="clear:both; padding-bottom:0.25em"></div>
+    </div>
+    </div>
+    
+    
+  
+  </div>
+  <!-- End .post -->
+  
+  
+  
+  <!-- Begin #comments -->
+ 
+
+  <!-- End #comments -->
+
+
+</div></div>
+<!-- End #main -->
+
+
+
+
+
+
+
+
+<!-- End #sidebar -->
+
+
+</div>
+<!-- End #content -->
+
+
+
+<!-- Begin #footer -->
+<div id="footer"><hr />
+  <p><!--This is an optional footer. If you want text here, place it inside these tags, and remove this comment. -->&nbsp;</p>
+
+</div>
+<!-- End #footer -->
+
+
+
+</body>
+</html>
